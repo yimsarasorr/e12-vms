@@ -1,0 +1,7 @@
+{
+  "name": "e12-vms",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
