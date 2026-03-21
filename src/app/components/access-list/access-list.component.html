@@ -1,0 +1,74 @@
+<div class="access-list-container">
+  <div class="list-header ion-padding-horizontal ion-padding-top ion-padding-bottom">
+    <div class="header-row">
+      <h3>พื้นที่ที่เข้าถึงได้</h3>
+      <ion-badge color="light" *ngIf="accessibleRooms$ | async as rooms">
+        {{ rooms.length }}
+      </ion-badge>
+    </div>
+    <ion-note class="header-subtitle">แตะเพื่อดูตำแหน่งและรายละเอียด</ion-note>
+  </div>
+
+  <div class="list-content">
+    <ng-container *ngIf="accessibleRooms$ | async as floorGroups">
+      <div *ngIf="floorGroups.length === 0" class="empty-state ion-text-center ion-padding">
+        <div class="empty-icon-circle">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+        </div>
+        <h4>ไม่พบรายการสิทธิ์</h4>
+        <p class="ion-text-muted">กรุณาเลือก User หรือตรวจสอบสิทธิ์การเข้าถึง</p>
+      </div>
+
+      <div *ngFor="let floorGroup of floorGroups" class="floor-section">
+        <div class="floor-header">
+          <h4>ชั้น {{ floorGroup.floor }}</h4>
+          <ion-badge color="light">{{ floorGroup.rooms.length }} ห้อง</ion-badge>
+        </div>
+
+        <ion-list lines="none" class="custom-room-list">
+          <ion-item
+            *ngFor="let room of floorGroup.rooms"
+            button
+            detail="false"
+            (click)="focusRoom(room)"
+            class="room-item-wrapper"
+          >
+            <div
+              slot="start"
+              class="room-box-square"
+              [style.background]="room.color"
+            >
+              <div class="room-box-inner" [style.color]="getContrastColor(room.color)">
+                <div class="box-prefix" *ngIf="getRoomDisplay(room.name).prefix">
+                  {{ getRoomDisplay(room.name).prefix }}
+                </div>
+                <div class="box-number">
+                  {{ getRoomDisplay(room.name).number }}
+                </div>
+              </div>
+            </div>
+
+            <ion-label class="room-details">
+              <div class="meta-info">
+                <span class="meta-text">{{ room.zoneName || 'โซนทั่วไป' }}</span>
+              </div>
+
+              <div class="door-tags" *ngIf="room.doors.length > 0">
+                <span
+                  *ngFor="let door of room.doors"
+                  class="door-tag"
+                  [class.allowed]="door.allowed"
+                >
+                  <ion-icon [name]="door.allowed ? 'checkmark-circle' : 'close-circle'"></ion-icon>
+                  {{ door.label }}
+                </span>
+              </div>
+            </ion-label>
+
+            <ion-icon slot="end" name="chevron-forward-outline" color="medium" style="font-size: 16px;"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-container>
+  </div>
+</div>

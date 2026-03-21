@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" fill="clear" color="medium">
+        <ion-icon name="close-outline" class="text-2xl"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="flex flex-col items-center pt-4">
+
+    <!-- Icon -->
+    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+      <ion-icon name="key-outline" class="text-4xl text-[#1a73e8]"></ion-icon>
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-2xl font-bold text-gray-800 text-center">ลงทะเบียนรหัสคำเชิญ</h2>
+    <p class="text-gray-500 text-center px-6 mt-2 text-sm">
+      กรอกรหัส 6 หลักที่คุณได้รับจาก Host เพื่อรับสิทธิ์เข้าอาคาร
+    </p>
+
+    <!-- Code Input -->
+    <div class="w-full px-4 mt-8">
+      <input
+        type="text"
+        maxlength="6"
+        [(ngModel)]="inviteCode"
+        (input)="inviteCode = inviteCode.toUpperCase(); errorMessage = ''"
+        class="w-full h-16 text-center text-3xl font-black tracking-[0.4em] border-2 rounded-xl outline-none transition-colors"
+        [class.border-[#1a73e8]]="inviteCode.length > 0"
+        [class.border-red-400]="errorMessage !== ''"
+        [class.border-gray-200]="inviteCode.length === 0 && errorMessage === ''"
+        placeholder="XXXXXX"
+        autocomplete="off"
+        spellcheck="false"
+      />
+
+      <!-- Error Message -->
+      <p *ngIf="errorMessage" class="text-red-500 text-sm text-center mt-2">
+        <ion-icon name="alert-circle-outline"></ion-icon> {{ errorMessage }}
+      </p>
+
+      <!-- Submit Button -->
+      <ion-button
+        expand="block"
+        class="h-14 font-bold text-base mt-6"
+        [disabled]="inviteCode.length < 6 || isLoading"
+        (click)="submitCode()">
+        <ion-spinner *ngIf="isLoading" name="crescent" class="mr-2"></ion-spinner>
+        <ion-icon *ngIf="!isLoading" name="checkmark-circle-outline" slot="start"></ion-icon>
+        {{ isLoading ? 'กำลังตรวจสอบ...' : 'ตรวจสอบและรับบัตรผ่าน' }}
+      </ion-button>
+
+      <ion-button fill="clear" color="medium" expand="block" (click)="dismiss()" class="mt-1">
+        ยกเลิก
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

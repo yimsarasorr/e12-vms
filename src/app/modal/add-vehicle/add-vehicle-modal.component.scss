@@ -1,0 +1,17 @@
+
+// Custom Select Styles
+ion-select {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --placeholder-color: #9ca3af;
+  --placeholder-opacity: 1;
+}
+
+// No Scrollbar utility
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

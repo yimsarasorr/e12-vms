@@ -1,0 +1,69 @@
+<ion-header class="ion-no-border bg-white mt-2">
+  <ion-toolbar>
+    <ion-title class="font-bold text-center text-gray-800">
+      ตั้งค่าข้อมูลส่วนตัว
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()" class="text-gray-500">
+        <ion-icon name="close-circle" class="text-2xl"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding bg-gray-50">
+  <div class="mb-4 text-center">
+    <p class="text-sm text-gray-600 m-0">กรุณากรอกข้อมูลเพื่อใช้ในการติดต่อและการจองที่จอดรถ</p>
+  </div>
+
+  <form [formGroup]="profileForm" (ngSubmit)="save()" class="space-y-4">
+
+    <!-- Phone Field -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="px-4 py-2 border-b border-gray-100 bg-gray-50">
+        <span class="text-sm font-bold text-gray-700">เบอร์โทรศัพท์ <span class="text-red-500">*</span></span>
+      </div>
+      <ion-item lines="none" class="bg-transparent">
+        <ion-icon name="call-outline" slot="start" class="text-gray-400"></ion-icon>
+        <ion-input formControlName="phone" type="tel" placeholder="0812345678" maxlength="10"
+          class="font-medium text-gray-800">
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid"
+        class="px-4 pb-2 text-xs text-red-500">
+        <span *ngIf="profileForm.get('phone')?.errors?.['required']">กรุณากรอกเบอร์โทรศัพท์</span>
+        <span *ngIf="profileForm.get('phone')?.errors?.['pattern']">เบอร์โทรศัพท์ต้องเป็นตัวเลข 9-10 หลัก</span>
+      </div>
+    </div>
+
+    <!-- Email Field -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="px-4 py-2 border-b border-gray-100 bg-gray-50">
+        <span class="text-sm font-bold text-gray-700">อีเมล <span class="text-red-500">*</span></span>
+      </div>
+      <ion-item lines="none" class="bg-transparent">
+        <ion-icon name="mail-outline" slot="start" class="text-gray-400"></ion-icon>
+        <ion-input formControlName="email" type="email" placeholder="your.email@example.com"
+          class="font-medium text-gray-800">
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid"
+        class="px-4 pb-2 text-xs text-red-500">
+        <span *ngIf="profileForm.get('email')?.errors?.['required']">กรุณากรอกอีเมล</span>
+        <span *ngIf="profileForm.get('email')?.errors?.['email']">รูปแบบอีเมลไม่ถูกต้อง</span>
+      </div>
+    </div>
+
+    <!-- Embedded Save Button -->
+    <div class="mt-8 pt-4 pb-6">
+      <ion-button type="submit" expand="block" color="primary" class="h-12 font-bold shadow-sm"
+        style="--border-radius: 12px;">
+        <ion-icon name="save-outline" slot="start" class="text-xl mr-2"></ion-icon>
+        บันทึกข้อมูล
+      </ion-button>
+    </div>
+
+  </form>
+</ion-content>

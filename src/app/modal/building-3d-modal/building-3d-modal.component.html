@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="white">
+        <ion-title class="font-bold text-gray-800">{{ buildingName }}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismiss()">
+                <ion-icon name="close" class="text-gray-600 font-bold"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-[#EBF0F5] relative">
+    <!-- 3D Viewer host -->
+    <div class="viewer-container absolute inset-0 w-full h-full">
+        <app-building-view [floors]="floors" [activeFloor]="selectedFloor" (floorSelected)="onFloorSelected($event)">
+        </app-building-view>
+    </div>
+
+    <!-- Overlay info (e.g., Instructions or currently selected floor) -->
+    <div
+        class="overlay-panel absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full shadow-lg border border-white flex flex-col items-center">
+        <span class="text-xs text-gray-500 font-medium mb-0.5" *ngIf="!selectedFloor">แตะที่ชั้นเพื่อดูรายละเอียด</span>
+        <div class="flex items-center gap-2">
+            <span class="text-sm font-bold text-gray-800" *ngIf="selectedFloor">ชั้น {{ selectedFloor }}</span>
+            <span class="text-sm font-bold text-gray-800" *ngIf="!selectedFloor">ภาพรวมอาคาร</span>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,217 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bg-white border-b border-gray-200 shadow-none">
+    <ng-container *ngIf="!showSearch">
+      <ion-title class="font-bold text-gray-900 text-xl text-center">การจองของฉัน</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="toggleSearch()">
+          <ion-icon name="search-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ng-container>
+    <ng-container *ngIf="showSearch">
+      <div class="flex items-center w-full h-full px-2 pt-1 pb-1">
+        <div class="rounded-full flex items-center w-full px-4 py-2 transition-all duration-300" [ngClass]="{
+               'bg-blue-50/80 border-2 border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.3)]': isSearching,
+               'bg-gray-100 border border-transparent': !isSearching
+             }">
+          <ion-icon name="search-outline" class="text-xl mr-3 transition-colors duration-300"
+            [ngClass]="isSearching ? 'text-blue-500 animate-pulse' : 'text-[#1a73e8]'"></ion-icon>
+          <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()"
+            placeholder="ค้นหา สถานที่, ทะเบียนรถ, ตึก..."
+            class="flex-1 w-full bg-transparent border-none outline-none p-0 m-0 text-[15px] text-gray-700 placeholder-gray-500 font-medium transition-colors"
+            [ngClass]="{'text-blue-700 placeholder-blue-300': isSearching}">
+
+          <ion-icon name="close-circle" class="text-xl ml-2 text-gray-400 cursor-pointer active:opacity-50"
+            (click)="toggleSearch()"></ion-icon>
+        </div>
+      </div>
+    </ng-container>
+  </ion-toolbar>
+
+  <!-- Filter Dropdowns Row -->
+  <div class="flex gap-3 px-4 py-2.5 bg-white">
+    <!-- Date/Month Filter -->
+    <div id="month-filter-trigger"
+      class="flex-1 flex items-center justify-between border border-gray-300 rounded-lg h-10 px-3 text-[13px] text-gray-700 bg-white cursor-pointer active:bg-gray-50 transition-colors">
+      <div class="flex items-center overflow-hidden">
+        <ion-icon name="calendar-outline" class="text-[16px] text-[#1a73e8] mr-2 shrink-0"></ion-icon>
+        <span class="truncate font-medium">{{ getSelectedMonthLabel() }}</span>
+      </div>
+      <ion-icon name="chevron-down-outline" class="text-sm text-gray-400 shrink-0 ml-1"></ion-icon>
+    </div>
+
+    <ion-popover trigger="month-filter-trigger" triggerAction="click" dismissOnSelect="true" class="custom-popover">
+      <ng-template>
+        <ion-content class="ion-padding-vertical">
+          <ion-list lines="none" class="m-0 p-0">
+            <ion-item *ngFor="let opt of monthOptions" [button]="true" [detail]="false" (click)="selectMonth(opt.value)"
+              class="mx-2 mb-1 rounded-lg" [color]="selectedMonth === opt.value ? 'primary' : ''"
+              [style.--background]="selectedMonth === opt.value ? '#ebf8f6' : 'white'">
+              <ion-label [class.font-bold]="selectedMonth === opt.value"
+                [class.text-[#1a73e8]]="selectedMonth === opt.value" class="text-sm">{{ opt.label }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+
+    <!-- Category Filter -->
+    <div id="category-filter-trigger"
+      class="flex-1 flex items-center justify-between border border-gray-300 rounded-lg h-10 px-3 text-[13px] text-gray-700 bg-white cursor-pointer active:bg-gray-50 transition-colors">
+      <div class="flex items-center overflow-hidden">
+        <ion-icon name="layers-outline" class="text-[16px] text-[#1a73e8] mr-2 shrink-0"></ion-icon>
+        <span class="truncate font-medium">{{ getSelectedCategoryLabel() }}</span>
+      </div>
+      <ion-icon name="chevron-down-outline" class="text-sm text-gray-400 shrink-0 ml-1"></ion-icon>
+    </div>
+
+    <ion-popover trigger="category-filter-trigger" triggerAction="click" dismissOnSelect="true" class="custom-popover">
+      <ng-template>
+        <ion-content class="ion-padding-vertical">
+          <ion-list lines="none" class="m-0 p-0">
+            <ion-item *ngFor="let opt of categoryOptions" [button]="true" [detail]="false"
+              (click)="selectCategory(opt.value)" class="mx-2 mb-1 rounded-lg"
+              [color]="selectedCategory === opt.value ? 'primary' : ''"
+              [style.--background]="selectedCategory === opt.value ? '#ebf8f6' : 'white'">
+              <ion-label [class.font-bold]="selectedCategory === opt.value"
+                [class.text-[#1a73e8]]="selectedCategory === opt.value" class="text-sm">{{ opt.label }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </div>
+
+  <!-- Status Tabs -->
+  <ion-toolbar class="bg-white pb-2" style="--background: white;">
+    <ion-segment [(ngModel)]="selectedStatusSegment" (ionChange)="segmentChanged($event)" mode="md"
+      class="bg-transparent">
+      <ion-segment-button value="in_progress"
+        class="min-w-0 flex-1 [--indicator-color:var(--ion-color-primary)] [--color:#999] [--color-checked:var(--ion-color-primary)]">
+        <ion-label class="text-sm font-medium">กำลังดำเนินการ</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completed"
+        class="min-w-0 flex-1 [--indicator-color:var(--ion-color-primary)] [--color:#999] [--color-checked:var(--ion-color-primary)]">
+        <ion-label class="text-sm font-medium">เสร็จสิ้น</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="cancelled"
+        class="min-w-0 flex-1 [--indicator-color:var(--ion-color-primary)] [--color:#999] [--color-checked:var(--ion-color-primary)]">
+        <ion-label class="text-sm font-medium">ยกเลิก/ล้มเหลว</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-[#f7f8fa]">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="h-full flex flex-col items-center justify-center space-y-4" *ngIf="isLoading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p class="text-gray-400 text-sm">กำลังโหลดข้อมูล...</p>
+  </div>
+
+  <div class="p-4 pb-10" *ngIf="!isLoading">
+
+    <!-- Combined Bookings List -->
+    <div class="mb-6">
+      <div class="mb-3 flex justify-between items-center">
+        <div class="text-[15px] font-bold text-gray-900 m-0">รายการจองล่าสุด</div>
+        <div *ngIf="isExpanded"
+          class="text-xs text-[var(--ion-color-primary)] font-medium cursor-pointer flex items-center gap-1 hover:underline"
+          (click)="toggleExpanded()">
+          ย่อรายการ
+          <ion-icon name="chevron-up-outline"></ion-icon>
+        </div>
+      </div>
+      <div *ngIf="displayBookings.length === 0"
+        class="flex flex-col items-center justify-center py-10 text-gray-400 bg-white rounded-2xl shadow-sm border border-gray-100">
+        <ion-icon name="document-text-outline" class="text-4xl mb-3 opacity-40"></ion-icon>
+        <span class="text-sm">ไม่พบรายการข้อมูล</span>
+      </div>
+      <div *ngFor="let item of (isExpanded ? displayBookings : (displayBookings | slice:0:2))"
+        class="bg-white rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.06)] mb-4 overflow-hidden border border-gray-100 transition-transform active:scale-[0.98] cursor-pointer"
+        (click)="handleFooterClick(item)">
+        <div class="p-4 pb-3">
+          <!-- Top Row -->
+          <div class="flex justify-between items-start mb-4">
+            <!-- TL: Status -->
+            <div class="flex flex-col">
+              <div class="flex items-center gap-1.5 text-[15px] font-bold" [ngClass]="getStatusClass(item)">
+                <ion-icon name="car-sport" class="text-lg"></ion-icon> {{ item.statusLabel }}
+              </div>
+              <div class="text-xs text-gray-500 font-medium pl-6 mt-1 flex items-center gap-2">
+                <span *ngIf="item.vehicleType">
+                  {{ getVehicleTypeLabel(item.vehicleType) }}
+                </span>
+              </div>
+              <!-- Added Booking Type Label -->
+              <div class="pl-6 mt-1.5 flex items-center">
+                <span class="text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wide"
+                  [ngClass]="getBookingTypeClass(item.bookingType)">
+                  {{ getBookingTypeLabel(item.bookingType) }}
+                </span>
+              </div>
+            </div>
+            <!-- TR: Time -->
+            <div class="text-right">
+              <div class="text-[15px] font-semibold text-[var(--ion-color-primary)] mb-0.5">
+                {{ item.dateLabel ? item.dateLabel : (item.bookingTime | date:'EEE d MMM') }}
+              </div>
+              <div class="text-[13px] text-gray-800 whitespace-pre-line font-medium">
+                {{ item.periodLabel ? item.periodLabel : (item.bookingTime | date:'HH:mm') + ' - ' + (item.endTime |
+                date:'HH:mm') + ' น.' }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row -->
+          <div class="flex justify-between items-end mb-0">
+            <!-- BL: Location -->
+            <div>
+              <div class="text-xs text-gray-500 mb-0.5 flex flex-wrap items-center gap-2">
+                <span
+                  class="flex items-center gap-1 font-medium before:content-[''] before:inline-block before:w-3.5 before:h-3.5 before:bg-[url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20512%20512%22%3E%3Cpath%20fill=%22none%22%20stroke=%22%23666%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20stroke-width=%2232%22%20d=%22M256%2048c-79.5%200-144%2061.39-144%20137%200%2087%2096%20224.87%20131.25%20272.49a15.77%2015.77%200%200025.5%200C304%20409.89%20400%20272.07%20400%20185c0-75.61-64.5-137-144-137z%22/%3E%3Ccircle%20cx=%22256%22%20cy=%22192%22%20r=%2248%22%20fill=%22none%22%20stroke=%22%23666%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20stroke-width=%2232%22/%3E%3C/svg%3E')] before:bg-contain before:bg-no-repeat">
+                  {{ item.placeName }}
+                </span>
+              </div>
+              <div class="mb-1" *ngIf="item.lat && item.lng">
+                <button (click)="openMap(item.lat, item.lng); $event.stopPropagation();"
+                  class="bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md px-2 py-1 text-[10px] flex items-center gap-1 font-bold border border-blue-100 uppercase tracking-wider transition-colors w-fit shadow-sm">
+                  <ion-icon name="map" class="text-[12px]"></ion-icon> เปิด Google Maps
+                </button>
+              </div>
+              <div class="text-xl text-gray-900 font-bold tracking-tight">
+                <span class="text-lg">ตึก {{ item.building }} ชั้น {{ item.floor }}</span>
+                <span class="text-gray-300 mx-1">|</span>
+                <span class="text-base">โซน {{ item.zone }}</span>
+                <span class="text-gray-300 mx-1">|</span>
+                <span class="text-base text-[var(--ion-color-primary)]">{{ item.slot }}</span>
+              </div>
+            </div>
+            <!-- BR: Car / User -->
+            <div class="text-right">
+              <div class="text-[10px] text-gray-500 uppercase mb-0.5 flex items-center justify-end gap-1 font-bold">
+                <ion-icon name="car"></ion-icon> {{ item.carBrand }}
+              </div>
+              <div class="text-[11px] text-gray-500 font-medium">{{ item.licensePlate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-2 mb-4" *ngIf="displayBookings.length > 2">
+        <div
+          class="text-sm text-[var(--ion-color-primary)] font-semibold cursor-pointer flex items-center gap-1.5 hover:underline py-2 px-4 rounded-full bg-blue-50 border border-blue-100 transition-colors"
+          (click)="toggleExpanded()">
+          {{ isExpanded ? 'ย่อรายการ' : 'ดูรายการทั้งหมด' }}
+          <ion-icon [name]="isExpanded ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</ion-content>

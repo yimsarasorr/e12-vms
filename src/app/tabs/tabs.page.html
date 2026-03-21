@@ -1,0 +1,31 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom" class="floating-tabbar">
+
+    <ion-tab-button tab="explore" (click)="onTab1Click()">
+      <ion-icon name="map-outline"></ion-icon>
+      <ion-label>สำรวจ</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="reservations" href="/tabs/reservations">
+      <ion-icon name="ticket-outline"></ion-icon>
+      <ion-label>การจอง</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="building" href="/tabs/building">
+      <ion-icon name="business-outline"></ion-icon>
+      <ion-label>อาคาร</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="saved" href="/tabs/saved">
+      <ion-icon name="bookmark-outline"></ion-icon>
+      <ion-label>บันทึก</ion-label>
+    </ion-tab-button>
+
+
+    <ion-tab-button tab="profile" href="/tabs/profile">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>โปรไฟล์</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>

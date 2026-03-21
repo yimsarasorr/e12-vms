@@ -1,0 +1,38 @@
+<ion-content color="light">
+  <div class="auth-wrapper">
+    
+    <div class="logo-container">
+      <ion-img src="assets/FastPass_Icon_1.png" class="app-logo"></ion-img>
+      <h1 class="brand-title">FASTPASS</h1>
+      <p class="brand-sub">Smart Building Access</p>
+    </div>
+
+    <ion-card mode="ios" class="login-card">
+
+      <ion-card-content>
+        <ion-button 
+          expand="block" 
+          mode="ios" 
+          class="line-btn"
+          (click)="loginWithLine()">
+          <ion-icon slot="start" name="logo-line"></ion-icon>
+          ดำเนินการต่อด้วย LINE
+        </ion-button>
+
+        <div class="or-divider">หรือ</div>
+
+        <ion-button 
+          expand="block" 
+          fill="clear" 
+          color="medium"
+          class="guest-btn"
+          (click)="continueAsGuest()">
+          เข้าใช้งานในฐานะผู้เยี่ยมชม (Guest)
+          <ion-icon slot="end" name="arrow-forward-outline" class="small-icon"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <p class="terms-text">Term condition</p>
+  </div>
+</ion-content>

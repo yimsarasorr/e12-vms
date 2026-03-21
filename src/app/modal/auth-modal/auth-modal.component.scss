@@ -1,0 +1,84 @@
+.auth-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 35px;
+
+  .app-logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+
+  .brand-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #003366;
+    margin: 10px 0 0;
+    letter-spacing: -1.5px;
+  }
+
+  .brand-sub {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 2px;
+  }
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 28px;
+  margin: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.line-btn {
+  --background: #06C755;
+  --border-radius: 16px;
+  font-weight: 700;
+  height: 56px;
+  margin-top: 5px;
+}
+
+.or-divider {
+  text-align: center;
+  margin: 15px 0;
+  color: #bbb;
+  font-size: 0.8rem;
+  position: relative;
+  
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: #eee;
+  }
+  &::before { left: 0; }
+  &::after { right: 0; }
+}
+
+.guest-btn {
+  font-weight: 600;
+  font-size: 0.9rem;
+  --padding-bottom: 10px;
+  
+  .small-icon {
+    font-size: 1rem;
+  }
+}
+
+.terms-text {
+  margin-top: 40px;
+  font-size: 0.7rem;
+  color: #bbb;
+}

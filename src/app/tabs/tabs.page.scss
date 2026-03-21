@@ -1,0 +1,16 @@
+.floating-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999 !important; /* 🔥 อยู่เหนือ modal */
+  background: #ffffffee; /* โปร่งนิดหน่อยสวย ๆ */
+  backdrop-filter: blur(10px); /* เบลอพื้นหลัง */
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* ปรับขนาดไอคอน / ปุ่มให้ดูสมดุล */
+.floating-tabbar ion-tab-button {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

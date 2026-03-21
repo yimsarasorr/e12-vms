@@ -1,0 +1,130 @@
+// --- MAP ---
+.map-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #e5e7eb;
+  overflow: hidden; // ป้องกัน Marker ล้น
+}
+
+.marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 6px 10px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1;
+  white-space: nowrap; // ป้องกันข้อความตกบรรทัด
+
+  &.success {
+    background-color: #10b981;
+  }
+
+  &.warning {
+    background-color: #f59e0b;
+  }
+
+  &.danger {
+    background-color: #ef4444;
+  }
+}
+
+// --- BOTTOM SHEET ---
+.bottom-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  // Performance hacks
+  will-change: height;
+  transition: none;
+
+  &.snapping {
+    transition: height 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+}
+
+.drag-header {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: grab;
+  background-color: white;
+  touch-action: none; // สำคัญ: บอก Browser ว่าอย่าจัดการ Touch เอง เราจะจัดการเอง
+}
+
+.drag-line {
+  width: 40px;
+  height: 5px;
+  background-color: #d1d5db;
+  border-radius: 3px;
+}
+
+.sheet-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 30px;
+  background-color: #f9fafb;
+
+  // ทำให้ Scroll ลื่นบน iOS
+  -webkit-overflow-scrolling: touch;
+
+  &.lock-scroll {
+    overflow-y: hidden;
+  }
+}
+
+// ---  NEW STICKY HEADER WRAPPER ---
+.sticky-header {
+  position: -webkit-sticky;
+  /* Safari Support */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  /* อยู่เหนือรายการ */
+  background-color: white;
+  /* พื้นหลังทึบ บังรายการตอนเลื่อนผ่าน */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  /* เงาบางๆ ให้รู้ว่าเป็น Header */
+
+  ion-searchbar {
+    padding-top: 8px;
+    padding-bottom: 0;
+    --background: #f3f4f6; // ปรับสีช่องค้นหาให้นวลตา
+    --box-shadow: none;
+  }
+}
+
+.filter-row {
+  padding: 4px 16px;
+  background: white;
+
+  ion-segment {
+    --background: #f3f4f6;
+    margin-top: 0;
+    margin-bottom: 0;
+    min-height: 32px;
+  }
+}
+
+// --- LIST ---
+.lot-list {
+  padding: 12px 16px 80px 16px; // Increased top padding as requested
+}
+
+// Old .lot-card styles removed to allow Tailwind to take over

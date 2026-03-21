@@ -1,0 +1,204 @@
+// Custom Font? No, rely on Tailwind / Ionic
+// But we want a refined look.
+
+ion-content {
+    --background: #ffffff;
+}
+
+// 1. Header (Sticky)
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition: all 0.2s;
+}
+
+// 2. Image Gallery
+.snap-center {
+    scroll-snap-align: center;
+}
+
+// 3. Filters
+// See below
+
+// --- Refined Styles ---
+
+.shadow-lg-up {
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-sm {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-glow {
+    box-shadow: 0 0 15px rgba(var(--ion-color-primary-rgb), 0.4);
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+
+    /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+// Calendar Grid Buttons (Refined)
+.slot-btn {
+    border-radius: 12px;
+    border: 1px solid #f3f4f6;
+    background: white;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &:active {
+        transform: scale(0.96);
+    }
+
+    // Unavailable
+    &.unavailable {
+        background-color: #f9fafb;
+        color: #d1d5db;
+        border-color: transparent;
+        cursor: not-allowed;
+
+        &:active {
+            transform: none;
+        }
+    }
+
+    // Selected (Start/End)
+    &.selected-start,
+    &.selected-end {
+        background-color: var(--ion-color-primary); // Deep Blue
+        color: white;
+        border-color: var(--ion-color-primary);
+        box-shadow: 0 4px 12px rgba(var(--ion-color-primary-rgb), 0.25);
+        z-index: 2;
+
+        .text-xs {
+            font-weight: 700;
+        }
+    }
+
+    // In Range
+    &.in-range {
+        background-color: #eff6ff; // Blue-50
+        border-color: #dbeafe; // Blue-100
+        color: var(--ion-color-primary);
+        border-radius: 4px; // Square it up a bit to look connected
+        z-index: 1;
+    }
+}
+
+// Filter Button Refined
+.filter-btn {
+    background: white;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    height: 48px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    color: #374151;
+    transition: all 0.2s;
+
+    &:active {
+        background-color: #f9fafb;
+        transform: scale(0.98);
+        border-color: #e5e7eb;
+    }
+}
+
+// Circle Close Button
+.circle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+// Animation
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+// Custom Popover overrides (Added)
+::ng-deep ion-popover.menu-popover {
+    --width: 260px;
+    --box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --backdrop-opacity: 0.2;
+    --border-radius: 16px;
+
+    ion-content {
+        --background: white;
+    }
+
+    ion-list {
+        padding: 8px;
+    }
+
+    ion-item {
+        --min-height: 48px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+        font-size: 14px;
+        color: #374151;
+
+        ion-icon {
+            margin-right: 8px;
+            font-size: 18px;
+            color: #9ca3af;
+        }
+
+        &.selected-item {
+            --background: #eff6ff;
+            --color: var(--ion-color-primary);
+            font-weight: 600;
+
+            ion-icon {
+                color: var(--ion-color-primary);
+            }
+        }
+    }
+
+    ion-list-header {
+        padding-left: 12px;
+        padding-bottom: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #9ca3af;
+        margin-top: 4px;
+    }
+}

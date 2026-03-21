@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar class="bg-white border-b border-gray-200 shadow-none">
+        <ion-title class="font-bold text-gray-900 text-xl text-center tracking-tight">เลือกรูปแบบการจอง</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="close()"
+                class="m-2 bg-gray-100 hover:bg-gray-200 rounded-full w-10 h-10 transition-colors">
+                <ion-icon name="close-outline" class="text-2xl text-gray-600"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="--background: white;">
+    <div class="flex flex-col gap-3 mt-1">
+        <div *ngFor="let type of bookingTypes" (click)="selectType(type.id)"
+            class="group relative p-4 rounded-xl bg-white border border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] active:scale-95 transition-all duration-300 flex items-center gap-4 overflow-hidden cursor-pointer"
+            [style.border-left]="'6px solid ' + type.hexColor">
+
+            <!-- Subtle background accent on hover -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-current opacity-0 group-hover:opacity-5 transition-opacity duration-300"
+                [ngStyle]="{'color': type.hexColor}"></div>
+
+            <!-- Icon Box -->
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 shadow-inner transition-transform duration-300 group-hover:scale-110"
+                [ngStyle]="{'background-color': type.hexColor + '15', 'color': type.hexColor}">
+                <ion-icon [name]="type.icon"></ion-icon>
+            </div>
+
+            <!-- Text Content -->
+            <div class="flex-1 min-w-0 z-10">
+                <div class="flex items-center gap-2 mb-0.5">
+                    <h3 class="text-base font-[Inter] font-bold text-gray-900 m-0 leading-tight group-hover:text-current transition-colors"
+                        [ngStyle]="{'color': 'inherit'}">
+                        {{ type.title }}
+                    </h3>
+                    <span *ngIf="type.badge"
+                        class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm animate-pulse"
+                        [ngStyle]="{'background-color': '#fee2e2', 'color': '#ef4444', 'border': '1px solid #fecaca'}">
+                        {{ type.badge }}
+                    </span>
+                </div>
+                <p class="text-[13px] text-gray-500 m-0 leading-snug line-clamp-2 font-medium">
+                    {{ type.desc }}
+                </p>
+            </div>
+
+            <!-- Arrow -->
+            <div class="w-7 h-7 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-white transition-colors duration-300 z-10 shadow-sm"
+                [ngStyle]="{'color': type.hexColor}">
+                <ion-icon name="chevron-forward-outline" class="text-lg"></ion-icon>
+            </div>
+
+            <ion-ripple-effect></ion-ripple-effect>
+        </div>
+    </div>
+</ion-content>

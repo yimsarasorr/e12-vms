@@ -1,0 +1,7482 @@
+{
+  "buildingId": "E12",
+  "buildingName": "อาคาร 12 ชั้น (ตึกโหล)",
+  "floors": [
+    {
+      "floor": 1,
+      "floorName": "ชั้น 1",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 2,
+      "floorName": "ชั้น 2",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f2",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f2",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f2",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f2",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f2",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f2",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f2",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f2",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f2",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f2",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f2",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f2",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f2",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f2",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f2",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f2",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f2",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f2",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f2",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f2",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f2",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 3,
+      "floorName": "ชั้น 3",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f3",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f3",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f3",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f3",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f3",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f3",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f3",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f3",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f3",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f3",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f3",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f3",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f3",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f3",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f3",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f3",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f3",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f3",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f3",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f3",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f3",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 4,
+      "floorName": "ชั้น 4",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f4",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f4",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f4",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f4",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f4",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f4",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f4",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f4",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f4",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f4",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f4",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f4",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f4",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f4",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f4",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f4",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f4",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f4",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f4",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f4",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f4",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 5,
+      "floorName": "ชั้น 5",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f5",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f5",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f5",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f5",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f5",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f5",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f5",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f5",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f5",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f5",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f5",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f5",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f5",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f5",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f5",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f5",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f5",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f5",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f5",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f5",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f5",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 6,
+      "floorName": "ชั้น 6",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f6",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f6",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f6",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f6",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f6",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f6",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f6",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f6",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f6",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f6",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f6",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f6",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f6",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f6",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f6",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f6",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f6",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f6",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f6",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f6",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f6",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 7,
+      "floorName": "ชั้น 7",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f7",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f7",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f7",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f7",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f7",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f7",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f7",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f7",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f7",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f7",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f7",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f7",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f7",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f7",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f7",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f7",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f7",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f7",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f7",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f7",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f7",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 8,
+      "floorName": "ชั้น 8",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f8",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f8",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f8",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f8",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f8",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f8",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f8",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f8",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f8",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f8",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f8",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f8",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f8",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f8",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f8",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f8",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f8",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f8",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f8",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f8",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f8",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 9,
+      "floorName": "ชั้น 9",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f9",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f9",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f9",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f9",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f9",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f9",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f9",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f9",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f9",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f9",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f9",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f9",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f9",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f9",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f9",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f9",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f9",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f9",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f9",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f9",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f9",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 10,
+      "floorName": "ชั้น 10",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f10",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f10",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f10",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f10",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f10",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f10",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f10",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f10",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f10",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f10",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f10",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f10",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f10",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f10",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f10",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f10",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f10",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f10",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f10",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f10",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f10",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 11,
+      "floorName": "ชั้น 11",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f11",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f11",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f11",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f11",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f11",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f11",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f11",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f11",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f11",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f11",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f11",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f11",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f11",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f11",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f11",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f11",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f11",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f11",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f11",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f11",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f11",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floor": 12,
+      "floorName": "ชั้น 12",
+      "walls": [
+        {
+          "start": {
+            "x": -7,
+            "y": 9
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -9
+          },
+          "end": {
+            "x": -4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": -9
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -4,
+            "y": -18
+          },
+          "end": {
+            "x": 4,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -7,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -18
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -18
+          },
+          "end": {
+            "x": -30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": 30,
+            "y": -18
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -30,
+            "y": -43
+          },
+          "end": {
+            "x": 30,
+            "y": -43
+          }
+        },
+        {
+          "start": {
+            "x": -7,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": 9
+          },
+          "end": {
+            "x": -7,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -46,
+            "y": -4
+          },
+          "end": {
+            "x": -37.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -35.25,
+            "y": -4
+          },
+          "end": {
+            "x": -17.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -15.75,
+            "y": -4
+          },
+          "end": {
+            "x": -7,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": -26.5,
+            "y": -4
+          },
+          "end": {
+            "x": -26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 46,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 7,
+            "y": -4
+          },
+          "end": {
+            "x": 15.75,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 17.75,
+            "y": -4
+          },
+          "end": {
+            "x": 35.25,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 37.25,
+            "y": -4
+          },
+          "end": {
+            "x": 46,
+            "y": -4
+          }
+        },
+        {
+          "start": {
+            "x": 26.5,
+            "y": -4
+          },
+          "end": {
+            "x": 26.5,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": -9
+          },
+          "end": {
+            "x": -46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": -52,
+            "y": 9
+          },
+          "end": {
+            "x": -46,
+            "y": 9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 52,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": -9
+          },
+          "end": {
+            "x": 46,
+            "y": -9
+          }
+        },
+        {
+          "start": {
+            "x": 52,
+            "y": 9
+          },
+          "end": {
+            "x": 46,
+            "y": 9
+          }
+        }
+      ],
+      "zones": [
+        {
+          "id": "lobby_zone_f12",
+          "name": "Lobby and Shared Areas",
+          "areas": [
+            {
+              "id": "lobby_f12",
+              "name": "Main Lobby",
+              "color": "#dc3545",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 9
+                }
+              }
+            },
+            {
+              "id": "lobby_extension_lift_f12",
+              "name": "Lift Hall",
+              "color": "#a52a2a",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": -18
+                },
+                "max": {
+                  "x": 7,
+                  "y": -9
+                }
+              }
+            }
+          ],
+          "rooms": [],
+          "objects": [
+            {
+              "id": "lift1_f12",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -4,
+                  "y": -11
+                },
+                "max": {
+                  "x": -2,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift2_f12",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": -1,
+                  "y": -11
+                },
+                "max": {
+                  "x": 1,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "lift3_f12",
+              "type": "Elevator",
+              "boundary": {
+                "min": {
+                  "x": 2,
+                  "y": -11
+                },
+                "max": {
+                  "x": 4,
+                  "y": -9
+                }
+              }
+            },
+            {
+              "id": "w_restroom_f12",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": -7,
+                  "y": 9
+                },
+                "max": {
+                  "x": -2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "stairs_main_f12",
+              "type": "Stairs",
+              "boundary": {
+                "min": {
+                  "x": -2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 2.5,
+                  "y": 11
+                }
+              }
+            },
+            {
+              "id": "m_restroom_f12",
+              "type": "Restroom",
+              "boundary": {
+                "min": {
+                  "x": 2.5,
+                  "y": 9
+                },
+                "max": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "zone1a_f12",
+          "name": "ปีกซ้าย",
+          "areas": [
+            {
+              "id": "zone1a_hallway_f12",
+              "name": "Hallway",
+              "color": "#c8c8fa",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -9
+                },
+                "max": {
+                  "x": -7,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1a_room1_f12",
+              "name": "ห้อง 1A-1",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -46,
+                  "y": -4
+                },
+                "max": {
+                  "x": -26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room1_f12",
+                  "center": {
+                    "x": -36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1a_room2_f12",
+              "name": "ห้อง 1A-2",
+              "color": "#a4a4f2",
+              "boundary": {
+                "min": {
+                  "x": -26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": -7,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1a_room2_f12",
+                  "center": {
+                    "x": -16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "zone1b_f12",
+          "name": "ปีกขวา",
+          "areas": [
+            {
+              "id": "zone1b_hallway_f12",
+              "name": "Hallway",
+              "color": "#add8e6",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -9
+                },
+                "max": {
+                  "x": 46,
+                  "y": -4
+                }
+              }
+            }
+          ],
+          "rooms": [
+            {
+              "id": "zone1b_room1_f12",
+              "name": "ห้อง 1B-1",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 7,
+                  "y": -4
+                },
+                "max": {
+                  "x": 26.5,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room1_f12",
+                  "center": {
+                    "x": 16.75,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "zone1b_room2_f12",
+              "name": "ห้อง 1B-2 (Blacklisted)",
+              "color": "#87ceeb",
+              "boundary": {
+                "min": {
+                  "x": 26.5,
+                  "y": -4
+                },
+                "max": {
+                  "x": 46,
+                  "y": 9
+                }
+              },
+              "doors": [
+                {
+                  "id": "door_1b_room2_f12",
+                  "center": {
+                    "x": 36.25,
+                    "y": -4
+                  },
+                  "size": {
+                    "width": 2,
+                    "depth": 0.2
+                  },
+                  "accessLevel": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" *ngIf="currentStep === 2">
+        <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="font-bold text-lg">{{ currentStep === 1 ? 'สรุปการจอง' : 'ชำระเงิน' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline" color="dark" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-[#f8f9fa]" [scrollY]="true">
+  <div class="p-4 space-y-4 pb-32">
+
+    <!-- Step 1: Summary -->
+    <div *ngIf="currentStep === 1" class="animate-fade-in">
+
+      <!-- Ticket Summary Card -->
+      <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden relative mb-4">
+        <!-- Decor: Top Circles -->
+        <div class="absolute -left-3 top-24 w-6 h-6 rounded-full bg-[#f8f9fa]"></div>
+        <div class="absolute -right-3 top-24 w-6 h-6 rounded-full bg-[#f8f9fa]"></div>
+        <!-- Decor: Dashed Line -->
+        <div class="absolute top-[106px] left-4 right-4 border-b-2 border-dashed border-gray-100"></div>
+
+        <!-- Section 1: Location & Date -->
+        <div class="p-5 pb-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+              <ion-icon name="location" class="text-blue-600 text-2xl"></ion-icon>
+            </div>
+            <div>
+              <h3 class="font-bold text-gray-900 text-lg mb-1 leading-tight">{{ data?.siteName || 'อาคารหอสมุด' }}</h3>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div
+              class="flex-1 bg-gray-50 rounded-xl p-3 flex flex-col items-center justify-center border border-gray-100">
+              <span class="text-[10px] text-gray-400 font-medium mb-1">วันที่</span>
+              <span class="text-sm font-bold text-gray-800">{{ data?.startSlot?.dateTime | date:'d MMM' }}</span>
+            </div>
+            <div
+              class="flex-1 bg-gray-50 rounded-xl p-3 flex flex-col items-center justify-center border border-gray-100">
+              <span class="text-[10px] text-gray-400 font-medium mb-1">เวลา</span>
+              <span class="text-sm font-bold text-gray-800">{{ timeDisplay.split(' - ')[0] }}</span>
+            </div>
+            <div
+              class="flex-1 bg-gray-50 rounded-xl p-3 flex flex-col items-center justify-center border border-gray-100">
+              <span class="text-[10px] text-gray-400 font-medium mb-1">ระยะเวลา</span>
+              <span class="text-sm font-bold text-gray-800">{{ durationText }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Slot & Vehicle -->
+        <div class="p-5 pt-6 bg-gray-50/50">
+          <!-- Result Slot -->
+          <div class="flex items-center justify-between bg-white p-3 rounded-2xl border border-gray-100 shadow-sm mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
+                <ion-icon name="car-sport" class="text-xl"></ion-icon>
+              </div>
+              <div>
+                <div class="text-[10px] text-gray-400 font-medium">ตำแหน่งจอด</div>
+                <div class="text-sm font-bold text-gray-800 flex items-center gap-2">
+                  {{ assignedFloor }} - {{ assignedZone }}
+                  <span class="text-xs bg-gray-100 px-1.5 py-0.5 rounded text-gray-500" *ngIf="data?.selectedSlotId">{{
+                    data.selectedSlotId }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Select Vehicle -->
+          <div
+            class="relative w-full rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden text-left flex justify-between items-center p-3"
+            id="trigger-car-popover">
+            <div class="flex items-center gap-3 w-full" *ngIf="selectedCarInfo">
+              <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                <ion-icon name="car" class="text-blue-600 text-xl"></ion-icon>
+              </div>
+              <div class="flex-1 overflow-hidden">
+                <div class="text-[10px] text-gray-400 font-medium">รถที่ใช้จอง</div>
+                <div class="text-sm font-bold text-gray-800 truncate flex items-center gap-2">
+                  {{ selectedCarInfo.licensePlate }}
+                  <span class="text-xs font-normal text-gray-500">{{ selectedCarInfo.province }}</span>
+                </div>
+              </div>
+            <ion-icon name="chevron-down-outline" class="text-gray-400 shrink-0"></ion-icon>
+            </div>
+          </div>
+          <!-- Warning for Car Overlap -->
+          <div *ngIf="isCarOccupied" class="mt-2 text-center bg-red-50 border border-red-100 rounded-xl p-2 animate-pulse">
+            <p class="text-[11px] text-red-500 font-bold flex items-center justify-center gap-1">
+              <ion-icon name="alert-circle"></ion-icon>
+              รถคันนี้มีการจองในช่วงเวลานี้แล้ว
+            </p>
+          </div>
+          <ion-popover trigger="trigger-car-popover" class="vehicle-popover">
+            <ng-template>
+              <ion-content class="ion-padding-vertical">
+                <ion-list lines="none">
+                  <ion-item *ngFor="let car of userVehicles" button (click)="selectCar(car.id)">
+                    <ion-label>
+                      <h2 class="font-bold text-gray-800">{{ car.licensePlate }}</h2>
+                      <p class="text-sm text-gray-500">{{ car.province }}</p>
+                    </ion-label>
+                    <ion-icon *ngIf="car.id === selectedCarId" name="checkmark-circle" color="primary"
+                      slot="end"></ion-icon>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </div>
+      </div>
+
+      <!-- Payment Method Selection -->
+      <div>
+        <h3 class="text-sm font-bold text-gray-800 mb-3 px-1">เลือกช่องทางชำระเงิน</h3>
+        <div class="space-y-2">
+          <label *ngFor="let method of paymentMethods"
+            class="flex items-center justify-between p-3.5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden"
+            [class.bg-white]="selectedPaymentMethod !== method.id"
+            [class.border-gray-100]="selectedPaymentMethod !== method.id"
+            [class.bg-blue-50]="selectedPaymentMethod === method.id"
+            [class.border-blue-200]="selectedPaymentMethod === method.id">
+
+            <div class="flex items-center gap-3.5 relative z-10">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                [ngClass]="[method.bg, method.color]">
+                <ion-icon [name]="method.icon" class="text-xl"></ion-icon>
+              </div>
+              <span class="font-bold text-sm text-gray-800">{{ method.name }}</span>
+            </div>
+
+            <div class="relative z-10">
+              <!-- Checkmark -->
+              <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
+                [class.border-gray-300]="selectedPaymentMethod !== method.id"
+                [class.border-blue-600]="selectedPaymentMethod === method.id"
+                [class.bg-blue-600]="selectedPaymentMethod === method.id">
+                <ion-icon name="checkmark" class="text-white text-xs"
+                  *ngIf="selectedPaymentMethod === method.id"></ion-icon>
+              </div>
+            </div>
+
+            <input type="radio" name="payment" [value]="method.id"
+              class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-20"
+              (change)="selectPaymentMethod(method.id)">
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Step 2: Payment Action -->
+    <div *ngIf="currentStep === 2" class="animate-fade-in-right">
+
+      <!-- Header / Total -->
+      <div class="text-center mb-6">
+        <p class="text-gray-500 text-sm mb-1">ยอดชำระที่ต้องจ่าย</p>
+        <h1 class="text-4xl font-black text-blue-600 tracking-tight">{{ totalPrice | number }} <span
+            class="text-lg text-gray-500 font-bold">บาท</span></h1>
+        <div class="mt-2 inline-flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full">
+          <ion-icon [name]="paymentMethods[0].icon" class="text-gray-500"></ion-icon>
+          <!-- Hack: Icon logic needed but simplified -->
+          <span class="text-xs font-bold text-gray-600">{{ selectedPaymentMethod | uppercase }}</span>
+        </div>
+      </div>
+
+      <!-- Payment Details Logic -->
+      <div class="mt-4">
+
+        <!-- PromptPay Detail -->
+        <div *ngIf="selectedPaymentMethod === 'promptpay'"
+          class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm text-center">
+          <div class="mb-4">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"
+              class="w-48 h-48 object-contain mx-auto" alt="PromptPay QR">
+          </div>
+          <p class="text-sm text-gray-500 mb-1">Ref No.</p>
+          <p class="text-xl font-bold text-gray-800 tracking-wider font-mono bg-gray-50 py-2 rounded-lg mb-2">{{
+            promptPayRef }}</p>
+          <p class="text-xs text-red-500">กรุณาชำระเงินภายใน 15:00 นาที</p>
+        </div>
+
+        <!-- Credit Card Detail -->
+        <div *ngIf="selectedPaymentMethod === 'creditcard'"
+          class="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm space-y-4">
+          <h3 class="font-bold text-gray-800 text-lg">กรอกข้อมูลบัตรเครดิต</h3>
+          <div>
+            <label class="text-xs text-gray-500 font-bold ml-1 mb-1 block">หมายเลขบัตร</label>
+            <div class="relative">
+              <input type="text" [(ngModel)]="cardNumber" placeholder="0000 0000 0000 0000"
+                class="w-full bg-gray-50 border border-transparent rounded-xl px-4 py-3 text-sm font-bold text-gray-800 outline-none focus:bg-white focus:border-blue-500 transition-all pl-10">
+              <ion-icon name="card-outline" class="absolute left-3.5 top-3.5 text-gray-400 text-lg"></ion-icon>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex-1">
+              <label class="text-xs text-gray-500 font-bold ml-1 mb-1 block">วันหมดอายุ</label>
+              <input type="text" [(ngModel)]="cardExpiry" placeholder="MM/YY"
+                class="w-full bg-gray-50 border border-transparent rounded-xl px-4 py-3 text-sm font-bold text-gray-800 outline-none focus:bg-white focus:border-blue-500 transition-all text-center">
+            </div>
+            <div class="flex-1">
+              <label class="text-xs text-gray-500 font-bold ml-1 mb-1 block">CVV</label>
+              <input type="text" [(ngModel)]="cardCvv" placeholder="123"
+                class="w-full bg-gray-50 border border-transparent rounded-xl px-4 py-3 text-sm font-bold text-gray-800 outline-none focus:bg-white focus:border-blue-500 transition-all text-center">
+            </div>
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 font-bold ml-1 mb-1 block">ชื่อบนบัตร</label>
+            <input type="text" [(ngModel)]="cardName" placeholder="JOHN DOE"
+              class="w-full bg-gray-50 border border-transparent rounded-xl px-4 py-3 text-sm font-bold text-gray-800 outline-none focus:bg-white focus:border-blue-500 transition-all uppercase">
+          </div>
+        </div>
+
+        <!-- TrueMoney Detail -->
+        <div *ngIf="selectedPaymentMethod === 'wallet'"
+          class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm text-center">
+          <div
+            class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-4">
+            <ion-icon name="phone-portrait-outline" class="text-3xl"></ion-icon>
+          </div>
+          <h3 class="font-bold text-gray-800 text-lg mb-2">ยืนยันเบอร์ TrueMoney</h3>
+          <input type="tel" [(ngModel)]="walletPhone" placeholder="0XX-XXX-XXXX"
+            class="w-full bg-orange-50/50 border border-orange-200 rounded-xl px-4 py-3 text-2xl font-bold text-gray-800 outline-none focus:border-orange-500 transition-colors text-center tracking-widest mb-4">
+          <p class="text-xs text-gray-400">ระบบจะส่งแจ้งเตือนการชำระเงินไปยังแอปพลิเคชันของท่าน</p>
+        </div>
+
+        <!-- Pay Later Detail -->
+        <div *ngIf="selectedPaymentMethod === 'pay_later'"
+          class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm text-center">
+          <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 mx-auto mb-4">
+            <ion-icon name="checkmark-circle" class="text-4xl text-green-500"></ion-icon>
+          </div>
+          <h3 class="font-bold text-gray-800 text-lg mb-2">ยืนยันการจอง</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            กรุณาชำระเงินที่เคาน์เตอร์ หรือตู้จ่ายเงินอัตโนมัติหน้าลานจอด
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border bg-white border-t border-gray-100">
+  <div class="px-6 py-4 pb-6">
+
+    <!-- Step 1 Footer -->
+    <div *ngIf="currentStep === 1" class="animate-fade-in">
+      <div class="flex justify-between items-end mb-4">
+        <div>
+          <div class="text-[10px] text-gray-400 mb-1">ยอดชำระรวม</div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-2xl font-black text-gray-900 tracking-tight">{{ totalPrice | number }}</span>
+            <span class="text-xs font-bold text-gray-500">บาท</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-[10px] text-gray-400 mb-1">รูปแบบการจอง</div>
+          <div class="text-xs font-bold text-blue-600">
+            {{ getModeLabel(data?.bookingMode) }}
+          </div>
+        </div>
+      </div>
+
+      <ion-button expand="block" shape="round" color="primary"
+        class="rounded-full font-bold h-12 text-base shadow-lg shadow-blue-200" (click)="confirm()"
+        [disabled]="!data.selectedSlotId || data.selectedFloors.length === 0 || data.selectedZones.length === 0 || isCarOccupied">
+        {{ selectedPaymentMethod === 'pay_later' ? 'ยืนยันการจอง' : 'ชำระเงิน (ต่อไป)' }}
+      </ion-button>
+    </div>
+
+    <!-- Step 2 Footer -->
+    <div *ngIf="currentStep === 2" class="animate-fade-in">
+      <ion-button expand="block" shape="round" color="primary"
+        class="rounded-full font-bold h-12 text-base shadow-lg shadow-blue-200" (click)="confirm()" [disabled]="isCarOccupied">
+        {{ selectedPaymentMethod === 'pay_later' ? 'ตกลง' : 'ยืนยันการชำระเงิน' }}
+      </ion-button>
+    </div>
+
+  </div>
+</ion-footer>

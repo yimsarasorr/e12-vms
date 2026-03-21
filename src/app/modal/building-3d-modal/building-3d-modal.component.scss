@@ -1,0 +1,8 @@
+.viewer-container {
+  overflow: hidden;
+}
+
+.overlay-panel {
+  z-index: 10;
+  pointer-events: none; /* Let clicks pass through to 3D canvas */
+}

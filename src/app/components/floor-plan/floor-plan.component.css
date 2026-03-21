@@ -1,0 +1,312 @@
+/* ไฟล์: src/app/components/floor-plan/floor-plan.component.css */
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.floor-plan-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #f4f5f8;
+  overflow: hidden;
+  border-radius: 16px;
+  --floor-bottom-offset: calc(112px + env(safe-area-inset-bottom));
+}
+
+.floor-plan-container.compact {
+  border-radius: 0;
+  --floor-bottom-offset: calc(64px + env(safe-area-inset-bottom));
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --- Shadow Button Base --- */
+.shadow-btn {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+ion-button.shadow-btn {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+ion-button.shadow-btn::part(native) {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--border-radius, 12px);
+}
+
+ion-button.circle-btn::part(native),
+ion-button.circle-btn::part(ripple) {
+  border-radius: 50%;
+}
+
+ion-button.circle-btn::part(native) {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+
+
+.fullscreen-toggle {
+  margin-left: auto;
+}
+
+.zoom-divider {
+  width: 20px;
+  height: 1px;
+  background: #ddd;
+}
+
+.modal-wrapper-custom {
+  background: #fff;
+  padding: 20px;
+  width: 100%;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.modal-heading {
+  margin: 0;
+  font-weight: 700;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.modal-subtitle {
+  margin-top: 4px;
+  color: #666;
+}
+
+.door-status-card {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.door-status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.door-status-unlocked {
+  font-weight: 700;
+  color: green;
+}
+
+.door-status-locked {
+  font-weight: 700;
+  color: red;
+}
+
+.default-status-card {
+  margin-top: 10px;
+}
+
+.modal-footer {
+  margin-top: 20px;
+}
+
+/* --- ปุ่มกลม (Perfect Circle) --- */
+.circle-btn {
+  width: 48px !important;
+  /* กำหนดกว้างสูงให้เท่ากัน */
+  height: 48px !important;
+  --border-radius: 50% !important;
+  /* บังคับกลม */
+  --padding-start: 0 !important;
+  --padding-end: 0 !important;
+  margin: 0;
+
+  /* จัด Content ตรงกลาง */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* สีพื้นหลัง */
+  --background: rgba(255, 255, 255, 0.9);
+  --color: #333;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ข้อความในปุ่ม (ON/OFF, 2D/3D) */
+.btn-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.btn-text-content span {
+  font-size: 0.75rem;
+  /* ตัวหนังสือเล็กหน่อยให้ใส่ในวงกลมได้ */
+}
+
+/* --- 1. Top Bar Floating --- */
+.floating-header {
+  position: absolute;
+  top: calc(16px + env(safe-area-inset-top));
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* แยกซ้ายขวา */
+  z-index: 20;
+  pointer-events: none;
+}
+
+.floating-header>* {
+  pointer-events: auto;
+}
+
+
+.floor-plan-container.compact .floating-header {
+  left: 16px;
+  right: 16px;
+  justify-content: space-between;
+}
+
+.floor-plan-container.compact .header-pill {
+  display: none;
+}
+
+.floor-plan-container.compact .fullscreen-toggle {
+  margin-left: 0;
+}
+
+.header-pill {
+  padding: 8px 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  color: #1a1a1a;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* จัด Title ให้อยู่กลางจอเสมอ */
+}
+
+/* --- 2. Bottom Left (Floor & Location) --- */
+.floating-bottom-left {
+  position: absolute;
+  bottom: var(--floor-bottom-offset);
+  left: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 10;
+  align-items: flex-end;
+}
+
+.info-pill {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+  transition: transform 0.1s;
+}
+
+.info-pill:active {
+  transform: scale(0.95);
+}
+
+/* --- 3. Bottom Right (Controls) --- */
+.floating-bottom-right {
+  position: absolute;
+  bottom: var(--floor-bottom-offset);
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* จัดกึ่งกลางแนวตั้ง */
+  gap: 12px;
+  z-index: 10;
+}
+
+/* Zoom Stack */
+.zoom-stack {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  /* Capsule */
+  padding: 4px;
+  width: 48px;
+  align-items: center;
+  gap: 2px;
+}
+
+.zoom-btn {
+  width: 40px !important;
+  height: 40px !important;
+  --border-radius: 50% !important;
+  --padding-start: 0;
+  --padding-end: 0;
+  --background: transparent;
+  --color: #333;
+  --box-shadow: none;
+}
+
+/* --- Joystick Position --- */
+app-joystick {
+  position: absolute;
+  bottom: calc(var(--floor-bottom-offset) + 72px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  scale: 0.85;
+  /* เล็กลงนิดนึง */
+}
+
+.floor-plan-container.compact app-joystick {
+  bottom: calc(var(--floor-bottom-offset) + 48px);
+  scale: 1;
+}
+
+/* --- Modal Center --- */
+::ng-deep .centered-detail-modal {
+  --width: 90%;
+  --max-width: 380px;
+  --height: auto;
+  --border-radius: 20px;
+  --box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+}

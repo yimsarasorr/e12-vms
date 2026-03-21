@@ -1,0 +1,321 @@
+<ion-header class="ion-no-border" [translucent]="false">
+  <ion-toolbar class="bg-white border-b border-gray-200 shadow-none">
+    <ion-title class="font-bold text-gray-900 text-xl text-center">โปรไฟล์</ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="--color: #111827;">
+        <ion-icon name="log-out-outline" class="text-xl"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Profile Card -->
+  <div class="px-4 pt-6 pb-4">
+    <div class="bg-white border border-gray-300 rounded-xl p-4 shadow-sm">
+      <div class="flex items-center">
+        <ion-avatar class="w-[60px] h-[60px] mr-4 border border-gray-300 bg-gray-100 flex items-center justify-center">
+          <img *ngIf="userProfile.avatar; else noAvatar" [src]="userProfile.avatar" alt="Avatar"
+            class="w-full h-full object-cover" />
+          <ng-template #noAvatar>
+            <ion-icon name="person" class="text-3xl text-gray-400"></ion-icon>
+          </ng-template>
+        </ion-avatar>
+        <div class="flex-1">
+          <h2 class="m-0 text-lg font-bold text-[#0056b3]">{{ userProfile.name || 'ผู้เยี่ยมชม' }}</h2>
+          <!-- Role Badge -->
+          <div class="mt-1 mb-1" *ngIf="userProfile.role">
+            <span
+              class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-0.5 rounded border border-yellow-200">
+              {{ userProfile.role }}
+            </span>
+          </div>
+          <p class="mb-1 text-sm text-[#666]">เบอร์โทร: {{ userProfile.phone || '-' }}</p>
+          <div class="flex items-center text-xs text-[#666] cursor-pointer active:opacity-70 transition-opacity"
+            (click)="openEditProfile()">
+            <span>แก้ไขข้อมูลส่วนตัว</span>
+            <ion-icon name="arrow-forward-outline" class="ml-1 text-sm"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE Connection Section -->
+      <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 uppercase font-bold">LINE Status</span>
+            <div *ngIf="userProfile.lineId" class="flex items-center gap-1 text-green-700 text-xs font-bold">
+              <ion-icon name="checkmark-circle"></ion-icon> เชื่อมต่อแล้ว
+            </div>
+            <div *ngIf="!userProfile.lineId" class="text-xs text-gray-400">ยังไม่เชื่อมต่อ</div>
+          </div>
+
+          <div *ngIf="userProfile.role === 'Host'" class="border-l border-gray-200 pl-4">
+            <ion-button (click)="openInviteModal()" size="small" fill="solid" color="primary" class="h-8 text-xs font-bold shadow-sm">
+              <ion-icon name="person-add-outline" slot="start"></ion-icon>
+              เชิญผู้ติดต่อ
+            </ion-button>
+          </div>
+
+          <!-- DevTool: Switch Role -->
+          <div class="border-l border-gray-200 pl-4">
+            <ion-button (click)="openSwitchMenu()" size="small" fill="outline" color="medium" class="h-8 text-xs font-bold">
+              <ion-icon name="options-outline" slot="start"></ion-icon>
+              สลับสิทธิ์
+            </ion-button>
+          </div>
+        </div>
+
+        <div *ngIf="!userProfile.lineId">
+          <ion-button size="small" fill="outline" color="success" class="h-8 text-xs font-bold">
+            เชื่อมต่อ LINE
+          </ion-button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Segment Control -->
+  <div class="border-b-2 border-gray-300">
+    <ion-segment [value]="selectedSegment" (ionChange)="segmentChanged($event)" mode="md" class="bg-transparent">
+      <ion-segment-button value="dashboard"
+        class="normal-case text-base font-semibold text-[#666] [--indicator-color:#0056b3] [--color-checked:#0056b3]">
+        <ion-label>แดชบอร์ด</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="list"
+        class="normal-case text-base font-semibold text-[#666] [--indicator-color:#0056b3] [--color-checked:#0056b3]">
+        <ion-label>รายการ</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!-- Dashboard View -->
+  <div *ngIf="selectedSegment === 'dashboard'">
+
+    <!-- Top Section: Background Gray -->
+    <div class="bg-[#f8f9fa] py-6">
+      <!-- Vehicle Horizontal Scroll -->
+      <!-- Empty State -->
+      <div *ngIf="vehicles.length === 0"
+        class="flex flex-col items-center justify-center py-8 text-center bg-white border-2 border-dashed border-gray-300 rounded-2xl mx-4">
+        <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-3">
+          <ion-icon name="car-sport-outline" class="text-3xl text-gray-400"></ion-icon>
+        </div>
+        <h3 class="text-base font-bold text-gray-600">ยังไม่มียานพาหนะ</h3>
+        <p class="text-sm text-gray-500 mb-4">เพิ่มรถของคุณเพื่อเริ่มใช้งาน</p>
+        <ion-button (click)="addVehicle()" [disabled]="vehicles.length >= 3" size="small"
+          class="font-bold [--background:#1a73e8] [--border-radius:8px]">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+          เพิ่มยานพาหนะ
+        </ion-button>
+      </div>
+
+      <!-- Vehicle Horizontal Scroll (Show only if vehicles exist) -->
+      <div *ngIf="vehicles.length > 0"
+        class="flex overflow-x-auto px-4 pt-5 gap-4 snap-x snap-mandatory scrollbar-hide pb-4">
+        <div
+          class="w-full bg-white border-2 border-[#1a73e8] rounded-2xl p-4 snap-center relative shrink-0 cursor-pointer"
+          *ngFor="let vehicle of vehicles" (click)="selectVehicle(vehicle.id)">
+
+          <!-- Badge: Show only if Default -->
+          <div *ngIf="vehicle.isDefault"
+            class="absolute -top-3.5 right-4 bg-[#1a73e8] text-white px-4 py-1 rounded-lg text-sm font-bold z-10 shadow-sm">
+            เลือกแล้ว
+          </div>
+
+          <div class="flex justify-between items-start mb-3 gap-2">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <div
+                  class="border border-black rounded-md px-1 py-1 bg-white leading-none w-[80px] sm:w-[90px] h-[48px] sm:h-[50px] flex flex-col items-center justify-center shrink-0">
+                  <div class="font-bold text-sm sm:text-base leading-none">{{
+                    getLicensePlateParts(vehicle.licensePlate)[0] }}
+                  </div>
+                  <div class="font-bold text-lg sm:text-xl leading-none mt-0.5">{{
+                    getLicensePlateParts(vehicle.licensePlate)[1] }}
+                  </div>
+                </div>
+                <div class="text-sm sm:text-base font-bold text-black flex-1 line-clamp-2 leading-tight break-words">
+                  {{ vehicle.province }}
+                </div>
+              </div>
+              <div class="text-[#888] text-xs sm:text-sm font-medium uppercase mt-2 truncate">{{ vehicle.model }}</div>
+            </div>
+            <div class="w-[100px] sm:w-[120px] h-[70px] sm:h-[80px] shrink-0">
+              <img [src]="vehicle.image" alt="Vehicle" class="w-full h-full object-cover rounded-lg shadow-sm" />
+            </div>
+          </div>
+
+          <div class="h-px bg-gray-100 w-full my-3"></div>
+
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <ion-icon name="checkmark-circle" class="text-[#1a73e8] text-xl" *ngIf="vehicle.isDefault"></ion-icon>
+              <div class="flex flex-col">
+                <span class="text-[#1a73e8] font-bold text-sm" *ngIf="vehicle.isDefault">พร้อมใช้งาน</span>
+                <span class="text-[#888] text-xs">อัพเดทล่าสุด {{ vehicle.lastUpdate }}</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="text-red-500 text-sm flex items-center gap-1 font-bold cursor-pointer hover:opacity-80"
+                (click)="confirmDeleteVehicle(vehicle); $event.stopPropagation()">
+                ลบ <ion-icon name="trash" class="text-base"></ion-icon>
+              </div>
+              <div class="text-[#1a73e8] text-sm flex items-center gap-1 font-bold cursor-pointer hover:opacity-80"
+                (click)="editVehicle(vehicle); $event.stopPropagation()">
+                แก้ไข <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section: Settings (White/Default) -->
+    <div class="bg-white">
+      <!-- Settings Sections -->
+      <div class="px-4 pb-24">
+        <h3 class="text-base font-semibold mb-3 mt-6 text-[#666] pl-1">การตั้งค่าทั่วไป</h3>
+        <ion-list class="bg-white rounded-2xl p-0 overflow-hidden shadow-sm border border-gray-100">
+          <ion-item button detail lines="full" *ngFor="let item of generalSettings"
+            class="[--padding-start:16px] [--inner-padding-end:16px] [--min-height:56px] last:[--border-width:0]">
+            <div class="mr-3 flex items-center justify-center w-8 h-8 bg-[#f5f8ff] rounded-lg" slot="start">
+              <ion-icon [name]="item.icon" class="text-lg text-[#1a73e8]"></ion-icon>
+            </div>
+            <ion-label class="font-medium text-[#333]">{{ item.title }}</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <h3 class="text-base font-semibold mb-3 mt-6 text-[#666] pl-1">อื่นๆ</h3>
+        <ion-list class="bg-white rounded-2xl p-0 overflow-hidden shadow-sm border border-gray-100">
+          <ion-item button detail lines="full" *ngFor="let item of otherSettings"
+            class="[--padding-start:16px] [--inner-padding-end:16px] [--min-height:56px] last:[--border-width:0]">
+            <div class="mr-3 flex items-center justify-center w-8 h-8 bg-[#f5f8ff] rounded-lg" slot="start">
+              <ion-icon [name]="item.icon" class="text-lg text-[#1a73e8]"></ion-icon>
+            </div>
+            <ion-label class="font-medium text-[#333]">{{ item.title }}</ion-label>
+            <ion-note slot="end" *ngIf="item.value" class="text-sm">{{ item.value }}</ion-note>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+
+  <!-- List View -->
+  <div *ngIf="selectedSegment === 'list'" class="bg-white min-h-full pb-20">
+
+    <!-- Empty State for List View -->
+    <div *ngIf="vehicles.length === 0" class="flex flex-col items-center justify-center py-10 mt-10 text-center mx-4">
+      <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4">
+        <ion-icon name="car-sport-outline" class="text-4xl text-gray-400"></ion-icon>
+      </div>
+      <h3 class="text-lg font-bold text-gray-600">ยังไม่มียานพาหนะ</h3>
+      <p class="text-sm text-gray-500 mb-6">เพิ่มรถของคุณเพื่อเริ่มใช้งาน</p>
+    </div>
+
+    <!-- Vehicle Lists (Show only if vehicles exist) -->
+    <div *ngIf="vehicles.length > 0">
+      <div class="text-lg font-bold m-4 mb-3 text-black">ใช้งานล่าสุด</div>
+
+      <!-- Active Vehicle Card -->
+      <div class="mx-4 mb-6 bg-white border-2 border-[#1a73e8] rounded-xl p-0 relative overflow-visible"
+        *ngFor="let vehicle of vehicles" [class.hidden]="!vehicle.isDefault">
+        <div class="absolute -top-3 right-4 bg-[#1a73e8] text-white px-3 py-1 rounded text-xs font-bold z-10">เลือกแล้ว
+        </div>
+
+        <div class="flex p-4 justify-between items-start gap-2">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1">
+              <div
+                class="border border-black rounded-md px-1 py-1 bg-white leading-none w-[80px] sm:w-[90px] h-[48px] sm:h-[50px] flex flex-col items-center justify-center shrink-0">
+                <div class="font-bold text-sm sm:text-base leading-none">{{
+                  getLicensePlateParts(vehicle.licensePlate)[0] }}</div>
+                <div class="font-bold text-lg sm:text-xl leading-none mt-0.5">{{
+                  getLicensePlateParts(vehicle.licensePlate)[1] }}</div>
+              </div>
+              <div class="text-sm sm:text-base font-bold text-black flex-1 line-clamp-2 leading-tight break-words">{{
+                vehicle.province }}</div>
+            </div>
+            <div class="text-[#888] text-xs sm:text-sm font-medium uppercase mt-2 truncate">{{ vehicle.model }}</div>
+          </div>
+          <div class="w-[100px] sm:w-[120px] h-[70px] sm:h-[80px] shrink-0">
+            <img [src]="vehicle.image" alt="Vehicle" class="w-full h-full object-cover rounded-lg shadow-sm" />
+          </div>
+        </div>
+
+        <div class="h-px bg-gray-200 mx-4"></div>
+
+        <div class="flex justify-between items-center p-3 px-4">
+          <div class="flex items-center gap-1.5">
+            <ion-icon name="checkmark-circle" color="primary" class="text-lg" *ngIf="vehicle.isDefault"></ion-icon>
+            <span class="text-[#1a73e8] font-bold text-sm" *ngIf="vehicle.isDefault">พร้อมใช้งาน</span>
+            <span class="text-[#888] text-xs ml-2">อัพเดทล่าสุด {{ vehicle.lastUpdate }}</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="text-red-500 text-sm flex items-center gap-1 font-bold cursor-pointer"
+              (click)="confirmDeleteVehicle(vehicle); $event.stopPropagation()">
+              ลบ <ion-icon name="trash"></ion-icon>
+            </div>
+            <div class="text-[#1a73e8] text-sm flex items-center gap-1 font-bold cursor-pointer"
+              (click)="editVehicle(vehicle); $event.stopPropagation()">
+              แก้ไข <ion-icon name="arrow-forward"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-lg font-bold m-4 mb-3 text-black">รถทั้งหมด</div>
+
+      <!-- Other Vehicles List -->
+      <div class="mx-4 mb-4 bg-white border border-gray-300 rounded-xl p-4 shadow-sm" *ngFor="let vehicle of vehicles"
+        [class.hidden]="vehicle.isDefault" (click)="selectVehicle(vehicle.id)">
+        <div class="flex justify-between items-start gap-3 mb-3">
+          <div class="w-[100px] sm:w-[110px] h-[70px] sm:h-[75px] shrink-0">
+            <img [src]="vehicle.image" alt="Vehicle" class="w-full h-full object-cover rounded-lg shadow-sm" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1">
+              <div
+                class="border border-black rounded-md px-1 py-1 bg-white leading-none w-[80px] shrink-0 h-[48px] flex flex-col items-center justify-center">
+                <div class="font-bold text-sm leading-none">{{ getLicensePlateParts(vehicle.licensePlate)[0] }}</div>
+                <div class="font-bold text-lg leading-none mt-0.5">{{ getLicensePlateParts(vehicle.licensePlate)[1] }}
+                </div>
+              </div>
+              <div class="text-sm font-bold text-black flex-1 line-clamp-2 leading-tight break-words">{{
+                vehicle.province }}</div>
+            </div>
+            <div class="text-[#666] text-xs uppercase mt-1 truncate">{{ vehicle.model }}</div>
+          </div>
+        </div>
+        <div class="flex justify-between items-center text-xs">
+          <span class="text-[#888]" *ngIf="vehicle.lastUpdate">แก้ไขเมื่อ {{ vehicle.lastUpdate }}</span>
+          <div class="flex items-center gap-4">
+            <div class="text-red-500 text-sm flex items-center gap-1 font-bold cursor-pointer"
+              (click)="confirmDeleteVehicle(vehicle); $event.stopPropagation()">
+              ลบ <ion-icon name="trash"></ion-icon>
+            </div>
+            <div class="text-[#1a73e8] flex items-center gap-1 font-bold cursor-pointer"
+              (click)="editVehicle(vehicle); $event.stopPropagation()">
+              แก้ไข <ion-icon name="arrow-forward"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add New Vehicle Button -->
+    <div class="py-4">
+      <div class="mx-4 mb-2 text-center text-xs text-red-500 font-medium" *ngIf="vehicles.length >= 3">
+        * ไม่สามารถเพิ่มยานพาหนะได้ (สูงสุด 3 คัน)
+      </div>
+      <ion-button expand="block" [disabled]="vehicles.length >= 3"
+        class="mx-4 font-bold text-base h-12 [--background:#1a73e8] [--border-radius:8px]" (click)="addVehicle()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        เพิ่มยานพาหนะใหม่
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>

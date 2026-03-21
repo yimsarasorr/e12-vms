@@ -1,0 +1,167 @@
+.access-list-container {
+  padding-bottom: 24px;
+}
+
+/* Floor Section */
+.floor-section {
+  margin-bottom: 24px;
+}
+
+.floor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-left: 3px solid #2563eb;
+  margin: 12px 8px 8px 8px;
+  border-radius: 4px;
+}
+
+.floor-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Header Styles (เหมือนเดิม) */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.header-row h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+.header-subtitle {
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+
+/* [ใหม่] ปรับสไตล์รายการแบบกำหนดเองให้กับ Ion List */
+.custom-room-list {
+  background: transparent;
+  padding: 0 8px;
+}
+
+.room-item-wrapper {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: transparent;
+  margin-bottom: 12px;
+}
+
+/* [สำคัญ] กล่องสี่เหลี่ยมด้านซ้าย (แทนจุดวงกลมเดิม) */
+.room-box-square {
+  width: 72px;   /* ปรับได้ เช่น 60/72/80 */
+  height: 72px;  /* ให้เป็นจัตุรัส */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px; /* ลด padding เพื่อให้มีที่เยอะขึ้น */
+  margin-right: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+/* [เพิ่มใหม่] Container ข้างในกล่อง */
+.room-box-inner {
+  display: flex;
+  flex-direction: column; /* เรียงแนวตั้ง */
+  align-items: center;
+  justify-content: center;
+  line-height: 1; /* ลดระยะห่างบรรทัด */
+  text-align: center;
+  width: 100%;
+}
+
+/* คำว่า "ห้อง" */
+.box-prefix {
+  font-size: 0.75rem; /* ตัวเล็กๆ */
+  font-weight: 500;
+  margin-bottom: 2px;
+  opacity: 0.9;
+}
+
+/* เลขห้อง "1A-1" */
+.box-number {
+  font-size: 1.3rem; /* ตัวใหญ่สะใจ */
+  font-weight: 700;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* ยอมให้ขึ้นบรรทัดใหม่ได้ถ้าเลขยาวมาก */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.1;
+}
+
+/* ส่วนรายละเอียดด้านขวา */
+.room-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.meta-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-pill {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.meta-text {
+  font-size: 0.9rem;
+  color: var(--ion-color-medium);
+}
+
+/* Door Tags */
+.door-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.door-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--ion-color-medium);
+}
+
+.door-tag.allowed {
+  color: var(--ion-color-success);
+}
+
+/* Empty State Styles (เหมือนเดิม) */
+.empty-state {
+  margin-top: 32px;
+}
+.empty-icon-circle {
+  width: 64px;
+  height: 64px;
+  background: var(--ion-color-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 32px;
+  color: var(--ion-color-medium);
+}

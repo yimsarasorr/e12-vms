@@ -1,0 +1,12 @@
+<div class="joystick" (contextmenu)="$event.preventDefault()">
+  <span class="sr-only">Virtual joystick control</span>
+  <div #base class="joystick-base">
+    <div
+      #stick
+      class="joystick-stick"
+      (pointerdown)="onPointerDown($event)"
+      aria-hidden="true"
+    ></div>
+    <div class="joystick-ring" aria-hidden="true"></div>
+  </div>
+</div>

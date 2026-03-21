@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar class="bg-white border-b border-gray-200 shadow-none">
+        <ion-title class="font-bold text-gray-900 text-xl text-center">สถานที่ที่บันทึกไว้</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-gray-50">
+    <div class="px-4 py-4">
+
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="flex justify-center items-center py-10">
+            <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && savedPlaces.length === 0"
+            class="flex flex-col items-center justify-center mt-20 p-6 text-center">
+            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
+                <ion-icon name="heart" class="text-4xl text-gray-300"></ion-icon>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">ยังไม่มีสถานที่ที่บันทึก</h3>
+            <p class="text-sm text-gray-500">
+                คุณสามารถกดหัวใจที่หน้ารายละเอียดสถานที่ เพื่อบันทึกสถานที่ที่คุณสนใจไว้ที่นี่ได้เลย
+            </p>
+        </div>
+
+        <!-- Saved Places List -->
+        <div *ngIf="!isLoading && savedPlaces.length > 0" class="flex flex-col gap-4">
+            <div *ngFor="let place of savedPlaces"
+                class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden active:scale-[0.98] transition-all"
+                (click)="goToDetail(place)">
+
+                <!-- Assuming place.images exists or place.cover_image -->
+                <div class="h-32 w-full bg-gray-200 relative">
+                    <img *ngIf="place?.images && place.images.length > 0" [src]="place.images[0]"
+                        class="w-full h-full object-cover">
+                    <ion-icon *ngIf="!place?.images || place.images.length === 0" name="image-outline"
+                        class="text-3xl text-gray-400 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></ion-icon>
+
+                    <!-- Bookmark Button (Active: click to remove) -->
+                    <button
+                        class="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-red-500 shadow-sm"
+                        (click)="removeBookmark(place, $event)">
+                        <ion-icon name="heart" class="text-lg"></ion-icon>
+                    </button>
+                </div>
+
+                <div class="p-3">
+                    <h3 class="font-bold text-gray-900 text-base mb-1 truncate">{{ place?.name || 'Unknown Place' }}
+                    </h3>
+
+                    <div class="flex items-center text-gray-500 text-xs mb-2">
+                        <ion-icon name="location-outline" class="mr-1 text-blue-500"></ion-icon>
+                        <span class="truncate">{{ place?.address || 'ไม่ระบุที่อยู่' }}</span>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <span *ngIf="place?.status"
+                            [class]="place.status !== 'closed' ? 'text-green-600 font-medium text-xs' : 'text-red-600 font-medium text-xs'">
+                            {{ place.status !== 'closed' ? 'เปิดบริการ' : 'ปิดบริการ' }}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ion-content>

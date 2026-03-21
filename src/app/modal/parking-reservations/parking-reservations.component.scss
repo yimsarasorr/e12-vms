@@ -1,0 +1,208 @@
+// --- Filter Buttons ---
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// ทำให้ ion-content ยืดพื้นที่ที่เหลือ เพื่อดัน footer ลงล่าง
+ion-content {
+  flex: 1;
+}
+
+// ... (CSS ส่วนบนคงเดิม) ...
+
+// --- Footer Styling ---
+ion-footer {
+  background: transparent; // พื้นหลังใสเพื่อให้ custom-footer จัดการ
+  box-shadow: none; // ลบเงา Default ของ Ionic
+
+  .custom-footer {
+    background: white;
+    // ลบเส้นขอบ (border-top)
+    border: none;
+
+    // ✅ 1. ขยับเข้ามาข้างใน (เพิ่ม Padding ซ้ายขวา) & ปรับขนาดให้เล็ก (ลด Padding บนล่าง)
+    padding: 10px 24px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+
+    // ใช้เงาบางๆ แทนเส้นขอบสีดำ
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
+
+    // Optional: ถ้าอยากให้ Footer ลอยๆ โค้งๆ
+    // border-top-left-radius: 20px;
+    // border-top-right-radius: 20px;
+  }
+
+  .confirm-btn {
+    // ✅ 2. ปรับปุ่มให้เล็กลง (จากเดิม 48px/h-12)
+    height: 42px;
+    font-size: 14px;
+    margin: 0;
+    --border-radius: 12px; // ปรับความมนให้เข้ากับขนาด
+  }
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid #f3f4f6; // สีขอบจางๆ
+  border-radius: 12px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #374151;
+  font-size: 13px;
+  height: 42px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); // เงาบางๆ
+
+  ion-icon[name="chevron-down-outline"] {
+    transition: transform 0.2s;
+  }
+
+  &:active {
+    background: #f9fafb;
+    transform: scale(0.98);
+    border-color: #e5e7eb;
+  }
+}
+
+// --- Popover / Menu Customization ---
+::ng-deep ion-popover.menu-popover {
+  // ✅ 3. ปรับขนาดให้เล็กลง (จาก 260px)
+  --width: 240px;
+  --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --backdrop-opacity: 0.2;
+
+  ion-content {
+    --background: white;
+  }
+
+  ion-list {
+    // ✅ 1. ขยับเนื้อหาเข้ามา (เพิ่ม Padding รอบๆ)
+    padding: 8px;
+  }
+
+  ion-list-header {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #9ca3af;
+    // ปรับ padding header ให้ตรงกับ item
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 4px;
+    min-height: 30px;
+  }
+
+  ion-item {
+    // ✅ 3. ปรับความสูงแต่ละรายการให้เล็กลง (จาก 44px)
+    --min-height: 40px;
+    font-size: 13px;
+
+    // ✅ 1. ปรับ Padding ของไอเท็มให้พอดี
+    --padding-start: 12px;
+    --inner-padding-end: 12px;
+
+    // ✅ 2. ลบเส้นสีดำออก (บังคับลบขอบ)
+    --border-width: 0 !important;
+    --inner-border-width: 0 !important;
+
+    // ✅ 1. เพิ่มความโค้งมน ให้ดูอยู่ "ข้างใน" กรอบ
+    border-radius: 8px;
+    margin-bottom: 2px; // เว้นระยะห่างระหว่างรายการนิดหน่อย
+
+    &.selected-item {
+      --background: #eff6ff;
+      --color: var(--ion-color-primary);
+      font-weight: 600;
+
+      ion-icon {
+        color: var(--ion-color-primary);
+      }
+    }
+  }
+}
+
+// --- Calendar Grid Buttons ---
+.slot-btn {
+  // flex: 1; // Removed fixed height approach
+  flex-direction: column; // Allow stacking time + status
+  gap: 2px;
+  height: auto;
+  min-height: 52px;
+  padding: 6px 2px;
+
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  position: relative;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  // สถานะไม่ว่าง
+  &.unavailable {
+    background-color: #f9fafb;
+    color: #d1d5db;
+    border-color: transparent;
+    text-decoration: line-through;
+    cursor: not-allowed;
+
+    &:active {
+      transform: none;
+    }
+  }
+
+  // สถานะเลือก (หัว/ท้าย)
+  &.selected-start,
+  &.selected-end {
+    background-color: var(--ion-color-primary);
+    color: white;
+    border-color: var(--ion-color-primary);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(var(--ion-color-primary-rgb), 0.3);
+    z-index: 1;
+  }
+
+  // ช่วงตรงกลาง
+  &.in-range {
+    background-color: #e5e7eb; // Gray-200 (แทน Primary Tint)
+    border-color: #e5e7eb;
+    color: #1f2937; // Gray-800 (สีตัวอักษรเข้ม)
+    border-radius: 4px;
+    opacity: 1; // ปรับให้ชัดเต็มที่เพราะสีอ่อนแล้ว
+  }
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+// Animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}

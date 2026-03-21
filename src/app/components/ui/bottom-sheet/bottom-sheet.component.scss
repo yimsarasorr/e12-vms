@@ -1,0 +1,235 @@
+:host {
+  --sheet-bg: #ffffff;
+  --sheet-radius: 24px;
+  --handle-height: 30px;
+  --peek-height: 80px;
+  --default-height: 58vh;
+  --tab-bar-height: var(--vms-tab-bar-height, 24px);
+  --expanded-height: calc(100vh - var(--tab-bar-height) - 24px);
+  --transition-curve: cubic-bezier(0.25, 1, 0.5, 1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.sheet-container {
+  background: var(--sheet-bg);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  transition: height 0.4s var(--transition-curve);
+  will-change: height;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* --- States --- */
+.sheet-container.state-hidden {
+  height: 0 !important;
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+.sheet-container.state-peek {
+  height: var(--peek-height);
+}
+
+/* [เพิ่มใหม่] State: Partial (ประมาณ 30% ของจอ) */
+.sheet-container.state-partial {
+  height: 30vh;
+  transition: height 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.sheet-container.state-default {
+  height: var(--default-height);
+}
+
+.sheet-container.state-expanded {
+  height: var(--expanded-height, calc(100vh - 4.5rem - 24px));
+}
+
+/* --- Handle --- */
+.sheet-header {
+  height: var(--handle-height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+  background: var(--sheet-bg);
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+.sheet-header:active {
+  cursor: grabbing;
+}
+
+.sheet-grabber {
+  width: 36px;
+  height: 4px;
+  background-color: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* --- Content --- */
+.sheet-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  overscroll-behavior: contain;
+  background: #fff;
+}
+
+.content-section {
+  padding: 1rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.section-header h3,
+.section-header h2 {
+  margin: 0;
+  color: #0f172a;
+}
+
+.section-header h2 {
+  font-size: 1.2rem;
+}
+
+.section-header h3 {
+  font-size: 1.05rem;
+}
+
+.section-header .muted,
+.section-header span.muted {
+  display: block;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.building-list {
+  --inner-padding-top: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --inner-padding-bottom: 0.25rem;
+  background: transparent;
+}
+
+.building-list ion-item {
+  --padding-start: 0.35rem;
+  --padding-end: 0.35rem;
+  --inner-padding-end: 0.5rem;
+  margin-bottom: 0.35rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.building-list ion-item:last-child {
+  margin-bottom: 0;
+}
+
+.list-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.color-chip {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: #fff;
+  border: 1px solid transparent;
+  flex-shrink: 0;
+}
+
+.color-chip ion-icon {
+  font-size: 1.1rem;
+}
+
+.label-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+ion-label h4 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+ion-label p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.distance-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: inherit;
+  align-self: flex-start;
+}
+
+.chevron {
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+@media (max-width: 520px) {
+  .action-row {
+    grid-template-columns: 1fr;
+  }
+}

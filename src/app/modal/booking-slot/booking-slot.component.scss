@@ -1,0 +1,39 @@
+// ซ่อน Scrollbar แต่ยังเลื่อนได้
+.custom-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+//  ลบ :active transform scale ออก เพื่อไม่ให้กระพริบ/ยุบตัว
+button {
+  outline: none;
+  -webkit-tap-highlight-color: transparent; // ลบไฮไลท์สีเทาบนมือถือเวลาแตะ
+
+  ion-icon {
+    transition: opacity 0.2s;
+  }
+  
+  // ให้ transition เฉพาะสี background/border นุ่มๆ
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+ion-footer {
+  background: white;
+  z-index: 20;
+}
+
+ion-content {
+  --background: #f8f9fa;
+}

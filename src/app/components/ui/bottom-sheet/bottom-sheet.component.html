@@ -1,0 +1,121 @@
+<div class="sheet-container" [ngClass]="'state-' + currentState" #sheet>
+  <div class="sheet-header" (mousedown)="onTouchStart($event)" (touchstart)="onTouchStart($event)"
+    (window:mousemove)="onTouchMove($event)" (window:touchmove)="onTouchMove($event)" (window:mouseup)="onTouchEnd()"
+    (window:touchend)="onTouchEnd()">
+    <div class="sheet-grabber"></div>
+  </div>
+
+  <div class="sheet-content">
+
+    @if (currentData.mode === 'building-list') {
+    <div class="content-section">
+      <div class="section-header">
+        <h3>{{ currentData.title }}</h3>
+        <ion-badge color="primary">{{ currentData.data?.length || 0 }} แห่ง</ion-badge>
+      </div>
+
+      <ion-list lines="none" class="building-list">
+        <ion-item button detail="false" *ngFor="let item of currentData.data" (click)="selectBuilding(item)">
+          <div class="list-rank" *ngIf="item.rank" [style.background]="item.color">{{ item.rank }}</div>
+          <div class="color-chip" [ngStyle]="{
+                background: accentSurface(item.color),
+                color: accentText(item.color),
+                borderColor: accentBorder(item.color)
+              }">
+            <ion-icon name="business-outline"></ion-icon>
+          </div>
+          <ion-label>
+            <div class="label-header">
+              <h4>{{ item.name }}</h4>
+              <ion-badge *ngIf="item.distanceText" mode="md" class="distance-pill" [ngStyle]="{
+                    '--background': accentSurface(item.color, 0.22),
+                    '--color': accentText(item.color)
+                  }">
+                📏 {{ item.distanceText }}
+              </ion-badge>
+            </div>
+            <p>{{ item.description }}</p>
+          </ion-label>
+          <ion-icon slot="end" name="chevron-forward-outline" class="chevron"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+    }
+
+    @if (currentData.mode === 'location-detail' && currentData.data) {
+    <div class="content-section">
+      <div class="section-header">
+        <div>
+          <h2>{{ currentData.data.name }}</h2>
+          <span class="muted">{{ currentData.data.description }}</span>
+        </div>
+        <ion-button fill="clear" size="small" (click)="backToList()">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="detail-meta" *ngIf="currentData.data.distanceText">
+        <ion-badge class="distance-pill" [ngStyle]="{
+              '--background': accentSurface(currentData.data.color, 0.22),
+              '--color': accentText(currentData.data.color)
+            }">
+          📏 ห่างจากคุณ {{ currentData.data.distanceText }}
+        </ion-badge>
+      </div>
+
+      <div class="action-row">
+        <ion-button expand="block" (click)="selectBuilding(currentData.data)" [ngStyle]="{
+              '--background': currentData.data.color || '#2563eb',
+              '--background-activated': accentSurface(currentData.data.color, 0.35),
+              '--background-focused': accentSurface(currentData.data.color, 0.35),
+              '--color': '#ffffff'
+            }">
+          <ion-icon name="cube-outline" slot="start"></ion-icon>
+          เข้าสู่อาคาร (3D)
+        </ion-button>
+        <ion-button expand="block" fill="outline" [href]="currentData.data.mapsLink" target="_blank" rel="noopener"
+          [ngStyle]="{
+              '--color': accentText(currentData.data.color),
+              '--border-color': accentBorder(currentData.data.color),
+              '--border-width': '1.5px'
+            }">
+          <ion-icon name="navigate-outline" slot="start"></ion-icon>
+          นำทาง
+        </ion-button>
+      </div>
+    </div>
+    }
+
+    <app-access-list *ngIf="currentData.mode === 'access-list'"></app-access-list>
+
+    <div class="room-detail-container" *ngIf="currentData.mode === 'room-detail'">
+      <div class="detail-header ion-padding-horizontal ion-padding-top">
+        <div class="header-row">
+          <ion-button fill="clear" size="small" (click)="onBackFromDetail()">
+            <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+          <h3>{{ currentData.data?.name || 'รายละเอียดห้อง' }}</h3>
+        </div>
+      </div>
+
+      <div class="ion-padding">
+        <ion-card class="detail-card">
+          <ion-card-content>
+            <div class="status-badge" [style.background]="accentSurface(currentData.data?.color)">
+              <span [style.color]="accentText(currentData.data?.color)">
+                {{ currentData.data?.zoneName || 'โซนทั่วไป' }}
+              </span>
+            </div>
+
+            <p class="description ion-margin-top">
+              ข้อมูลห้อง: {{ currentData.data?.id }}<br>
+              ชั้น: {{ currentData.data?.floor }}
+            </p>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+  </div>
+</div>

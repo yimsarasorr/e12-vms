@@ -1,0 +1,79 @@
+<div class="map-container">
+  <div id="map"></div>
+
+  <div class="top-overlay">
+    <div class="search-wrapper">
+      <ion-searchbar
+        mode="ios"
+        placeholder="ค้นหาสถานที่..."
+        [debounce]="0"
+        showClearButton="focus"
+        [value]="currentSearchQuery"
+        (ionInput)="onSearchInput($event.detail.value ?? '')"
+        (ionFocus)="showSuggestions = true"
+        (ionClear)="clearSearch()"
+      ></ion-searchbar>
+
+      <div class="search-suggestions" *ngIf="showSuggestions && (searchResults.length > 0 || isSearching)">
+        <ion-list lines="none">
+          <ion-item *ngIf="isSearching">
+            <ion-spinner slot="start" name="crescent"></ion-spinner>
+            <ion-label>กำลังค้นหา...</ion-label>
+          </ion-item>
+          <ion-item
+            button
+            detail="false"
+            *ngFor="let result of searchResults"
+            (click)="selectSearchResult(result)"
+          >
+            <ion-icon slot="start" [name]="result.isLocal ? 'business-outline' : 'pin-outline'"></ion-icon>
+            <ion-label>
+              <h4>{{ result.name }}</h4>
+              <p>{{ result.address }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <ion-note *ngIf="searchError" color="danger" class="search-feedback">
+         {{ searchError }}
+      </ion-note>
+      <ion-note
+        *ngIf="!isSearching && searchResults.length === 0 && currentSearchQuery"
+        color="medium"
+        class="search-feedback"
+      >
+        ไม่พบผลลัพธ์ ลองค้นคำอื่นดูนะ
+      </ion-note>
+    </div>
+
+    <div class="zone-selector-wrapper">
+      <ion-label class="zone-label">เลือกพื้นที่</ion-label>
+      <ion-select
+        mode="ios"
+        interface="popover"
+        placeholder="เลือกโซน"
+        (ionChange)="focusOnSelectedZone($event.detail.value)"
+      >
+        <ion-select-option *ngFor="let zone of zones" [value]="zone.hash">
+          {{ zone.name }}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <ion-chip *ngIf="userGeoHash" class="user-status">
+      <ion-icon name="locate-outline"></ion-icon>
+      <ion-label>{{ userLat?.toFixed(4) }}, {{ userLng?.toFixed(4) }} • {{ userGeoHash }}</ion-label>
+    </ion-chip>
+  </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-container">
+    <ion-fab-button (click)="focusOnUser()">
+      <ion-icon name="locate-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div class="error-toast" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+</div>

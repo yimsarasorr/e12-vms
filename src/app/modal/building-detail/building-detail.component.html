@@ -1,0 +1,266 @@
+<ion-content class="bg-white">
+
+    <!-- 1. Header Section (Sticky) -->
+    <div class="sticky top-0 bg-white z-20 pb-2 shadow-sm">
+        <div class="px-4 pt-6 pb-2">
+            <div class="flex justify-between items-start">
+                <div class="flex-1 pr-2">
+                    <!-- Title with Dropdown -->
+                    <button id="building-site-trigger"
+                        class="text-2xl font-bold text-gray-900 mb-1 leading-tight flex items-center gap-2 bg-transparent border-none p-0 outline-none w-full text-left tracking-tight">
+                        {{ lot.name }}
+                        <ion-icon name="chevron-down-outline" class="text-gray-400 text-lg mt-1"></ion-icon>
+                    </button>
+
+                    <ion-popover trigger="building-site-trigger" dismissOnSelect="true" class="menu-popover"
+                        side="bottom" alignment="start">
+                        <ng-template>
+                            <ion-content class="ion-no-padding">
+                                <ion-list lines="none">
+                                    <ion-list-header>เปลี่ยนอาคาร</ion-list-header>
+                                    <ion-item *ngFor="let s of availableSites" button (click)="selectSite(s)"
+                                        [class.selected-item]="lot.id === s.id">
+                                        <ion-label class="ion-text-wrap">{{ s.name }}</ion-label>
+                                        <ion-icon name="checkmark-outline" slot="end" *ngIf="lot.id === s.id"
+                                            class="text-blue-600"></ion-icon>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-content>
+                        </ng-template>
+                    </ion-popover>
+
+                    <div class="text-sm mt-2 flex flex-wrap items-center gap-2">
+                        <span
+                            class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border bg-blue-50 text-blue-600 border-blue-100">
+                            รายชั่วโมง
+                        </span>
+                        <span
+                            [class]="lot.status !== 'closed' ? 'text-green-600 font-medium' : 'text-red-600 font-medium'">
+                            {{ lot.status !== 'closed' ? 'เปิด' : 'ปิด' }}
+                        </span>
+                        <span class="text-gray-400 text-xs" *ngIf="lot.hours">• ปิด {{ lot.hours.split('-')[1] ||
+                            '20:00' }}</span>
+                    </div>
+                    <div class="mt-2" *ngIf="(lot.lat && lot.lng) || (lot.mapX && lot.mapY)">
+                        <button
+                            (click)="openMap((lot.lat || lot.mapX), (lot.lng || lot.mapY)); $event.stopPropagation();"
+                            class="bg-blue-50 hover:bg-blue-100 text-blue-600 rounded px-2 py-1 text-[10px] flex items-center gap-1 font-bold border border-blue-100 uppercase tracking-wider transition-colors w-fit">
+                            <ion-icon name="map" class="text-[12px]"></ion-icon> เปิด Google Maps
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button class="circle-btn bg-gray-50 hover:bg-gray-100 rounded-full p-1 transition-colors"
+                        [class.text-red-500]="isBookmarked" [class.text-gray-500]="!isBookmarked"
+                        (click)="toggleBookmark()">
+                        <ion-icon [name]="isBookmarked ? 'heart' : 'heart-outline'" class="text-2xl"></ion-icon>
+                    </button>
+                    <button class="circle-btn bg-gray-50 hover:bg-gray-100 text-gray-500 rounded-full p-1"
+                        (click)="dismiss()">
+                        <ion-icon name="close-outline" class="text-2xl"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Image Gallery -->
+    <div class="pl-4 pb-4 border-b border-gray-100 bg-white" *ngIf="lot.images && lot.images.length > 0">
+        <div class="flex overflow-x-auto gap-3 no-scrollbar pr-4">
+            <div *ngFor="let img of lot.images"
+                class="flex-none w-[280px] h-[180px] rounded-xl overflow-hidden bg-gray-100 border border-gray-100 shadow-sm snap-center relative">
+                <img [src]="img" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Filters Section -->
+    <div class="bg-white border-b border-gray-100 px-4 py-3">
+
+        <!-- Pass Type Selector (Large) -->
+        <div class="mb-3">
+            <button id="pass-type-trigger" class="filter-btn w-full px-3 py-2 flex items-center justify-between">
+                <div class="flex items-center gap-2 overflow-hidden w-full">
+                    <ion-icon name="key-outline" class="text-gray-600 text-lg flex-shrink-0"></ion-icon>
+                    <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
+                        <span
+                            class="text-[10px] text-gray-400 leading-none font-medium truncate w-full text-left">ประเภทบัตร</span>
+                        <span class="font-bold text-sm text-gray-800 truncate w-full text-left">
+                            {{ selectedPassType === '1-day' ? '1-Day Pass (ทั้งวัน)' : (selectedPassType === 'visitor' ?
+                            'Visitor Pass' : 'Monthly Pass') }}
+                        </span>
+                    </div>
+                    <ion-icon name="chevron-down-outline" class="text-gray-300 text-xs flex-shrink-0 ml-1"></ion-icon>
+                </div>
+            </button>
+
+            <ion-popover trigger="pass-type-trigger" dismissOnSelect="true" class="pass-type-popover menu-popover">
+                <ng-template>
+                    <ion-list lines="none">
+                        <ion-list-header>เลือกประเภทบัตร</ion-list-header>
+                        <ion-item button (click)="selectPassType('1-day')"
+                            [class.selected-item]="selectedPassType === '1-day'">
+                            <ion-label>1-Day Pass (ทั้งวัน)</ion-label>
+                        </ion-item>
+                        <ion-item button (click)="selectPassType('visitor')"
+                            [class.selected-item]="selectedPassType === 'visitor'">
+                            <ion-label>Visitor Pass (รายชั่วโมง)</ion-label>
+                        </ion-item>
+                        <ion-item button (click)="selectPassType('monthly')"
+                            [class.selected-item]="selectedPassType === 'monthly'">
+                            <ion-label>Monthly Pass (รายเดือน)</ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ng-template>
+            </ion-popover>
+        </div>
+
+        <!-- Row Filters -->
+        <div class="flex gap-2">
+
+            <!-- User Role -->
+            <button id="role-trigger" class="filter-btn flex-1 min-w-0 pr-2">
+                <div class="flex items-center gap-2 overflow-hidden w-full">
+                    <ion-icon name="person-outline" class="text-gray-500 text-lg flex-shrink-0"></ion-icon>
+                    <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
+                        <span
+                            class="text-[10px] text-gray-400 leading-none font-medium truncate w-full text-left">บทบาท</span>
+                        <span class="font-bold text-sm text-gray-800 truncate w-full text-left">
+                            {{ selectedUserRole === 'user' ? 'ผู้ใช้งาน' : (selectedUserRole === 'admin' ? 'ผู้ดูแล' :
+                            'เจ้าหน้าที่') }}
+                        </span>
+                    </div>
+                    <ion-icon name="chevron-down-outline" class="text-gray-300 text-xs flex-shrink-0"></ion-icon>
+                </div>
+            </button>
+
+            <ion-popover trigger="role-trigger" dismissOnSelect="true" class="role-popover menu-popover">
+                <ng-template>
+                    <ion-list lines="none">
+                        <ion-item button (click)="selectUserRole('user')"
+                            [class.selected-item]="selectedUserRole === 'user'">ผู้ใช้งาน</ion-item>
+                        <ion-item button (click)="selectUserRole('admin')"
+                            [class.selected-item]="selectedUserRole === 'admin'">ผู้ดูแล</ion-item>
+                    </ion-list>
+                </ng-template>
+            </ion-popover>
+
+            <!-- Duration -->
+            <button id="duration-trigger" class="filter-btn flex-none min-w-[30%]">
+                <div class="flex items-center gap-2 w-full overflow-hidden">
+                    <ion-icon name="time-outline" class="text-gray-500 text-lg flex-shrink-0"></ion-icon>
+                    <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
+                        <span
+                            class="text-[10px] text-gray-400 leading-none font-medium truncate w-full text-left">ระยะเวลา</span>
+                        <span class="font-bold text-sm text-gray-800 truncate w-full text-left">
+                            {{ selectedDuration >= 60 ? (selectedDuration/60) + ' ชม.' : selectedDuration + ' น.' }}
+                        </span>
+                    </div>
+                    <ion-icon name="chevron-down-outline" class="text-gray-300 text-xs flex-shrink-0 ml-0.5"></ion-icon>
+                </div>
+            </button>
+
+            <ion-popover trigger="duration-trigger" dismissOnSelect="true" class="duration-popover menu-popover">
+                <ng-template>
+                    <ion-list lines="none">
+                        <ion-item button (click)="selectDuration(60)">1 ชม.</ion-item>
+                        <ion-item button (click)="selectDuration(120)">2 ชม.</ion-item>
+                        <ion-item button (click)="selectDuration(240)">4 ชม.</ion-item>
+                    </ion-list>
+                </ng-template>
+            </ion-popover>
+
+            <!-- Days -->
+            <button id="days-trigger" class="filter-btn flex-none min-w-[25%] px-2">
+                <div class="flex items-center gap-2 w-full overflow-hidden">
+                    <ion-icon name="calendar-number-outline" class="text-gray-500 text-lg flex-shrink-0"></ion-icon>
+                    <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
+                        <span class="font-bold text-sm text-gray-800 truncate">{{ selectedBookingDays }} วัน</span>
+                    </div>
+                    <ion-icon name="chevron-down-outline" class="text-gray-300 text-xs flex-shrink-0"></ion-icon>
+                </div>
+            </button>
+
+            <ion-popover trigger="days-trigger" dismissOnSelect="true" class="days-popover menu-popover">
+                <ng-template>
+                    <ion-list lines="none">
+                        <ion-item button (click)="selectBookingDays(1)">1 วัน</ion-item>
+                        <ion-item button (click)="selectBookingDays(2)">2 วัน</ion-item>
+                        <ion-item button (click)="selectBookingDays(3)">3 วัน</ion-item>
+                    </ion-list>
+                </ng-template>
+            </ion-popover>
+
+        </div>
+    </div>
+
+    <!-- 4. Date Picker Section -->
+    <div class="pb-6">
+        <div class="bg-white sticky top-[72px] z-10 shadow-sm border-b border-gray-100 pb-2">
+            <!-- Month Header -->
+            <div class="px-4 py-3 text-gray-900 text-base font-bold flex justify-between items-center bg-white">
+                {{ currentMonthLabel }}
+            </div>
+
+            <!-- Horizontal Scroll -->
+            <div class="flex overflow-x-auto px-4 pb-2 gap-3 no-scrollbar items-center">
+                <button *ngFor="let day of displayDays; let i = index"
+                    class="flex flex-col items-center justify-center min-w-[80px] h-[64px] rounded-xl transition-all duration-200 border relative overflow-hidden"
+                    [class.bg-blue-600]="selectedDateIndex === i" [class.border-blue-600]="selectedDateIndex === i"
+                    [class.text-white]="selectedDateIndex === i" [class.shadow-md]="selectedDateIndex === i"
+                    [class.shadow-blue-200]="selectedDateIndex === i" [class.bg-white]="selectedDateIndex !== i"
+                    [class.border-gray-200]="selectedDateIndex !== i" [class.text-gray-700]="selectedDateIndex !== i"
+                    (click)="selectDate(i)">
+
+                    <span class="text-[13px] font-normal opacity-60 mb-0.5" [class.opacity-90]="selectedDateIndex === i"
+                        [class.text-gray-500]="selectedDateIndex !== i">{{ day.dayName }}</span>
+                    <span class="text-lg font-bold leading-none">{{ day.dateNumber }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="h-20"></div>
+
+</ion-content>
+
+<!-- ION FOOTER -->
+<ion-footer class="ion-no-border bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+    <div class="p-4 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+
+        <!-- Summary Card -->
+        <div class="bg-gray-50 border border-gray-100 rounded-xl p-3 mb-4 flex items-center gap-3">
+            <div
+                class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-blue-600 shadow-sm shrink-0">
+                <ion-icon name="calendar-number-outline" class="text-xl"></ion-icon>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-0.5">สรุปการจอง</div>
+                <div class="text-sm font-bold text-gray-900 leading-tight w-full break-words">
+                    9 ก.พ. 10:00 - 11:00 | ชั้น F1 Zone A
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex gap-3">
+            <!-- 3D Button -->
+            <ion-button shape="round" color="medium" fill="outline" class="h-12 w-14 font-bold shadow-none flex-none"
+                (click)="view3DFloorPlan()">
+                <div class="flex items-center gap-1">
+                    <ion-icon name="cube-outline" class="text-xl"></ion-icon>
+                    <span class="text-xs">3D</span>
+                </div>
+            </ion-button>
+
+            <!-- Check Rights -->
+            <ion-button expand="block" shape="round" color="primary" class="h-12 flex-1 font-bold shadow-none"
+                (click)="checkRights()">
+                ตรวจสอบสิทธิ์การจอง
+            </ion-button>
+        </div>
+
+    </div>
+</ion-footer>

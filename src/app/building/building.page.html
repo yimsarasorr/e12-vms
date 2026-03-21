@@ -1,0 +1,24 @@
+<ion-content [fullscreen]="true">
+  <div class="h-full w-full relative" *ngIf="buildingData; else loading">
+
+    <!-- Building Overview (Exterior) -->
+    <app-building-view *ngIf="!selectedFloor" [floors]="buildingData.floors" (floorSelected)="onFloorSelected($event)"
+      class="w-full h-full block">
+    </app-building-view>
+
+    <!-- Floor Plan (Interior) -->
+    <app-floor-plan *ngIf="selectedFloor" [floorData]="selectedFloorData" [floors]="buildingData.floors"
+      [activeFloorValue]="selectedFloor" [showBackButton]="true" (floorChange)="onFloorSelected($event)"
+      (backRequested)="onBackToBuilding()" class="w-full h-full block">
+    </app-floor-plan>
+
+  </div>
+
+  <ng-template #loading>
+    <div class="flex items-center justify-center h-full">
+      <ion-spinner></ion-spinner>
+    </div>
+  </ng-template>
+</ion-content>
+
+<app-bottom-sheet></app-bottom-sheet>

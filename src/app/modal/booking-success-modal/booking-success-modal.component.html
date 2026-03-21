@@ -1,0 +1,93 @@
+<ion-content class="ion-padding">
+  <div class="success-container">
+    <!-- Success Icon with Animation -->
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <h2 class="success-title">จองสำเร็จ!</h2>
+    <p class="success-subtitle">การจองของคุณได้รับการยืนยันแล้ว</p>
+
+    <!-- Booking Details Card -->
+    <div class="booking-details-card">
+      <!-- Parking Slot (Primary) -->
+      <div class="detail-row" *ngIf="bookingData?.selectedSlotId || bookingData?.locationDetails">
+        <ion-icon name="car-outline" class="detail-icon"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">ตำแหน่งที่จอด</span>
+          <span class="detail-value">{{ bookingData?.selectedSlotId || bookingData?.locationDetails }}</span>
+          <span class="detail-remark" *ngIf="bookingData?.id">{{ bookingData.id }}</span>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="detail-row">
+        <ion-icon name="location-outline" class="detail-icon"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">สถานที่</span>
+          <span class="detail-value">{{ bookingData?.siteName || bookingData?.placeName }}</span>
+        </div>
+      </div>
+
+      <!-- Floor & Zone -->
+      <div class="detail-row" *ngIf="bookingData?.selectedFloors && bookingData?.selectedZones">
+        <ion-icon name="layers-outline" class="detail-icon"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">ชั้นและโซน</span>
+          <span class="detail-value">ชั้น {{ bookingData.selectedFloors[0] }} | โซน {{ bookingData.selectedZones[0] }}</span>
+        </div>
+      </div>
+
+      <!-- Start Time -->
+      <div class="detail-row">
+        <ion-icon name="time-outline" class="detail-icon"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">เวลาเริ่มต้น</span>
+          <span class="detail-value">{{ formatDateTime(bookingData?.startSlot?.dateTime || bookingData?.bookingTime) }}</span>
+        </div>
+      </div>
+
+      <!-- End Time -->
+      <div class="detail-row">
+        <ion-icon name="time-outline" class="detail-icon"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">เวลาสิ้นสุด</span>
+          <span class="detail-value">{{ formatDateTime(bookingData?.endSlot?.dateTime || bookingData?.endTime) }}</span>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="detail-row price-row">
+        <ion-icon name="cash-outline" class="detail-icon"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">ยอดชำระ</span>
+          <span class="detail-value price-value">{{ bookingData?.price || bookingData?.totalPrice }} บาท</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status (Outside Card) -->
+    <div class="status-badge" [class.status-pending]="bookingData?.status === 'pending' || bookingData?.status === 'pending_payment'" [class.status-confirmed]="bookingData?.status === 'confirmed'">
+      <ion-icon [name]="getStatusIcon()" class="status-icon"></ion-icon>
+      <span class="status-text">{{ getStatusText() }}</span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <ion-button expand="block" shape="round" color="primary" (click)="goToBookings()" class="primary-button">
+        <ion-icon name="list-outline" slot="start"></ion-icon>
+        ดูรายการจองของฉัน
+      </ion-button>
+      
+      <ion-button expand="block" shape="round" fill="outline" color="medium" (click)="dismiss()" class="secondary-button">
+        ปิด
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
