@@ -18,11 +18,8 @@ import { Subscription, interval, of, Subject } from 'rxjs';
 import { catchError, timeout, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { UiEventService } from '../services/ui-event';
 import { SupabaseService } from '../services/supabase.service';
-import { ParkingDetailComponent } from '../modal/parking-detail/parking-detail.component';
-import { BookingTypeSelectorComponent } from '../modal/booking-type-selector/booking-type-selector.component';
 import { BuildingDetailComponent } from '../modal/building-detail/building-detail.component';
 import { RegisterCodeModalComponent } from '../modal/register-code/register-code-modal.component';
-import { Building3dModalComponent } from '../modal/building-3d-modal/building-3d-modal.component';
 
 import * as ngeohash from 'ngeohash';
 import { ParkingLot, ScheduleItem, UserProfile } from '../data/models';
@@ -31,8 +28,6 @@ import { ParkingService } from '../services/parking.service';
 import { BookmarkService } from '../services/bookmark.service';
 import { ReservationService } from '../services/reservation.service';
 import { BottomSheetService } from '../services/bottom-sheet.service';
-
-import buildingFloorData from '../components/floor-plan/e12-floor1.json';
 
 @Component({
   selector: 'app-explore',
@@ -46,16 +41,11 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
 
   searchQuery = '';
   selectedTab = 'all';
-  selectedLocation: 'parking' | 'building' = 'parking';
+  selectedLocation: 'building' = 'building';
 
   allParkingLots: ParkingLot[] = [];
   visibleParkingLots: ParkingLot[] = [];
   filteredParkingLots: ParkingLot[] = [];
-
-  // --- Building Variables ---
-  buildingZones: any[] = [];
-  allBuildingRooms: any[] = [];
-  filteredBuildingRooms: any[] = [];
 
   userProfile: UserProfile | null = null;
 
@@ -65,8 +55,8 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   feeCalcInterval: any;
 
   // --- User Coordinates (Default) ---
-  userLat = 13.6513;
-  userLon = 100.4955;
+  userLat = 0;
+  userLon = 0;
 
   // --- Map Variables ---
   private map: any;
@@ -74,6 +64,7 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   private userMarker: any;
   private geoHashBounds: any; // เลเยอร์กรอบสี่เหลี่ยม Geohash
   private userGeoHash: string | null = null;
+  private mapCenteredByUserLocation = false;
 
   // --- Subscription & Animation ---
   private animationFrameId: any;
@@ -122,6 +113,9 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.updateSheetHeightByLevel(this.sheetLevel);
 
+    // Load building list immediately; do not wait for auth/profile id.
+    this.loadRealData();
+
     this.sheetToggleSub = this.uiEventService.toggleExploreSheet$.subscribe(() => {
       requestAnimationFrame(() => {
         this.toggleSheetState();
@@ -137,7 +131,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     this.reservationService.currentProfileId$.subscribe(id => {
       if (id) {
         // Fetch Real Data with the updated profile ID
-        this.loadBuildingData();
         this.loadRealData();
         this.loadActiveReservation();
       }
@@ -238,7 +231,7 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   loadRealData() {
     console.log('[Tab1] 1. Requesting Real Data API...');
     const profileId = this.reservationService.getCurrentProfileId() || this.userProfile?.id || null;
-    this.parkingApiService.getSiteBuildings('1', 0, 0, profileId)
+    this.parkingApiService.getSiteBuildings(1, this.userLat, this.userLon, profileId)
       .pipe(
         timeout(3000),
         catchError(err => {
@@ -249,15 +242,30 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
       .subscribe({
         next: async (realLots) => {
           if (realLots) {
-            console.log('[Tab1] Applying Real Data (Count: ' + realLots.length + ')');
+            const buildingLots = realLots.filter((lot) => String(lot.category || 'building').toLowerCase() === 'building');
+            console.log('[Tab1] Applying Building Data (Count: ' + buildingLots.length + ')');
 
             // Fetch bookmarks and apply to lots
             const bookmarkedIds = await this.bookmarkService.getBookmarkedBuildingIds();
-            realLots.forEach(lot => {
+            buildingLots.forEach(lot => {
               lot.isBookmarked = bookmarkedIds.includes(lot.id);
             });
 
-            this.allParkingLots = realLots;
+            this.allParkingLots = buildingLots;
+
+            // If location permission is unavailable, center map by E12 (from DB) or first building with coordinates.
+            if (!this.mapCenteredByUserLocation) {
+              const e12Building = this.allParkingLots.find((lot) => lot.id === 'E12' && !!lot.lat && !!lot.lng);
+              const fallbackBuilding = e12Building || this.allParkingLots.find((lot) => !!lot.lat && !!lot.lng);
+              if (fallbackBuilding?.lat && fallbackBuilding?.lng) {
+                this.userLat = Number(fallbackBuilding.lat);
+                this.userLon = Number(fallbackBuilding.lng);
+                if (this.map) {
+                  this.map.setView([this.userLat, this.userLon], 16);
+                }
+              }
+            }
+
             this.processScheduleData();
             this.updateParkingStatuses();
             this.calculateDistances(); // Calculate distance & color here
@@ -281,76 +289,14 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  loadBuildingData() {
-    // Instead of mapping rooms, we just want to create a Single Building Card from the JSON data.
-    this.buildingZones = [{ id: 'all', name: 'All Buildings' }];
-
-    // Create one single building record representing e12
-    const singleBuilding = {
-      id: buildingFloorData.buildingId,
-      name: buildingFloorData.buildingName,
-      type: 'Building',
-      zoneId: 'all',
-      zoneName: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี',
-      color: '#1a73e8',
-      floorCount: buildingFloorData.floors.length
-    };
-
-    this.allBuildingRooms = [singleBuilding];
-  }
-
   filterData() {
     let results = this.allParkingLots;
 
-    // 1. Filter by Location Type (Safe & Case-Insensitive, default to 'parking' if undefined)
-    results = results.filter(lot => {
-      const cat = (lot.category || 'parking').toLowerCase();
-      const selectedCat = (this.selectedLocation || 'parking').toLowerCase();
-
-      // Strict parking filter: must have at least one type of parking capacity
-      if (selectedCat === 'parking') {
-        const hasCapacity = lot.capacity && (lot.capacity.normal > 0 || lot.capacity.ev > 0 || lot.capacity.motorcycle > 0);
-        if (!hasCapacity) {
-          return false;
-        }
-      }
-
-      return cat === selectedCat;
-    });
-
-    // 2. Filter by Vehicle Type (Tab) OR Zone
-    if (this.selectedTab !== 'all') {
-      if (this.selectedLocation === 'parking') {
-        results = results.filter((lot) => {
-          if (lot.supportedTypes && Array.isArray(lot.supportedTypes)) {
-            return lot.supportedTypes.includes(this.selectedTab);
-          }
-          if (lot.capacity) {
-            if (this.selectedTab === 'normal') return lot.capacity.normal > 0;
-            if (this.selectedTab === 'ev') return lot.capacity.ev > 0;
-            if (this.selectedTab === 'motorcycle') return lot.capacity.motorcycle > 0;
-          }
-          return false;
-        });
-      } else {
-        // Building -> Filter by Zone Room Data
-        this.filteredBuildingRooms = this.selectedTab === 'all'
-          ? this.allBuildingRooms
-          : this.allBuildingRooms.filter((room: any) => room.zoneId === this.selectedTab);
-      }
-    } else {
-      if (this.selectedLocation === 'building') {
-        this.filteredBuildingRooms = this.allBuildingRooms;
-      }
-    }
+    results = results.filter(lot => String(lot.category || 'building').toLowerCase() === 'building');
 
     if (this.searchQuery.trim() !== '') {
       const q = this.searchQuery.toLowerCase();
-      if (this.selectedLocation === 'parking') {
-        results = results.filter((lot) => lot.name.toLowerCase().includes(q));
-      } else {
-        this.filteredBuildingRooms = this.filteredBuildingRooms.filter((room: any) => room.name.toLowerCase().includes(q));
-      }
+      results = results.filter((lot) => String(lot.name || '').toLowerCase().includes(q));
     }
 
     this.filteredParkingLots = results;
@@ -364,7 +310,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     this.isSearching = true;
     this.searchSubject.next(this.searchQuery);
   }
-  onTabChange() { this.filterData(); }
 
   async openRegisterCodeModal() {
     const modal = await this.modalCtrl.create({
@@ -410,24 +355,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  locationChanged(ev: any) {
-    this.selectedLocation = ev.detail.value;
-    this.selectedTab = 'all'; // Reset tab when location changes
-    this.filterData();
-  }
-
-  // Handle building click
-  async openBuildingDetails(building: any) {
-    const modal = await this.modalCtrl.create({
-      component: Building3dModalComponent,
-      componentProps: { buildingData: building }
-    });
-    return await modal.present();
-  }
-
-
-
-
   //  ทำงานหลังจากหน้าเว็บโหลดเสร็จ (เพื่อโหลด Map)
   async ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -453,6 +380,43 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   //  MAP LOGIC (Leaflet + Geohash + Error Handling)
   // ----------------------------------------------------------------
 
+  private getCurrentPositionOnce(): Promise<{ lat: number; lng: number } | null> {
+    return new Promise((resolve) => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        () => resolve(null),
+        {
+          enableHighAccuracy: true,
+          timeout: 8000,
+          maximumAge: 60000,
+        }
+      );
+    });
+  }
+
+  private async getE12CenterFromDatabase(): Promise<{ lat: number; lng: number } | null> {
+    try {
+      const { data, error } = await this.supabaseService.client
+        .from('buildings')
+        .select('lat,lng')
+        .eq('id', 'E12')
+        .maybeSingle();
+
+      if (error || !data?.lat || !data?.lng) {
+        return null;
+      }
+
+      return { lat: Number(data.lat), lng: Number(data.lng) };
+    } catch {
+      return null;
+    }
+  }
+
   private async initMap() {
     const L = await import('leaflet');
 
@@ -468,9 +432,16 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     });
     L.Marker.prototype.options.icon = new DefaultIcon();
 
-    // พิกัดเริ่มต้น (kmUTT)
-    const centerLat = 13.651336;
-    const centerLng = 100.496472;
+    // Center map by user location when allowed; otherwise use E12 coordinates from DB.
+    const userPosition = await this.getCurrentPositionOnce();
+    const dbFallback = userPosition ? null : await this.getE12CenterFromDatabase();
+
+    const centerLat = userPosition?.lat ?? dbFallback?.lat ?? 0;
+    const centerLng = userPosition?.lng ?? dbFallback?.lng ?? 0;
+
+    this.userLat = centerLat;
+    this.userLon = centerLng;
+    this.mapCenteredByUserLocation = !!userPosition;
 
     this.map = L.map('map', {
       center: [centerLat, centerLng],
@@ -1012,71 +983,10 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async viewLotDetails(lot: ParkingLot) {
-    // 0. Check if it's a building -> Open Building Detail Modal
-    if (lot.category === 'building') {
-      // Open Building Detail Modal
-      const modal = await this.modalCtrl.create({
-        component: BuildingDetailComponent,
-        componentProps: {
-          lot: lot
-        },
-        initialBreakpoint: 1,
-        breakpoints: [0, 1],
-        backdropDismiss: true,
-        showBackdrop: true,
-        cssClass: 'detail-sheet-modal', // Reuse same class if appropriate
-      });
-      await modal.present();
-      return;
-    }
-
-    // 1. Show Booking Type Selector First
-    this.isModalOpen = true; // Trigger Scale Down
-
-    // Minimize Sheet to lowest level
-    this.isSnapping = true;
-    this.sheetLevel = 0;
-    this.updateSheetHeightByLevel(0);
-
-    const typeModal = await this.modalCtrl.create({
-      component: BookingTypeSelectorComponent,
-      cssClass: 'auto-height-modal', // You might need to add this class or use 'detail-sheet-modal' if it fits
-      initialBreakpoint: 0.65, // Increased to move up
-      breakpoints: [0, 0.65, 1],
-      showBackdrop: true,
-      backdropDismiss: true
-    });
-
-    await typeModal.present();
-
-    const { data, role } = await typeModal.onDidDismiss();
-
-    // If user cancelled, stop here
-    if (role !== 'confirm' || !data) {
-      this.isModalOpen = false; // Reset Scale Up
-      return;
-    }
-
-    const selectedBookingMode = data.bookingMode; // 'daily', 'monthly', 'flat24', 'monthly_night'
-
-    // 2. Open Parking Detail with Selected Mode
-    this.isSnapping = true;
-    this.sheetLevel = 0;
-    this.updateSheetHeightByLevel(0);
-
-    if (this.map && lot.lat && lot.lng) {
-      this.map.flyTo([lot.lat, lot.lng], 18, {
-        animate: true,
-        duration: 1.0
-      });
-    }
-
     const modal = await this.modalCtrl.create({
-      component: ParkingDetailComponent,
+      component: BuildingDetailComponent,
       componentProps: {
-        lot: lot,
-        initialType: this.selectedTab === 'all' ? 'normal' : this.selectedTab,
-        bookingMode: selectedBookingMode // PASS THE MODE
+        lot: lot
       },
       initialBreakpoint: 1,
       breakpoints: [0, 1],
@@ -1085,15 +995,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
       cssClass: 'detail-sheet-modal',
     });
     await modal.present();
-
-    // Reset scale when Detail Modal closes? 
-    // User said "Tab1 to Booking Type Selection". 
-    // But logically, if we go to Detail, we might want to keep it or reset it.
-    // Usually, if Detail opens full screen, the background doesn't matter much.
-    // But if user closes Booking Modal, we MUST reset.
-
-    const detailRes = await modal.onDidDismiss();
-    this.isModalOpen = false; // Reset finally
   }
 
   getMarkerColor(available: number | null, capacity: number) {

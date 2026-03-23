@@ -18,7 +18,7 @@ export class ParkingService {
    * @param lng User's current longitude
    * @param userId Optional User ID for bookmark status
    */
-  getSiteBuildings(siteId: string, lat: number = 0, lng: number = 0, profileId: string | null = null): Observable<ParkingLot[]> {
+  getSiteBuildings(siteId: string | number, lat: number = 0, lng: number = 0, profileId: string | null = null): Observable<ParkingLot[]> {
     return from((async () => {
       let lots: ParkingLot[] = [];
 
@@ -38,6 +38,50 @@ export class ParkingService {
         }
 
         lots = (response.data || []) as ParkingLot[];
+
+        if (!lots.length) {
+          const { data: fallbackBuildings, error: fallbackError } = await this.supabase.client
+            .from('buildings')
+            .select('*')
+            .eq('site_id', siteId);
+
+          if (fallbackError) {
+            throw fallbackError;
+          }
+
+          lots = (fallbackBuildings || []).map((item: any) => ({
+            id: item.id,
+            name: item.name,
+            category: item.category || 'building',
+            zone: item.zone,
+            capacity: {
+              normal: item.capacity_normal || 0,
+              ev: item.capacity_ev || 0,
+              motorcycle: item.capacity_motorcycle || 0
+            },
+            available: {
+              normal: item.available_normal || 0,
+              ev: item.available_ev || 0,
+              motorcycle: item.available_motorcycle || 0
+            },
+            floors: item.floors || [],
+            mapX: item.map_x || 0,
+            mapY: item.map_y || 0,
+            lat: item.lat || 0,
+            lng: item.lng || 0,
+            status: item.status || 'available',
+            isBookmarked: false,
+            distance: 0,
+            hours: item.hours || '08:00 - 20:00',
+            hasEVCharger: item.has_ev_charger || false,
+            userTypes: item.user_types || 'General',
+            price: item.price || 0,
+            priceUnit: item.price_unit || 'บาท/ชม.',
+            supportedTypes: item.supported_types || ['normal'],
+            schedule: item.schedule || [],
+            images: item.images || ['assets/images/parking/default.png']
+          }));
+        }
       } catch (edgeError) {
         console.warn('[ParkingService] get-parking-lots edge function is unavailable. Falling back to public.buildings query.', edgeError);
 
