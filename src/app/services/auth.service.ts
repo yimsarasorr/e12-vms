@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SupabaseClient, User } from '@supabase/supabase-js';
 import { SupabaseService } from './supabase.service';
+import { ParkingDataService } from './parking-data.service';
 import { BehaviorSubject, Observable, from, map } from 'rxjs';
 
 export interface RolePermission {
@@ -27,17 +28,89 @@ export class AuthService {
   private userProfileSubject = new BehaviorSubject<UserProfile | null>(null);
   userProfile$ = this.userProfileSubject.asObservable();
 
-  constructor(private supabaseService: SupabaseService) {
+  constructor(
+    private supabaseService: SupabaseService,
+    private parkingDataService: ParkingDataService
+  ) {
     this.supabase = this.supabaseService.client;
   }
 
+  private mapRole(role: string | null | undefined): string {
+    const roleStr = String(role || '').toLowerCase();
+    if (roleStr === 'admin') return 'Admin';
+    if (roleStr === 'host') return 'Host';
+    if (roleStr === 'user') return 'User';
+    return 'Visitor';
+  }
+
+  async ensureProfileExists(user: User): Promise<UserProfile | null> {
+    const { data: existing, error: existingError } = await this.supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (existingError) {
+      throw existingError;
+    }
+
+    if (existing) {
+      this.userProfileSubject.next(existing);
+      return existing;
+    }
+
+    const metadata = (user.user_metadata || {}) as Record<string, any>;
+    const displayName = metadata['displayName'] || metadata['name'] || metadata['full_name'] || 'Guest';
+    const avatar = metadata['pictureUrl'] || metadata['avatar_url'] || '';
+    const lineId = metadata['line_id'] || metadata['provider_id'] || null;
+
+    const upsertPayload: any = {
+      id: user.id,
+      name: displayName,
+      avatar,
+      role: this.mapRole(metadata['role']),
+      line_id: lineId,
+      email: user.email || null,
+      updated_at: new Date().toISOString()
+    };
+
+    const { data: created, error: createError } = await this.supabase
+      .from('profiles')
+      .upsert(upsertPayload, { onConflict: 'id' })
+      .select('*')
+      .single();
+
+    if (createError) {
+      throw createError;
+    }
+
+    this.userProfileSubject.next(created);
+    return created;
+  }
+
   async refreshProfile(userId: string) {
-    const { data } = await this.supabase
+    const { data, error } = await this.supabase
       .from('profiles')
       .select('*')
       .eq('id', userId)
       .maybeSingle();
-    if (data) this.userProfileSubject.next(data);
+
+    if (error) {
+      console.error('Refresh Profile Error:', error);
+      return;
+    }
+
+    if (data) {
+      this.userProfileSubject.next(data);
+      return;
+    }
+
+    const { data: authData, error: authError } = await this.supabase.auth.getUser();
+    if (authError || !authData.user || authData.user.id !== userId) {
+      return;
+    }
+
+    await this.ensureProfileExists(authData.user);
   }
 
   // Login ผ่าน LINE (เอา Token แลก Session)
@@ -64,7 +137,10 @@ export class AuthService {
     if (data?.session) {
       await this.supabase.auth.setSession(data.session);
       const loggedInUser = data.session.user;
+      await this.ensureProfileExists(loggedInUser);
       await this.refreshProfile(loggedInUser.id);
+      // Trigger ParkingDataService to refetch profile so UI components see updates
+      await this.parkingDataService.loadUserProfile(loggedInUser.id);
       return loggedInUser;
     }
     return null;

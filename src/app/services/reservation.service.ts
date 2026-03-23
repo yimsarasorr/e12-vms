@@ -301,23 +301,41 @@ export class ReservationService {
     console.log('getUserReservationsFromEdge: Using currentProfileId:', this.currentProfileId);
 
     console.log('getUserReservationsFromEdge: Invoking edge function "reservation_user" with body:', { profile_id: this.currentProfileId });
-    const { data, error } = await this.supabaseService.client.functions.invoke('reservation_user', {
-      body: { profile_id: this.currentProfileId }
-    });
 
-    console.log('getUserReservationsFromEdge: Edge function response:', { data, error });
+    try {
+      const { data, error } = await this.supabaseService.client.functions.invoke('reservation_user', {
+        body: { profile_id: this.currentProfileId }
+      });
 
-    if (error) {
-      if (this.isSchemaMissingError(error)) {
-        console.warn('[ReservationService] reservation_user function or source table is missing in current DB. Returning empty list.');
-        return [];
+      console.log('getUserReservationsFromEdge: Edge function response:', { data, error });
+
+      if (error) {
+        throw error;
       }
-      console.error('getUserReservationsFromEdge: Error from edge function:', error);
-      throw error;
-    }
 
-    console.log('getUserReservationsFromEdge: Success, returning data:', data.data);
-    return data.data;
+      const payload = Array.isArray(data?.data) ? data.data : [];
+      console.log('getUserReservationsFromEdge: Success, returning data:', payload);
+      return payload;
+    } catch (error: any) {
+      console.warn('[ReservationService] Edge function unavailable, fallback to direct reservations query.', error);
+
+      const { data: fallbackData, error: fallbackError } = await this.supabaseService.client
+        .from('reservations')
+        .select('*')
+        .eq('profile_id', this.currentProfileId)
+        .order('created_at', { ascending: false });
+
+      if (fallbackError) {
+        if (this.isSchemaMissingError(fallbackError)) {
+          console.warn('[ReservationService] reservations table is missing in current DB. Returning empty list.');
+          return [];
+        }
+        console.error('getUserReservationsFromEdge: Fallback query failed:', fallbackError);
+        throw fallbackError;
+      }
+
+      return fallbackData || [];
+    }
   }
 
   subscribeToUserReservations(callback: () => void) {

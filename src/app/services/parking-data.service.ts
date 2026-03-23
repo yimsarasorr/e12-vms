@@ -102,7 +102,7 @@ export class ParkingDataService {
             .from('profiles')
             .select('*')
             .eq('id', userId)
-            .single();
+            .maybeSingle();
 
         console.log('User Profile Data:', data);
         console.log('User Profile Error:', error);
@@ -113,19 +113,62 @@ export class ParkingDataService {
             return;
         }
 
-        if (data) {
-            const profile: UserProfile = {
-                id: data.id,
-                name: data.name,
-                phone: data.phone,
-                avatar: data.avatar,
-                role: data.role,
-                role_level: data.role_level,
-                lineId: data.line_id,
-                email: data.email
+        if (!data) {
+            // Fallback: some auth flows create auth user first and profile row later.
+            const { data: authData, error: authError } = await this.supabaseService.client.auth.getUser();
+            if (authError || !authData.user || authData.user.id !== userId) {
+                this.userProfileSubject.next(null);
+                return;
+            }
+
+            const metadata = (authData.user.user_metadata || {}) as Record<string, any>;
+            const fallbackRole = String(metadata['role'] || 'Visitor');
+
+            const { data: created, error: createError } = await this.supabaseService.client
+                .from('profiles')
+                .upsert({
+                    id: userId,
+                    name: metadata['displayName'] || metadata['name'] || metadata['full_name'] || 'Guest',
+                    avatar: metadata['pictureUrl'] || metadata['avatar_url'] || '',
+                    role: fallbackRole,
+                    line_id: metadata['line_id'] || metadata['provider_id'] || null,
+                    email: authData.user.email || null,
+                    updated_at: new Date().toISOString()
+                }, { onConflict: 'id' })
+                .select('*')
+                .maybeSingle();
+
+            if (createError || !created) {
+                console.error('Error creating fallback user profile:', createError);
+                this.userProfileSubject.next(null);
+                return;
+            }
+
+            const createdProfile: UserProfile = {
+                id: created.id,
+                name: created.name,
+                phone: created.phone,
+                avatar: created.avatar,
+                role: created.role,
+                role_level: created.role_level,
+                lineId: created.line_id,
+                email: created.email
             };
-            this.userProfileSubject.next(profile);
+            this.userProfileSubject.next(createdProfile);
+            return;
         }
+
+        const profile: UserProfile = {
+            id: data.id,
+            name: data.name,
+            phone: data.phone,
+            avatar: data.avatar,
+            role: data.role,
+            role_level: data.role_level,
+            lineId: data.line_id,
+            email: data.email
+        };
+        this.userProfileSubject.next(profile);
     }
 
     async loadUserVehicles(userId: string) {

@@ -25,6 +25,37 @@ export class AppComponent implements OnInit {
     await this.checkAuthStatus();
   }
 
+  private async waitForAuthenticatedUser(maxRetries = 6, delayMs = 300) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      const user = await this.authService.getCurrentUser();
+      if (user) {
+        console.log('[AuthSync] User resolved after login', { attempt, userId: user.id });
+        return user;
+      }
+
+      console.log('[AuthSync] Waiting for session propagation', { attempt, maxRetries });
+      await new Promise(resolve => setTimeout(resolve, delayMs));
+    }
+
+    console.warn('[AuthSync] No authenticated user after retries');
+    return null;
+  }
+
+  private async syncAfterLoginSuccess() {
+    console.log('[AuthSync] syncAfterLoginSuccess started');
+    const user = await this.waitForAuthenticatedUser();
+    if (!user) {
+      console.warn('[AuthSync] Aborting sync: user is null');
+      return;
+    }
+
+    this.isGuestChoice = false;
+    this.reservationService.setCurrentProfileId(user.id);
+    await this.authService.refreshProfile(user.id);
+    await this.authService.getProfile(user.id);
+    console.log('[AuthSync] Post-login sync completed', { userId: user.id });
+  }
+
   private async checkAuthStatus() {
     if (this.isGuestChoice) return;
 
@@ -42,8 +73,11 @@ export class AppComponent implements OnInit {
         await modal.present();
 
         const { data } = await modal.onDidDismiss();
+        console.log('[AuthSync] Auth modal dismissed from checkAuthStatus', data);
         if (data?.role === 'guest') {
           this.isGuestChoice = true;
+        } else if (data?.isLoggedIn) {
+          await this.syncAfterLoginSuccess();
         }
       }
     }
@@ -59,7 +93,9 @@ export class AppComponent implements OnInit {
     await modal.present();
 
     const { data } = await modal.onDidDismiss();
+    console.log('[AuthSync] Auth modal dismissed from showAuthLanding', data);
     if (data?.isLoggedIn) {
+      await this.syncAfterLoginSuccess();
       console.log('User logged in successfully');
     }
   }

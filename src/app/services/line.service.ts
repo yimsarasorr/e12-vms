@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class LineService {
 
   private readonly LIFF_ID = environment.liffId;
-  private readonly FUNCTION_URL = 'https://unxcjdypaxxztywplqdv.supabase.co/functions/v1/switch-menu';
+  private readonly FUNCTION_URL = `${environment.supabaseUrl}/functions/v1/switch-menu`;
   public readonly LINE_OA_ID = '@804vyuvy';
 
   constructor() { }

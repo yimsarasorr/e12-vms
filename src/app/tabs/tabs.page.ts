@@ -13,11 +13,15 @@ import { UiEventService } from '../services/ui-event';
   imports: [IonTabsStandalone, IonTabBar, IonTabButton, IonIcon, IonLabel],
 })
 export class TabsPage {
-  @ViewChild(IonTabs) tabs!: IonTabs; // ❗️ ใช้ ! เพื่อบอกว่าจะมีค่าแน่นอน
+  @ViewChild(IonTabsStandalone) tabs?: IonTabs; // ViewChild may be undefined during first click
 
   constructor(private uiEventService: UiEventService) {} // ❗️ Inject Service
 
   onTab1Click() {
+    if (!this.tabs) {
+      return;
+    }
+
     const selectedTab = this.tabs.getSelected();
 
     if (selectedTab === 'explore') {
