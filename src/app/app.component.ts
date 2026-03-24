@@ -3,7 +3,7 @@ import { IonApp, IonRouterOutlet, ModalController } from '@ionic/angular/standal
 import { AuthService } from './services/auth.service';
 import { LineService } from './services/line.service';
 import { AuthModalComponent } from './modal/auth-modal/auth-modal.component';
-import { ReservationService } from './services/reservation.service';
+import { UserContextService } from './services/user-context.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private lineService: LineService,
     private modalCtrl: ModalController,
-    private reservationService: ReservationService
+    private userContextService: UserContextService
   ) { }
 
   async ngOnInit() {
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     }
 
     this.isGuestChoice = false;
-    this.reservationService.setCurrentProfileId(user.id);
+    this.userContextService.setCurrentProfileId(user.id);
     await this.authService.refreshProfile(user.id);
     await this.authService.getProfile(user.id);
     console.log('[AuthSync] Post-login sync completed', { userId: user.id });
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
     if (!user) user = await this.authService.signInAnonymously();
 
     if (user) {
-      this.reservationService.setCurrentProfileId(user.id);
+      this.userContextService.setCurrentProfileId(user.id);
       const profile = await this.authService.getProfile(user.id);
       if (!profile || !profile.line_id) {
         const modal = await this.modalCtrl.create({

@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>ตั๋วของฉัน</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="loadPasses()">
+        <ion-icon name="refresh-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="tickets-content">
+  <div class="tickets-wrap">
+    <div *ngIf="isLoading" class="empty-state">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>กำลังโหลดพาส...</p>
+    </div>
+
+    <div *ngIf="!isLoading && passes.length === 0" class="empty-state">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <h3>ยังไม่มีพาส</h3>
+      <p>เมื่อ Host เชิญและยืนยันสิทธิ์แล้ว พาสจะแสดงที่หน้านี้</p>
+    </div>
+
+    <div *ngFor="let pass of passes" class="pass-card">
+      <div class="pass-head">
+        <div>
+          <div class="badge">ACCESS PASS</div>
+          <h3>{{ pass.roomName }}</h3>
+          <p>{{ pass.floorName }} | {{ pass.buildingName }}</p>
+        </div>
+        <ion-icon name="qr-code-outline" class="qr-icon"></ion-icon>
+      </div>
+
+      <div class="qr-placeholder">
+        <div class="qr-box">{{ pass.qrValue }}</div>
+        <div class="qr-caption">QR Preview</div>
+      </div>
+
+      <div class="pass-meta">
+        <div>
+          <label>ได้สิทธิ์เมื่อ</label>
+          <div>{{ formatDateTime(pass.grantedAt) }}</div>
+        </div>
+        <div>
+          <label>หมดอายุ</label>
+          <div>{{ formatDateTime(pass.validUntil) }}</div>
+        </div>
+      </div>
+
+      <ion-button expand="block" fill="outline" (click)="openBuilding(pass)">ไปหน้าอาคารและดูสิทธิ์เข้า</ion-button>
+    </div>
+  </div>
+</ion-content>

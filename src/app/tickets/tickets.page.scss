@@ -1,0 +1,117 @@
+ion-toolbar {
+  --background: #ffffff;
+}
+
+.tickets-content {
+  --background: #f7f8fb;
+}
+
+.tickets-wrap {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-state {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 14px;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: #6b7280;
+
+  ion-icon {
+    font-size: 36px;
+    color: #3b82f6;
+  }
+}
+
+.pass-card {
+  background: #fff;
+  border: 1px solid #e6edf8;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+}
+
+.pass-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+
+  h3 {
+    margin: 6px 0 2px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+  }
+
+  p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+  }
+}
+
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  color: #2563eb;
+  background: #eaf2ff;
+  border: 1px solid #cfe1ff;
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+.qr-icon {
+  font-size: 34px;
+  color: #2563eb;
+}
+
+.qr-placeholder {
+  margin: 12px 0;
+  border: 1px dashed #bed6ff;
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.qr-box {
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  font-size: 18px;
+  color: #1e40af;
+}
+
+.qr-caption {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.pass-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0 12px;
+
+  label {
+    font-size: 10px;
+    color: #6b7280;
+    display: block;
+  }
+
+  div div {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+  }
+}

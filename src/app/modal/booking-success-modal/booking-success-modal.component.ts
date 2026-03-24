@@ -35,7 +35,7 @@ export class BookingSuccessModalComponent implements OnInit {
 
   async goToBookings() {
     await this.modalCtrl.dismiss();
-    this.router.navigate(['/tabs/reservations']);
+    this.router.navigate(['/tabs/tickets']);
   }
 
   formatDateTime(date: Date): string {

@@ -101,7 +101,7 @@ export class BuildingDetailComponent implements OnInit {
 
     openBuildingAccess() {
         this.modalCtrl.dismiss().then(() => {
-            this.router.navigate(['/tabs/building'], { queryParams: { buildingId: this.lot.id } });
+            this.router.navigate(['/building-access'], { queryParams: { buildingId: this.lot.id } });
         });
     }
 

@@ -11,20 +11,21 @@ export const routes: Routes = [
         loadComponent: () => import('../explore/explore.page').then(m => m.ExplorePage)
       },
       {
-        path: 'reservations',
-        loadComponent: () => import('../reservations/reservations.page').then(m => m.ReservationsPage)
-      },
-      {
         path: 'profile',
         loadComponent: () => import('../profile/profile.page').then(m => m.ProfilePage)
       },
       {
-        path: 'building',
-        loadComponent: () => import('../building/building.page').then(m => m.BuildingPage)
+        path: 'tickets',
+        loadComponent: () => import('../tickets/tickets.page').then(m => m.TicketsPage)
       },
       {
         path: 'saved',
         loadComponent: () => import('../saved/saved.page').then(m => m.SavedPage)
+      },
+      {
+        path: 'building',
+        redirectTo: '/building-access',
+        pathMatch: 'full'
       },
       {
         path: 'tab1',
@@ -33,7 +34,7 @@ export const routes: Routes = [
       },
       {
         path: 'tab2',
-        redirectTo: '/tabs/reservations',
+        redirectTo: '/tabs/tickets',
         pathMatch: 'full'
       },
       {
@@ -43,7 +44,7 @@ export const routes: Routes = [
       },
       {
         path: 'tab4',
-        redirectTo: '/tabs/building',
+        redirectTo: '/tabs/tickets',
         pathMatch: 'full'
       },
       {

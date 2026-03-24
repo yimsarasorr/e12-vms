@@ -51,7 +51,7 @@ export class Building3dModalComponent implements OnInit {
         // Add a slight delay so the user sees the floor get highlighted before navigating
         setTimeout(() => {
             this.modalCtrl.dismiss().then(() => {
-                this.router.navigate(['/tabs/building'], {
+                this.router.navigate(['/building-access'], {
                     queryParams: {
                         buildingId: this.buildingData?.id || 'school-building-01',
                         floor: floorNum

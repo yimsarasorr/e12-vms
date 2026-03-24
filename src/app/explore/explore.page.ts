@@ -26,7 +26,6 @@ import { ParkingLot, ScheduleItem, UserProfile } from '../data/models';
 import { ParkingDataService } from '../services/parking-data.service';
 import { ParkingService } from '../services/parking.service';
 import { BookmarkService } from '../services/bookmark.service';
-import { ReservationService } from '../services/reservation.service';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 
 @Component({
@@ -48,11 +47,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   filteredParkingLots: ParkingLot[] = [];
 
   userProfile: UserProfile | null = null;
-
-  // --- Active Reservation ---
-  activeReservation: any = null;
-  currentParkingFee: number = 0;
-  feeCalcInterval: any;
 
   // --- User Coordinates (Default) ---
   userLat = 0;
@@ -101,7 +95,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     private parkingDataService: ParkingDataService, // Renamed for clarity
     private parkingApiService: ParkingService, // Inject new RPC Service
     private supabaseService: SupabaseService, // Inject Supabase for Realtime
-    private reservationService: ReservationService, // ✅ Inject Reservation Service
     private router: Router, // ✅ Inject Router
     private bottomSheetService: BottomSheetService,
     private bookmarkService: BookmarkService, // ✅ Inject Bookmark Service
@@ -125,15 +118,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     // 1. Subscribe to User Profile first
     this.parkingDataService.userProfile$.subscribe(p => {
       this.userProfile = p;
-    });
-
-    // 2. Wait for the Auth Profile ID to be available, then load real data
-    this.reservationService.currentProfileId$.subscribe(id => {
-      if (id) {
-        // Fetch Real Data with the updated profile ID
-        this.loadRealData();
-        this.loadActiveReservation();
-      }
     });
 
     // Subscribe to Refresh Event
@@ -160,61 +144,19 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  async loadActiveReservation() {
-    try {
-      // Get all reservations for the current user
-      const reservations = await this.reservationService.getUserReservationsFromEdge();
-      
-      // Look for the currently active ones (status = active or checked_in)
-      this.activeReservation = reservations.find((r: any) => 
-        r.status === 'active' || r.status === 'checked_in' || r.status === 'checked_in_pending_payment'
-      );
-
-      if (this.activeReservation) {
-        // Fetch initially
-        this.updateCurrentFee();
-        
-        // Polling fee update every 1 minute
-        if (this.feeCalcInterval) clearInterval(this.feeCalcInterval);
-        this.feeCalcInterval = setInterval(() => {
-          this.updateCurrentFee();
-        }, 60000);
-      } else {
-        if (this.feeCalcInterval) clearInterval(this.feeCalcInterval);
-        this.currentParkingFee = 0;
-      }
-    } catch (e) {
-      console.error('[Tab1] Error loading active reservation', e);
-    }
-  }
-
-  async updateCurrentFee() {
-    if (this.activeReservation && this.activeReservation.id) {
-      const fee = await this.reservationService.getParkingFee(this.activeReservation.id);
-      this.currentParkingFee = fee;
-    }
-  }
-
   setupRealtimeSubscription() {
     console.log('[Tab1] 🔴 Starting Realtime Subscription...');
 
-    // Create a NEW channel for multiple tables
-    const channel = this.supabaseService.client.channel('parking-channel-multi');
+    const channel = this.supabaseService.client.channel('building-channel');
 
-    // 1. Listen to Reservations (Bookings change availability)
     channel
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'reservations' }, (payload) => {
-        console.log('[Tab1] 🔔 Realtime Reservation Update:', payload);
-        this.handleRealtimeUpdate();
-      })
-      // 2. Listen to Parking Lots (Status/Capacity changes by Admin)
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'parking_lots' }, (payload) => {
-        console.log('[Tab1] 🔔 Realtime Parking Lot Update:', payload);
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'buildings' }, (payload) => {
+        console.log('[Tab1] 🔔 Realtime Building Update:', payload);
         this.handleRealtimeUpdate();
       })
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
-          console.log('[Tab1] ✅ Realtime Connection Established (Multi-Table)');
+          console.log('[Tab1] ✅ Realtime Connection Established (buildings)');
         }
       });
   }
@@ -224,13 +166,12 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       console.log('[Tab1] 🔄 Refreshing Data due to Realtime Event...');
       this.loadRealData();
-      this.loadActiveReservation(); // Also check if reservation status changed
     }, 1000); // 1s delay for safety
   }
 
   loadRealData() {
     console.log('[Tab1] 1. Requesting Real Data API...');
-    const profileId = this.reservationService.getCurrentProfileId() || this.userProfile?.id || null;
+    const profileId = this.userProfile?.id || null;
     this.parkingApiService.getSiteBuildings(1, this.userLat, this.userLon, profileId)
       .pipe(
         timeout(3000),
@@ -340,7 +281,7 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
 
       const buildingId = accessData?.building_id || 'E12';
 
-      this.router.navigate(['/tabs/building'], {
+      this.router.navigate(['/building-access'], {
         queryParams: { buildingId }
       });
 
@@ -359,10 +300,10 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   async ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       await this.initMap();
+      // Auto-request user location at startup so distance and marker are ready without tapping locate.
+      this.focusOnUser(true);
+      this.loadRealData();
       this.updateMarkers();
-
-      // ลองขอตำแหน่งทันทีเมื่อเข้าหน้า
-      // this.focusOnUser();
     }
   }
 
@@ -370,7 +311,6 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     if (this.sheetToggleSub) this.sheetToggleSub.unsubscribe();
     if (this.timeCheckSub) this.timeCheckSub.unsubscribe();
     if (this.searchSub) this.searchSub.unsubscribe();
-    if (this.feeCalcInterval) clearInterval(this.feeCalcInterval);
     if (this.map) {
       this.map.remove();
     }
@@ -512,9 +452,11 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   // ✅ ฟังก์ชันหาตำแหน่ง + Geohash + Error Alert
-  public focusOnUser() {
+  public focusOnUser(silent: boolean = false) {
     if (!navigator.geolocation) {
-      this.showLocationError('เบราว์เซอร์นี้ไม่รองรับการระบุตำแหน่ง');
+      if (!silent) {
+        this.showLocationError('เบราว์เซอร์นี้ไม่รองรับการระบุตำแหน่ง');
+      }
       return;
     }
 
@@ -578,7 +520,9 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
         message = 'หมดเวลาในการค้นหาตำแหน่ง ลองใหม่อีกครั้ง';
       }
 
-      this.showLocationError(message);
+      if (!silent) {
+        this.showLocationError(message);
+      }
 
     }, {
       enableHighAccuracy: true,

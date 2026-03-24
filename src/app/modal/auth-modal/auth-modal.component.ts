@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoadingController, ModalController } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
 import { LineService } from '../../services/line.service';
-import { ReservationService } from '../../services/reservation.service';
+import { UserContextService } from '../../services/user-context.service';
 import liff from '@line/liff';
 import { addIcons } from 'ionicons';
 import { arrowForwardOutline } from 'ionicons/icons';
@@ -20,7 +20,7 @@ export class AuthModalComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private lineService: LineService,
-    private reservationService: ReservationService,
+    private userContextService: UserContextService,
     private modalCtrl: ModalController,
     private loadingCtrl: LoadingController
   ) {
@@ -55,8 +55,7 @@ export class AuthModalComponent implements OnInit {
 
       if (user) {
         console.log('Auth Success:', user);
-        // Notify ReservationService of the logged-in user for vehicle sync
-        this.reservationService.setCurrentProfileId(user.id);
+        this.userContextService.setCurrentProfileId(user.id);
         this.modalCtrl.dismiss({ isLoggedIn: true });
       }
     } catch (err: any) {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Booking, ParkingLot, UserProfile, Vehicle } from '../data/models';
 import { SupabaseService } from './supabase.service';
-import { ReservationService } from './reservation.service'; // Import ReservationService
+import { UserContextService } from './user-context.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,11 +24,11 @@ export class ParkingDataService {
 
     constructor(
         private supabaseService: SupabaseService,
-        private reservationService: ReservationService
+        private userContextService: UserContextService
     ) {
         this.loadParkingLots();
         // Subscribe to user ID changes
-        this.reservationService.currentProfileId$.subscribe(userId => {
+        this.userContextService.currentProfileId$.subscribe(userId => {
             if (userId) {
                 console.log('[ParkingDataService] User ID Changed:', userId);
                 this.loadUserProfile(userId);
@@ -247,7 +247,7 @@ export class ParkingDataService {
         const currentVehicles = this.vehiclesSubject.value;
 
         // Ensure user is loaded
-        const userId = this.reservationService.getCurrentProfileId();
+        const userId = this.userContextService.getCurrentProfileId();
 
         // 1. Check if vehicle exists for this user by license_plate
         const { data: existingCars, error: checkError } = await this.supabaseService.client
@@ -452,7 +452,7 @@ export class ParkingDataService {
 
         // 2. Persist to Backend
         try {
-            const userId = this.reservationService.getCurrentProfileId();
+            const userId = this.userContextService.getCurrentProfileId();
 
             // Set all vehicles for this user to is_default = false
             await this.supabaseService.client

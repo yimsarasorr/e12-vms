@@ -774,7 +774,7 @@ export class ParkingReservationsComponent implements OnInit {
 
       await this.modalCtrl.dismiss(result, 'confirm');
       // Navigate to Booking List (Tab 2) using Angular Router
-      this.router.navigate(['/tabs/reservations']);
+      this.router.navigate(['/tabs/tickets']);
     }
   }
 
