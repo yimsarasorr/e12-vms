@@ -5,6 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { ModalController } from '@ionic/angular/standalone';
 import { SupabaseService } from '../../services/supabase.service';
 
+interface BuildingOption {
+  id: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-invite-visitor-modal',
   templateUrl: './invite-visitor-modal.component.html',
@@ -13,8 +18,12 @@ import { SupabaseService } from '../../services/supabase.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class InviteVisitorModalComponent implements OnInit {
+  selectedBuildingId: string = 'E12';
+  selectedBuildingName: string = 'E12';
   selectedFloor: number | null = null;
   selectedRoom: string = '';
+  buildings: BuildingOption[] = [];
+  floors: number[] = [];
   availableRooms: any[] = [];
   visitorCount: number = 1;
   passType: string = '1-day';
@@ -24,12 +33,73 @@ export class InviteVisitorModalComponent implements OnInit {
   isLoading = false;
   isSuccess = false;
   generatedCode = '';
-
-  floors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  errorMessage = '';
 
   constructor(private modalCtrl: ModalController, private supabase: SupabaseService) {}
 
-  ngOnInit() { this.updateExpiry(); }
+  async ngOnInit() {
+    this.updateExpiry();
+    await this.loadBuildings();
+  }
+
+  async loadBuildings() {
+    try {
+      const { data, error } = await this.supabase.client
+        .from('buildings')
+        .select('id, name')
+        .order('name', { ascending: true });
+
+      if (error) throw error;
+
+      this.buildings = (data || []).map((b: any) => ({
+        id: String(b.id),
+        name: String(b.name || b.id)
+      }));
+
+      if (!this.buildings.length) {
+        this.buildings = [{ id: 'E12', name: 'E12' }];
+      }
+
+      if (!this.buildings.find((b) => b.id === this.selectedBuildingId)) {
+        this.selectedBuildingId = this.buildings[0].id;
+      }
+
+      this.selectedBuildingName = this.getSelectedBuildingName(this.selectedBuildingId);
+      await this.loadFloorsForBuilding();
+    } catch (err) {
+      console.error('Error loading buildings:', err);
+      this.buildings = [{ id: 'E12', name: 'E12' }];
+      this.selectedBuildingId = 'E12';
+      this.selectedBuildingName = 'E12';
+      await this.loadFloorsForBuilding();
+    }
+  }
+
+  async onBuildingChange() {
+    this.selectedBuildingName = this.getSelectedBuildingName(this.selectedBuildingId);
+    this.selectedFloor = null;
+    this.selectedRoom = '';
+    this.availableRooms = [];
+    await this.loadFloorsForBuilding();
+  }
+
+  async loadFloorsForBuilding() {
+    this.floors = [];
+    try {
+      const { data, error } = await this.supabase.client
+        .from('floors')
+        .select('level_order')
+        .eq('building_id', this.selectedBuildingId)
+        .order('level_order', { ascending: true });
+
+      if (error) throw error;
+
+      this.floors = Array.from(new Set((data || []).map((f: any) => Number(f.level_order)).filter((v) => !Number.isNaN(v))));
+    } catch (err) {
+      console.error('Error loading floors:', err);
+      this.floors = [];
+    }
+  }
 
   async onFloorChange() {
     this.selectedRoom = '';
@@ -40,7 +110,7 @@ export class InviteVisitorModalComponent implements OnInit {
       const { data, error } = await this.supabase.client
         .from('floors')
         .select('layout_data')
-        .eq('building_id', 'E12')
+        .eq('building_id', this.selectedBuildingId)
         .eq('level_order', this.selectedFloor)
         .maybeSingle();
 
@@ -79,13 +149,14 @@ export class InviteVisitorModalComponent implements OnInit {
 
   async generateTicket() {
     this.isLoading = true;
+    this.errorMessage = '';
     this.generatedCode = Math.random().toString(36).substring(2, 8).toUpperCase();
 
     const { data: user } = await this.supabase.client.auth.getUser();
 
     const ticketData = {
       invite_code: this.generatedCode,
-      building_id: 'E12',
+      building_id: this.selectedBuildingId,
       floor: this.selectedFloor,
       room_id: this.selectedRoom,
       max_usage: this.visitorCount,
@@ -99,11 +170,16 @@ export class InviteVisitorModalComponent implements OnInit {
       const { error } = await this.supabase.client.from('access_tickets').insert(ticketData);
       if (error) throw error;
       this.isSuccess = true;
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error generating ticket:', err);
+      this.errorMessage = String(err?.message || 'ไม่สามารถสร้างคำเชิญได้');
     } finally {
       this.isLoading = false;
     }
+  }
+
+  getSelectedBuildingName(buildingId: string): string {
+    return this.buildings.find((b) => b.id === buildingId)?.name || buildingId;
   }
 
   dismiss() { this.modalCtrl.dismiss(); }

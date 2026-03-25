@@ -9,6 +9,7 @@ import { ParkingDataService } from '../../services/parking-data.service';
 import { BookmarkService } from '../../services/bookmark.service';
 import { AuthService } from '../../services/auth.service';
 import { SupabaseService } from '../../services/supabase.service';
+import * as QRCode from 'qrcode';
 import { addIcons } from 'ionicons';
 import {
     closeOutline, locationOutline, peopleOutline, cubeOutline, timeOutline,
@@ -21,6 +22,7 @@ interface AccessPassSummary {
     totalGranted: number;
     roomLabels: string[];
     expiresAt: string | null;
+    qrImageDataUrl?: string;
 }
 
 @Component({
@@ -40,6 +42,7 @@ export class BuildingDetailComponent implements OnInit {
         totalGranted: 0,
         roomLabels: [],
         expiresAt: null,
+        qrImageDataUrl: '',
     };
 
     availableSites: ParkingLot[] = [];
@@ -115,15 +118,19 @@ export class BuildingDetailComponent implements OnInit {
                     totalGranted: 0,
                     roomLabels: [],
                     expiresAt: null,
+                    qrImageDataUrl: '',
                 };
                 return;
             }
 
+            const nowIso = new Date().toISOString();
+
             const { data: accesses, error: accessError } = await this.supabaseService.client
                 .from('user_door_access')
-                .select('door_id, valid_until, is_granted')
+                .select('id, door_id, valid_until, is_granted, granted_at')
                 .eq('profile_id', user.id)
-                .eq('is_granted', true);
+                .eq('is_granted', true)
+                .or(`valid_until.gte.${nowIso},valid_until.is.null`);
 
             if (accessError) {
                 throw accessError;
@@ -135,34 +142,65 @@ export class BuildingDetailComponent implements OnInit {
                     totalGranted: 0,
                     roomLabels: [],
                     expiresAt: null,
+                    qrImageDataUrl: '',
                 };
                 return;
             }
 
-            const doorIds = Array.from(new Set(grantedRows.map((row: any) => row.door_id).filter(Boolean)));
-            let roomLabels: string[] = doorIds.map((id: string) => `ประตู ${id}`);
+            const allDoorIds = Array.from(new Set(grantedRows.map((row: any) => row.door_id).filter(Boolean)));
+            let relevantRows: any[] = [];
+            let doorIds: string[] = [];
+            let roomLabels: string[] = [];
 
-            // Try mapping door IDs to asset names within current building floors.
-            const { data: floorsInBuilding } = await this.supabaseService.client
-                .from('floors')
-                .select('id')
-                .eq('building_id', this.lot.id);
+            // Primary mapping: use access_tickets as the source of truth for building ownership.
+            if (allDoorIds.length) {
+                const { data: ticketRows, error: ticketError } = await this.supabaseService.client
+                    .from('access_tickets')
+                    .select('room_id, floor, building_id, expires_at')
+                    .eq('building_id', this.lot.id)
+                    .in('room_id', allDoorIds);
 
-            const floorIds = (floorsInBuilding || []).map((f: any) => f.id).filter(Boolean);
-            if (floorIds.length && doorIds.length) {
-                const { data: assetRows } = await this.supabaseService.client
-                    .from('assets')
-                    .select('id,name,floor_id')
-                    .in('id', doorIds)
-                    .in('floor_id', floorIds);
+                if (!ticketError && ticketRows?.length) {
+                    const activeTicketRows = ticketRows.filter((t: any) => !t.expires_at || new Date(t.expires_at).getTime() >= new Date(nowIso).getTime());
+                    const allowedDoorIds = new Set(activeTicketRows.map((t: any) => t.room_id).filter(Boolean));
 
-                if (assetRows && assetRows.length) {
-                    const assetMap = new Map(assetRows.map((a: any) => [a.id, a.name || a.id]));
-                    roomLabels = doorIds.map((id: string) => assetMap.get(id) || `ประตู ${id}`);
+                    relevantRows = grantedRows.filter((row: any) => allowedDoorIds.has(row.door_id));
+                    doorIds = Array.from(new Set(relevantRows.map((row: any) => row.door_id).filter(Boolean)));
+
+                    const ticketMap = new Map(activeTicketRows.map((t: any) => [t.room_id, t]));
+                    roomLabels = doorIds.map((id: string) => {
+                        const ticket = ticketMap.get(id);
+                        return ticket?.floor ? `ชั้น ${ticket.floor} | ${id}` : `ห้อง ${id}`;
+                    });
                 }
             }
 
-            const expireCandidates = grantedRows
+            // Fallback mapping for legacy data where access_tickets is incomplete.
+            if (!relevantRows.length && allDoorIds.length) {
+                const { data: floorsInBuilding } = await this.supabaseService.client
+                    .from('floors')
+                    .select('id')
+                    .eq('building_id', this.lot.id);
+
+                const floorIds = (floorsInBuilding || []).map((f: any) => f.id).filter(Boolean);
+                if (floorIds.length) {
+                    const { data: assetRows } = await this.supabaseService.client
+                        .from('assets')
+                        .select('id,name,floor_id')
+                        .in('id', allDoorIds)
+                        .in('floor_id', floorIds);
+
+                    if (assetRows && assetRows.length) {
+                        const assetMap = new Map(assetRows.map((a: any) => [a.id, a.name || a.id]));
+                        const allowedDoorIds = new Set(assetRows.map((a: any) => a.id));
+                        relevantRows = grantedRows.filter((row: any) => allowedDoorIds.has(row.door_id));
+                        doorIds = Array.from(new Set(relevantRows.map((row: any) => row.door_id).filter(Boolean)));
+                        roomLabels = doorIds.map((id: string) => assetMap.get(id) || `ประตู ${id}`);
+                    }
+                }
+            }
+
+            const expireCandidates = relevantRows
                 .map((row: any) => row.valid_until)
                 .filter((val: string | null) => !!val) as string[];
 
@@ -170,10 +208,25 @@ export class BuildingDetailComponent implements OnInit {
                 ? expireCandidates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime())[0]
                 : null;
 
+            let qrImageDataUrl = '';
+            const qrSource = relevantRows[0];
+            if (qrSource?.id && qrSource?.door_id) {
+                const qrPayload = JSON.stringify({
+                    type: 'gate_access',
+                    v: 1,
+                    access_id: qrSource.id,
+                    door_id: qrSource.door_id,
+                    valid_until: qrSource.valid_until || null,
+                    issued_at: qrSource.granted_at || null,
+                });
+                qrImageDataUrl = await this.generateQrDataUrl(qrPayload);
+            }
+
             this.accessPassSummary = {
                 totalGranted: doorIds.length,
                 roomLabels,
                 expiresAt,
+                qrImageDataUrl,
             };
         } catch (error) {
             console.error('Failed to load access pass summary', error);
@@ -181,9 +234,32 @@ export class BuildingDetailComponent implements OnInit {
                 totalGranted: 0,
                 roomLabels: [],
                 expiresAt: null,
+                qrImageDataUrl: '',
             };
         } finally {
             this.isLoadingAccessPass = false;
+        }
+    }
+
+    openTicketsPage() {
+        this.modalCtrl.dismiss().then(() => {
+            this.router.navigate(['/tabs/tickets']);
+        });
+    }
+
+    private async generateQrDataUrl(payload: string): Promise<string> {
+        try {
+            return await QRCode.toDataURL(payload, {
+                width: 220,
+                margin: 1,
+                color: {
+                    dark: '#111827',
+                    light: '#FFFFFFFF'
+                }
+            });
+        } catch (error) {
+            console.error('Failed to generate access QR image', error);
+            return '';
         }
     }
 

@@ -212,6 +212,51 @@ export type Database = {
         }
         Relationships: []
       }
+      gate_attendance: {
+        Row: {
+          access_id: string | null
+          check_in_at: string | null
+          check_out_at: string | null
+          id: string
+          location_id: string | null
+          profile_id: string | null
+          status: string | null
+        }
+        Insert: {
+          access_id?: string | null
+          check_in_at?: string | null
+          check_out_at?: string | null
+          id?: string
+          location_id?: string | null
+          profile_id?: string | null
+          status?: string | null
+        }
+        Update: {
+          access_id?: string | null
+          check_in_at?: string | null
+          check_out_at?: string | null
+          id?: string
+          location_id?: string | null
+          profile_id?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gate_attendance_access_id_fkey"
+            columns: ["access_id"]
+            isOneToOne: false
+            referencedRelation: "user_door_access"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gate_attendance_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar: string | null
@@ -330,6 +375,14 @@ export type Database = {
           p_user: string
         }
         Returns: undefined
+      }
+      process_gate_access: {
+        Args: {
+          p_access_id: string
+          p_door_id: string
+          p_scanner_name?: string
+        }
+        Returns: Json
       }
       update_profile_with_log: {
         Args: {

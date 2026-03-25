@@ -78,12 +78,15 @@
             </div>
 
             <div class="mt-4 bg-white rounded-xl border border-dashed border-blue-300 min-h-[180px] flex items-center justify-center p-4">
-                <div class="text-center">
-                    <div class="w-28 h-28 mx-auto rounded-lg border-2 border-blue-200 bg-blue-50 flex items-center justify-center">
+                <div class="text-center w-full">
+                    <img *ngIf="accessPassSummary.qrImageDataUrl" [src]="accessPassSummary.qrImageDataUrl" alt="Access QR" class="w-44 h-44 mx-auto rounded-lg border border-blue-200 bg-white" />
+                    <div *ngIf="!accessPassSummary.qrImageDataUrl" class="w-28 h-28 mx-auto rounded-lg border-2 border-blue-200 bg-blue-50 flex items-center justify-center">
                         <ion-icon name="qr-code-outline" class="text-5xl text-blue-400"></ion-icon>
                     </div>
-                    <p class="mt-3 text-xs text-gray-500">QR-Code Placeholder</p>
-                    <p class="text-[11px] text-gray-400">อนาคตจะแสดงโค้ดสำหรับยืนยันสิทธิ์เข้าอาคาร</p>
+                    <p class="mt-3 text-xs text-gray-500">นำ QR นี้ไปสแกนที่จุดเข้า-ออก</p>
+                    <ion-button fill="clear" size="small" color="primary" (click)="openTicketsPage()">
+                        ไปหน้า ตั๋วของฉัน
+                    </ion-button>
                 </div>
             </div>
         </div>

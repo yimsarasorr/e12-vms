@@ -9,82 +9,104 @@
 
 <ion-content class="ion-padding">
 
-  <!-- ฟอร์ม -->
-  <div *ngIf="!isSuccess" class="space-y-6">
+  <div *ngIf="!isSuccess" class="space-y-4">
+    <ion-card class="ion-no-margin">
+      <ion-card-header>
+        <ion-card-title>ตั้งค่าคำเชิญ</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="inset" class="ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked">อาคาร</ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="selectedBuildingId" (ionChange)="onBuildingChange()" placeholder="เลือกอาคาร">
+              <ion-select-option *ngFor="let b of buildings" [value]="b.id">{{ b.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
 
-    <!-- 1. สถานที่ติดต่อ -->
-    <div>
-      <h3 class="text-sm font-bold text-gray-500 mb-2">1. สถานที่ติดต่อ</h3>
-      <div class="flex gap-2">
-        <ion-item lines="none" class="flex-1 rounded-lg border border-gray-200">
-          <ion-select [(ngModel)]="selectedFloor" placeholder="ชั้น" (ionChange)="onFloorChange()">
-            <ion-select-option *ngFor="let f of floors" [value]="f">ชั้น {{ f }}</ion-select-option>
-          </ion-select>
+          <ion-item>
+            <ion-label position="stacked">ชั้น</ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="selectedFloor" (ionChange)="onFloorChange()" placeholder="เลือกชั้น" [disabled]="floors.length === 0">
+              <ion-select-option *ngFor="let f of floors" [value]="f">ชั้น {{ f }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">ห้อง / ประตู</ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="selectedRoom" placeholder="เลือกห้อง" [disabled]="availableRooms.length === 0">
+              <ion-select-option *ngFor="let room of availableRooms" [value]="getRoomAccessId(room)">{{ room.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">จำนวนผู้มาติดต่อ</ion-label>
+            <ion-input type="number" min="1" [(ngModel)]="visitorCount" placeholder="เช่น 1"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <div class="quick-counts">
+          <ion-chip [outline]="visitorCount !== 1" [color]="visitorCount === 1 ? 'primary' : 'medium'" (click)="visitorCount = 1">
+            <ion-label>1 คน</ion-label>
+          </ion-chip>
+          <ion-chip [outline]="visitorCount !== 3" [color]="visitorCount === 3 ? 'primary' : 'medium'" (click)="visitorCount = 3">
+            <ion-label>3 คน</ion-label>
+          </ion-chip>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="ion-no-margin">
+      <ion-card-header>
+        <ion-card-title>ระยะเวลาบัตรผ่าน</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-segment [(ngModel)]="passType" (ionChange)="updateExpiry()" mode="ios">
+          <ion-segment-button value="1-time">
+            <ion-label>ครั้งเดียว</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="1-day">
+            <ion-label>1 วัน</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2-day">
+            <ion-label>2 วัน</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-label>เริ่มใช้งาน</ion-label>
+          <ion-datetime-button datetime="inviteStartDate"></ion-datetime-button>
         </ion-item>
-        <ion-item lines="none" class="flex-1 rounded-lg border border-gray-200">
-          <ion-select [(ngModel)]="selectedRoom" placeholder="เลือกห้อง" [disabled]="availableRooms.length === 0">
-            <ion-select-option *ngFor="let room of availableRooms" [value]="getRoomAccessId(room)">{{ room.name }}</ion-select-option>
-          </ion-select>
+
+        <ion-item lines="none" color="light" class="expire-row">
+          <ion-label>หมดอายุ</ion-label>
+          <ion-note slot="end" color="danger">{{ expiryDate | date:'dd/MM/yyyy HH:mm' }}</ion-note>
         </ion-item>
-      </div>
-    </div>
+      </ion-card-content>
+    </ion-card>
 
-    <!-- 2. จำนวนคนที่อนุญาต -->
-    <div>
-      <h3 class="text-sm font-bold text-gray-500 mb-2">2. จำนวนคนที่อนุญาต</h3>
-      <div class="flex items-center gap-2">
-        <ion-button [fill]="visitorCount === 1 ? 'solid' : 'outline'" color="primary" size="small"
-          (click)="visitorCount = 1">1 คน</ion-button>
-        <ion-button [fill]="visitorCount === 3 ? 'solid' : 'outline'" color="primary" size="small"
-          (click)="visitorCount = 3">3 คน</ion-button>
-        <ion-item lines="none" class="w-24 rounded-lg border border-gray-200 h-9">
-          <ion-input type="number" [(ngModel)]="visitorCount" placeholder="ระบุ" min="1"></ion-input>
-        </ion-item>
-      </div>
-    </div>
-
-    <!-- 3. ประเภทบัตรผ่าน -->
-    <div>
-      <h3 class="text-sm font-bold text-gray-500 mb-2">3. ประเภทบัตรผ่าน</h3>
-      <ion-segment [(ngModel)]="passType" (ionChange)="updateExpiry()" mode="ios">
-        <ion-segment-button value="1-time">
-          <ion-label>ครั้งเดียว</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="1-day">
-          <ion-label>1 วัน</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="2-day">
-          <ion-label>2 วัน</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-
-    <!-- 4. วันที่เริ่มใช้งาน -->
-    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-      <h3 class="text-sm font-bold text-gray-500 mb-2">4. วันที่เริ่มใช้งาน</h3>
-      <ion-datetime
-        presentation="date"
-        [(ngModel)]="startDate"
-        (ionChange)="updateExpiry()"
-        class="rounded-xl">
-      </ion-datetime>
-      <div class="mt-4 pt-4 border-t border-gray-200 text-sm flex justify-between text-gray-600">
-        <span>หมดอายุ:</span>
-        <span class="font-bold text-red-500">{{ expiryDate | date:'dd/MM/yyyy HH:mm' }}</span>
-      </div>
-    </div>
-
-    <!-- สร้างรหัส -->
     <ion-button
       expand="block"
-      class="h-12 font-bold text-lg mt-4"
-      [disabled]="isLoading || !selectedFloor || !selectedRoom"
+      size="large"
+      [disabled]="isLoading || !selectedBuildingId || !selectedFloor || !selectedRoom"
       (click)="generateTicket()">
       <ion-spinner *ngIf="isLoading" name="crescent" slot="start"></ion-spinner>
       {{ isLoading ? 'กำลังสร้าง...' : 'สร้างรหัสเข้าอาคาร' }}
     </ion-button>
 
+    <ion-text color="danger" *ngIf="errorMessage">
+      <p class="text-sm text-center mt-2">{{ errorMessage }}</p>
+    </ion-text>
   </div>
+
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime
+        id="inviteStartDate"
+        presentation="date"
+        [(ngModel)]="startDate"
+        (ionChange)="updateExpiry()">
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
 
   <!-- ผลลัพธ์หลังสร้างสำเร็จ -->
   <div *ngIf="isSuccess" class="text-center pt-8">
@@ -98,7 +120,7 @@
     </div>
 
     <div class="mt-6 text-left bg-gray-50 p-4 rounded-lg text-sm text-gray-600 space-y-2">
-      <p>📍 อาคาร 12 ชั้น, ชั้น {{ selectedFloor }}, ห้อง {{ selectedRoom }}</p>
+      <p>📍 {{ selectedBuildingName }}, ชั้น {{ selectedFloor }}, ห้อง {{ selectedRoom }}</p>
       <p>👥 ใช้งานได้สูงสุด {{ visitorCount }} คน ({{ passType }})</p>
       <p>⏳ หมดอายุ {{ expiryDate | date:'dd/MM/yyyy HH:mm' }}</p>
     </div>

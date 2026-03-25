@@ -34,12 +34,15 @@ export class AccessControlService {
         }
 
         try {
+            const nowIso = new Date().toISOString();
+
             // ดึงข้อมูลจากตาราง user_door_access
             const { data, error } = await this.supabase.client
                 .from('user_door_access')
                 .select('door_id')
                 .eq('profile_id', profileId)
-                .eq('is_granted', true);
+                .eq('is_granted', true)
+                .or(`valid_until.gte.${nowIso},valid_until.is.null`);
 
             if (error) {
                 console.error('AccessControlService: Error fetching accessible doors:', error);

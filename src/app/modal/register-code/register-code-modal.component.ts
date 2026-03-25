@@ -31,8 +31,14 @@ export class RegisterCodeModalComponent {
     if (this.inviteCode.length < 6) return;
     this.isLoading = true;
     this.errorMessage = '';
+    this.inviteCode = this.inviteCode.trim().toUpperCase();
 
-    const visitorId = this.reservationService.getCurrentProfileId();
+    const visitorId = await this.resolveVisitorId();
+    if (!visitorId) {
+      this.errorMessage = 'ไม่พบข้อมูลผู้ใช้งาน กรุณาล็อกอินใหม่';
+      this.isLoading = false;
+      return;
+    }
 
     try {
       const { data, error } = await this.supabase.client.rpc('claim_invite_code', {
@@ -52,12 +58,18 @@ export class RegisterCodeModalComponent {
 
       if (!ticketError && ticketData?.room_id) {
         // บันทึก user_door_access เพื่อให้ access-list ดึงได้
-        await this.supabase.client.from('user_door_access').insert({
+        const { error: accessError } = await this.supabase.client.from('user_door_access').upsert({
           profile_id: visitorId,
           door_id: ticketData.room_id,
           is_granted: true,
           valid_until: ticketData.expires_at
+        }, {
+          onConflict: 'profile_id,door_id'
         });
+
+        if (accessError) {
+          throw accessError;
+        }
       }
 
       const toast = await this.toastCtrl.create({
@@ -69,9 +81,24 @@ export class RegisterCodeModalComponent {
 
       this.modalCtrl.dismiss({ code: this.inviteCode }, 'confirm');
     } catch (err: any) {
-      this.errorMessage = err.message || 'รหัสไม่ถูกต้องหรือหมดอายุแล้ว';
+      if (String(err?.code || '') === '23505') {
+        this.errorMessage = 'สิทธิ์ห้องนี้ถูกบันทึกแล้วในบัญชีนี้';
+      } else {
+        this.errorMessage = err.message || 'รหัสไม่ถูกต้องหรือหมดอายุแล้ว';
+      }
     } finally {
       this.isLoading = false;
     }
+  }
+
+  private async resolveVisitorId(): Promise<string> {
+    // Prefer current auth user id; fallback to in-memory reservation context.
+    const { data, error } = await this.supabase.client.auth.getUser();
+    if (!error && data?.user?.id) {
+      return data.user.id;
+    }
+
+    const contextId = this.reservationService.getCurrentProfileId();
+    return contextId ? String(contextId).trim() : '';
   }
 }

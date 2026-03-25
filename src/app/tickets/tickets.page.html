@@ -33,8 +33,13 @@
       </div>
 
       <div class="qr-placeholder">
-        <div class="qr-box">{{ pass.qrValue }}</div>
-        <div class="qr-caption">QR Preview</div>
+        <img *ngIf="pass.qrImageDataUrl" [src]="pass.qrImageDataUrl" alt="Access QR" class="qr-image" />
+        <div *ngIf="!pass.qrImageDataUrl" class="qr-box">{{ pass.qrValue }}</div>
+        <div class="qr-caption">นำไปสแกนที่จุดเข้า-ออกอาคาร</div>
+        <ion-button size="small" fill="clear" color="primary" (click)="openQr(pass)">
+          <ion-icon name="expand-outline" slot="start"></ion-icon>
+          ขยาย QR
+        </ion-button>
       </div>
 
       <div class="pass-meta">
@@ -51,4 +56,27 @@
       <ion-button expand="block" fill="outline" (click)="openBuilding(pass)">ไปหน้าอาคารและดูสิทธิ์เข้า</ion-button>
     </div>
   </div>
+
+  <ion-modal [isOpen]="isQrModalOpen" (didDismiss)="closeQr()" cssClass="qr-float-modal">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>QR Access Pass</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeQr()">
+              <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="qr-modal-content">
+        <div class="qr-modal-wrap" *ngIf="selectedPass">
+          <img *ngIf="selectedPass.qrImageDataUrl" [src]="selectedPass.qrImageDataUrl" alt="Access QR" class="qr-image-full" />
+          <div class="qr-modal-name">{{ selectedPass.roomName }}</div>
+          <div class="qr-modal-sub">{{ selectedPass.floorName }} | {{ selectedPass.buildingName }}</div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
