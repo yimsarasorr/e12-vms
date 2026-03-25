@@ -14,7 +14,7 @@ export type Database = {
   }
   public: {
     Tables: {
-      "access-tickets": {
+      access_tickets: {
         Row: {
           building_id: string | null
           created_at: string | null
@@ -27,6 +27,7 @@ export type Database = {
           max_usage: number | null
           pass_type: string | null
           room_id: string | null
+          status: string | null
           valid_from: string | null
         }
         Insert: {
@@ -36,11 +37,12 @@ export type Database = {
           expires_at?: string | null
           floor?: number | null
           host_id?: string | null
-          id: string
+          id?: string
           invite_code?: string | null
           max_usage?: number | null
           pass_type?: string | null
           room_id?: string | null
+          status?: string | null
           valid_from?: string | null
         }
         Update: {
@@ -55,7 +57,56 @@ export type Database = {
           max_usage?: number | null
           pass_type?: string | null
           room_id?: string | null
+          status?: string | null
           valid_from?: string | null
+        }
+        Relationships: []
+      }
+      activity_logs: {
+        Row: {
+          action: string | null
+          category: string | null
+          changes: Json | null
+          created_at: string | null
+          detail: string | null
+          entity_id: string | null
+          id: number
+          log_type: string | null
+          meta: Json | null
+          status: string | null
+          time_display: string | null
+          type: string | null
+          user: string | null
+        }
+        Insert: {
+          action?: string | null
+          category?: string | null
+          changes?: Json | null
+          created_at?: string | null
+          detail?: string | null
+          entity_id?: string | null
+          id?: number
+          log_type?: string | null
+          meta?: Json | null
+          status?: string | null
+          time_display?: string | null
+          type?: string | null
+          user?: string | null
+        }
+        Update: {
+          action?: string | null
+          category?: string | null
+          changes?: Json | null
+          created_at?: string | null
+          detail?: string | null
+          entity_id?: string | null
+          id?: number
+          log_type?: string | null
+          meta?: Json | null
+          status?: string | null
+          time_display?: string | null
+          type?: string | null
+          user?: string | null
         }
         Relationships: []
       }
@@ -200,6 +251,32 @@ export type Database = {
         }
         Relationships: []
       }
+      user_bookmarks: {
+        Row: {
+          building_id: string
+          created_at: string
+          user_id: string
+        }
+        Insert: {
+          building_id: string
+          created_at?: string
+          user_id: string
+        }
+        Update: {
+          building_id?: string
+          created_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_bookmarks_building_id_fkey"
+            columns: ["building_id"]
+            isOneToOne: false
+            referencedRelation: "buildings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_door_access: {
         Row: {
           door_id: string | null
@@ -214,7 +291,7 @@ export type Database = {
           door_id?: string | null
           granted_at?: string | null
           granted_by?: string | null
-          id: string
+          id?: string
           is_granted?: boolean | null
           profile_id?: string | null
           valid_until?: string | null
@@ -235,7 +312,51 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      claim_invite_code: {
+        Args: { p_code: string; p_visitor_id: string }
+        Returns: Json
+      }
+      insert_activity_log: {
+        Args: {
+          p_action: string
+          p_category: string
+          p_changes?: Json
+          p_detail?: string
+          p_entity_id?: string
+          p_log_type: string
+          p_meta?: Json
+          p_status: string
+          p_type?: string
+          p_user: string
+        }
+        Returns: undefined
+      }
+      update_profile_with_log: {
+        Args: {
+          p_actor_id: string
+          p_actor_name: string
+          p_updates: Json
+          p_user_id: string
+        }
+        Returns: {
+          avatar: string | null
+          created_at: string | null
+          email: string | null
+          id: string
+          line_id: string | null
+          name: string | null
+          phone: string | null
+          role: string | null
+          role_level: number | null
+          updated_at: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "profiles"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       [_ in never]: never
