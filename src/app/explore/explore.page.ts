@@ -59,6 +59,7 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   private geoHashBounds: any; // เลเยอร์กรอบสี่เหลี่ยม Geohash
   private userGeoHash: string | null = null;
   private mapCenteredByUserLocation = false;
+  private lastLocationErrorCode: number | null = null;
 
   // --- Subscription & Animation ---
   private animationFrameId: any;
@@ -320,7 +321,7 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
   //  MAP LOGIC (Leaflet + Geohash + Error Handling)
   // ----------------------------------------------------------------
 
-  private getCurrentPositionOnce(): Promise<{ lat: number; lng: number } | null> {
+  private requestCurrentPosition(options: PositionOptions): Promise<{ lat: number; lng: number } | null> {
     return new Promise((resolve) => {
       if (!navigator.geolocation) {
         resolve(null);
@@ -328,15 +329,80 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
       }
 
       navigator.geolocation.getCurrentPosition(
-        (pos) => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-        () => resolve(null),
-        {
-          enableHighAccuracy: true,
-          timeout: 8000,
-          maximumAge: 60000,
-        }
+        (pos) => {
+          this.lastLocationErrorCode = null;
+          resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        },
+        (err) => {
+          this.lastLocationErrorCode = err?.code ?? null;
+          resolve(null);
+        },
+        options
       );
     });
+  }
+
+  private async getCurrentPositionWithFallback(): Promise<{ lat: number; lng: number } | null> {
+    // Try a quick cached/low-accuracy location first to avoid first-request timeout.
+    const quickPosition = await this.requestCurrentPosition({
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 300000,
+    });
+    if (quickPosition) return quickPosition;
+
+    // Then try precise GPS fix.
+    const precisePosition = await this.requestCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 12000,
+      maximumAge: 0,
+    });
+    if (precisePosition) return precisePosition;
+
+    // Final retry with relaxed options (common fix for first-call timeout).
+    return this.requestCurrentPosition({
+      enableHighAccuracy: false,
+      timeout: 12000,
+      maximumAge: 600000,
+    });
+  }
+
+  private async renderUserLocationOnMap(lat: number, lng: number, moveMap: boolean = false) {
+    if (!this.map) return;
+
+    const L = await import('leaflet');
+
+    if (moveMap) {
+      this.map.flyTo([lat, lng], 17);
+    }
+
+    if (!this.userMarker) {
+      const userIcon = L.divIcon({
+        html: `<div style="width: 15px; height: 15px; background: #4285F4; border: 2px solid white; border-radius: 50%; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>`,
+        className: '',
+        iconSize: [15, 15]
+      });
+      this.userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(this.map);
+    } else {
+      this.userMarker.setLatLng([lat, lng]);
+    }
+
+    this.userGeoHash = ngeohash.encode(lat, lng, 7);
+
+    if (this.geoHashBounds) {
+      this.map.removeLayer(this.geoHashBounds);
+    }
+
+    const boundsArray = ngeohash.decode_bbox(this.userGeoHash);
+    const bounds = [[boundsArray[0], boundsArray[1]], [boundsArray[2], boundsArray[3]]];
+
+    // @ts-ignore
+    this.geoHashBounds = L.rectangle(bounds, {
+      color: '#4285f4',
+      weight: 1,
+      fillOpacity: 0.1,
+      fillColor: '#4285f4'
+    }).addTo(this.map);
   }
 
   private async getE12CenterFromDatabase(): Promise<{ lat: number; lng: number } | null> {
@@ -373,7 +439,7 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     L.Marker.prototype.options.icon = new DefaultIcon();
 
     // Center map by user location when allowed; otherwise use E12 coordinates from DB.
-    const userPosition = await this.getCurrentPositionOnce();
+    const userPosition = await this.getCurrentPositionWithFallback();
     const dbFallback = userPosition ? null : await this.getE12CenterFromDatabase();
 
     const centerLat = userPosition?.lat ?? dbFallback?.lat ?? 0;
@@ -398,6 +464,10 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
       updateWhenIdle: true,
       keepBuffer: 8
     }).addTo(this.map);
+
+    if (userPosition) {
+      await this.renderUserLocationOnMap(userPosition.lat, userPosition.lng, false);
+    }
 
     setTimeout(() => { this.map.invalidateSize(); }, 500);
   }
@@ -460,74 +530,36 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(async (pos) => {
-      const lat = pos.coords.latitude;
-      const lng = pos.coords.longitude;
+    this.getCurrentPositionWithFallback().then(async (position) => {
+      if (position) {
+        const lat = position.lat;
+        const lng = position.lng;
 
-      // 1. คำนวณ Geohash (ความละเอียด 7 หลัก)
-      this.userGeoHash = ngeohash.encode(lat, lng, 7);
+        this.userLat = lat;
+        this.userLon = lng;
+        this.mapCenteredByUserLocation = true;
 
-      // --- อัปเดตพิกัด และ คำนวณระยะทาง/สีใหม่ ---
-      this.userLat = lat;
-      this.userLon = lng;
-      this.calculateDistances();
-      this.filterData(); // เพื่ออัปเดต UI หน้าจอทันที
-
-      if (this.map) {
-        const L = await import('leaflet');
-
-        this.map.flyTo([lat, lng], 17);
-
-        // 2. วาดจุดตำแหน่งผู้ใช้
-        if (!this.userMarker) {
-          const userIcon = L.divIcon({
-            html: `<div style="width: 15px; height: 15px; background: #4285F4; border: 2px solid white; border-radius: 50%; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>`,
-            className: '',
-            iconSize: [15, 15]
-          });
-          this.userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(this.map);
-        } else {
-          this.userMarker.setLatLng([lat, lng]);
-        }
-
-        // 3. วาดกรอบสี่เหลี่ยม Geohash (Bounding Box)
-        if (this.geoHashBounds) {
-          this.map.removeLayer(this.geoHashBounds);
-        }
-
-        // Decode เพื่อหาขอบเขตสี่เหลี่ยม
-        const boundsArray = ngeohash.decode_bbox(this.userGeoHash);
-        const bounds = [[boundsArray[0], boundsArray[1]], [boundsArray[2], boundsArray[3]]];
-
-        // @ts-ignore
-        this.geoHashBounds = L.rectangle(bounds, {
-          color: '#4285f4',
-          weight: 1,
-          fillOpacity: 0.1,
-          fillColor: '#4285f4'
-        }).addTo(this.map);
+        this.calculateDistances();
+        this.filterData();
+        await this.renderUserLocationOnMap(lat, lng, true);
+        return;
       }
-    }, (err) => {
+
       //  จัดการ Error ที่นี่ (กรณี User กด Block หรือ GPS ไม่ทำงาน)
-      console.error('Error getting location', err);
+      console.error('Error getting location', this.lastLocationErrorCode);
 
       let message = 'ไม่สามารถระบุตำแหน่งได้';
-      if (err.code === 1) { // PERMISSION_DENIED
+      if (this.lastLocationErrorCode === 1) { // PERMISSION_DENIED
         message = 'กรุณาเปิดสิทธิ์การเข้าถึงตำแหน่ง (Location Permission) ที่การตั้งค่าของเบราว์เซอร์หรืออุปกรณ์';
-      } else if (err.code === 2) { // POSITION_UNAVAILABLE
+      } else if (this.lastLocationErrorCode === 2) { // POSITION_UNAVAILABLE
         message = 'สัญญาณ GPS ขัดข้อง ไม่สามารถระบุตำแหน่งได้';
-      } else if (err.code === 3) { // TIMEOUT
+      } else if (this.lastLocationErrorCode === 3) { // TIMEOUT
         message = 'หมดเวลาในการค้นหาตำแหน่ง ลองใหม่อีกครั้ง';
       }
 
       if (!silent) {
         this.showLocationError(message);
       }
-
-    }, {
-      enableHighAccuracy: true,
-      timeout: 10000, // 10 วินาที
-      maximumAge: 0
     });
   }
 

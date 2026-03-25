@@ -28,15 +28,12 @@ export class BookmarkService {
 
             const { error } = await this.supabaseService.client
                 .from('user_bookmarks')
-                .insert([
-                    { user_id: user.id, building_id: buildingId }
-                ]);
+                .upsert(
+                    [{ user_id: user.id, building_id: String(buildingId) }],
+                    { onConflict: 'user_id,building_id', ignoreDuplicates: true }
+                );
 
             if (error) {
-                if (error.code === '23505') {
-                    // Unique violation (already bookmarked)
-                    return;
-                }
                 if (this.isSchemaMissingError(error)) {
                     console.warn('[BookmarkService] user_bookmarks table is missing in current DB. Skip add bookmark.');
                     return;
@@ -61,7 +58,7 @@ export class BookmarkService {
             const { error } = await this.supabaseService.client
                 .from('user_bookmarks')
                 .delete()
-                .match({ user_id: user.id, building_id: buildingId });
+                .match({ user_id: user.id, building_id: String(buildingId) });
 
             if (error) {
                 if (this.isSchemaMissingError(error)) {
@@ -88,7 +85,7 @@ export class BookmarkService {
             const { data, error } = await this.supabaseService.client
                 .from('user_bookmarks')
                 .select('building_id')
-                .match({ user_id: user.id, building_id: buildingId })
+                .match({ user_id: user.id, building_id: String(buildingId) })
                 .maybeSingle();
 
             if (error) {
