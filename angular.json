@@ -46,7 +46,7 @@
               }
             ],
             "styles": ["src/tailwind.css", "src/global.scss", "src/theme/variables.scss"],
-            "allowedCommonJsDependencies": ["ngeohash", "leaflet", "tiny-sha256"],
+            "allowedCommonJsDependencies": ["ngeohash", "leaflet", "tiny-sha256", "qrcode"],
             "scripts": [],
             "browser": "src/main.ts"
           },
