@@ -22,6 +22,8 @@
               "base": "www",
               "browser": ""
             },
+            "baseHref": "/",
+            "deployUrl": "/",
             "index": "src/index.html",
             "polyfills": [
               "src/polyfills.ts"
