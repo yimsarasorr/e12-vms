@@ -397,12 +397,12 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     const bounds = [[boundsArray[0], boundsArray[1]], [boundsArray[2], boundsArray[3]]];
 
     // @ts-ignore
-    this.geoHashBounds = L.rectangle(bounds, {
-      color: '#4285f4',
-      weight: 1,
-      fillOpacity: 0.1,
-      fillColor: '#4285f4'
-    }).addTo(this.map);
+    // this.geoHashBounds = L.rectangle(bounds, {
+    //   color: '#4285f4',
+    //   weight: 1,
+    //   fillOpacity: 0.1,
+    //   fillColor: '#4285f4'
+    // }).addTo(this.map);
   }
 
   private async getE12CenterFromDatabase(): Promise<{ lat: number; lng: number } | null> {
