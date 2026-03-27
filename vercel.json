@@ -1,9 +1,10 @@
 {
+  "version": 2,
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "www",
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }
