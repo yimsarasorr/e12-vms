@@ -51,6 +51,9 @@
                 </div>
 
                 <div class="flex items-center gap-2">
+                    <button class="circle-btn bg-gray-50 hover:bg-gray-100 text-gray-500 rounded-full p-1" (click)="dismiss()">
+                        <ion-icon name="chevron-back-outline" class="text-2xl"></ion-icon>
+                    </button>
                     <button class="circle-btn bg-gray-50 hover:bg-gray-100 rounded-full p-1 transition-colors"
                         [class.text-red-500]="isBookmarked" [class.text-gray-500]="!isBookmarked"
                         (click)="toggleBookmark()">
@@ -111,19 +114,27 @@
 <ion-footer class="ion-no-border bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
     <div class="p-4 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
         <!-- Buttons -->
-        <div class="flex gap-3">
-            <ion-button shape="round" color="medium" fill="outline" class="h-12 w-24 font-bold shadow-none flex-none"
-                (click)="dismiss()">
-                <div class="flex items-center gap-1">
-                    <ion-icon name="close-outline" class="text-xl"></ion-icon>
-                    <span class="text-xs">ปิด</span>
-                </div>
+        <div class="flex gap-3 flex-col">
+            <ion-button expand="block" shape="round" color="primary" class="h-12 font-bold shadow-none"
+                (click)="openRegisterCodeModal()">
+                <ion-icon name="key-outline" slot="start"></ion-icon>
+                ลงทะเบียนรหัสคำเชิญ
             </ion-button>
+            
+            <div class="flex gap-3">
+                <ion-button shape="round" color="medium" fill="outline" class="h-12 w-24 font-bold shadow-none flex-none"
+                    (click)="dismiss()">
+                    <div class="flex items-center gap-1">
+                        <ion-icon name="close-outline" class="text-xl"></ion-icon>
+                        <span class="text-xs">ปิด</span>
+                    </div>
+                </ion-button>
 
-            <ion-button expand="block" shape="round" color="primary" class="h-12 flex-1 font-bold shadow-none"
-                (click)="openBuildingAccess()">
-                ไปหน้าอาคารและดูสิทธิ์เข้า
-            </ion-button>
+                <ion-button expand="block" shape="round" color="primary" class="h-12 flex-1 font-bold shadow-none"
+                    (click)="openBuildingAccess()">
+                    ไปหน้าอาคารและดูสิทธิ์เข้า
+                </ion-button>
+            </div>
         </div>
 
     </div>

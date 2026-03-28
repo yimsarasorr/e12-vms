@@ -9,56 +9,56 @@
 
 <ion-content class="ion-padding">
 
-  <div *ngIf="!isSuccess" class="space-y-4">
-    <ion-card class="ion-no-margin">
-      <ion-card-header>
-        <ion-card-title>ตั้งค่าคำเชิญ</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list lines="inset" class="ion-no-padding">
-          <ion-item>
-            <ion-label position="stacked">อาคาร</ion-label>
-            <ion-select interface="action-sheet" [(ngModel)]="selectedBuildingId" (ionChange)="onBuildingChange()" placeholder="เลือกอาคาร">
-              <ion-select-option *ngFor="let b of buildings" [value]="b.id">{{ b.name }}</ion-select-option>
-            </ion-select>
-          </ion-item>
+  <div *ngIf="!isSuccess" class="space-y-6">
+    <div>
+      <h3 class="text-lg font-bold mb-3 px-2">ตั้งค่าคำเชิญ</h3>
+      <ion-card class="ion-no-margin">
+        <ion-card-content class="space-y-5">
+        <div>
+          <ion-label color="medium">อาคาร</ion-label>
+          <ion-select interface="action-sheet" [(ngModel)]="selectedBuildingId" (ionChange)="onBuildingChange()" placeholder="เลือกอาคาร" class="ion-margin-top">
+            <ion-select-option *ngFor="let b of buildings" [value]="b.id">{{ b.name }}</ion-select-option>
+          </ion-select>
+        </div>
 
-          <ion-item>
-            <ion-label position="stacked">ชั้น</ion-label>
-            <ion-select interface="action-sheet" [(ngModel)]="selectedFloor" (ionChange)="onFloorChange()" placeholder="เลือกชั้น" [disabled]="floors.length === 0">
-              <ion-select-option *ngFor="let f of floors" [value]="f">ชั้น {{ f }}</ion-select-option>
-            </ion-select>
-          </ion-item>
+        <div>
+          <ion-label color="medium">ชั้น</ion-label>
+          <ion-select interface="action-sheet" [(ngModel)]="selectedFloor" (ionChange)="onFloorChange()" placeholder="เลือกชั้น" [disabled]="floors.length === 0" class="ion-margin-top">
+            <ion-select-option *ngFor="let f of floors" [value]="f">ชั้น {{ f }}</ion-select-option>
+          </ion-select>
+        </div>
 
-          <ion-item>
-            <ion-label position="stacked">ห้อง / ประตู</ion-label>
-            <ion-select interface="action-sheet" [(ngModel)]="selectedRoom" placeholder="เลือกห้อง" [disabled]="availableRooms.length === 0">
-              <ion-select-option *ngFor="let room of availableRooms" [value]="getRoomAccessId(room)">{{ room.name }}</ion-select-option>
-            </ion-select>
-          </ion-item>
+        <div>
+          <ion-label color="medium">ห้อง / ประตู</ion-label>
+          <ion-select interface="action-sheet" [(ngModel)]="selectedRoom" placeholder="เลือกห้อง" [disabled]="availableRooms.length === 0" class="ion-margin-top">
+            <ion-select-option *ngFor="let room of availableRooms" [value]="getRoomAccessId(room)">{{ room.name }}</ion-select-option>
+          </ion-select>
+        </div>
 
-          <ion-item>
-            <ion-label position="stacked">จำนวนผู้มาติดต่อ</ion-label>
-            <ion-input type="number" min="1" [(ngModel)]="visitorCount" placeholder="เช่น 1"></ion-input>
-          </ion-item>
-        </ion-list>
+        <div>
+          <ion-label color="medium">จำนวนผู้มาติดต่อ</ion-label>
+          <ion-input type="number" min="1" [(ngModel)]="visitorCount" placeholder="เช่น 1" class="ion-margin-top"></ion-input>
+        </div>
 
-        <div class="quick-counts">
-          <ion-chip [outline]="visitorCount !== 1" [color]="visitorCount === 1 ? 'primary' : 'medium'" (click)="visitorCount = 1">
-            <ion-label>1 คน</ion-label>
-          </ion-chip>
-          <ion-chip [outline]="visitorCount !== 3" [color]="visitorCount === 3 ? 'primary' : 'medium'" (click)="visitorCount = 3">
-            <ion-label>3 คน</ion-label>
-          </ion-chip>
+        <div>
+          <ion-label color="medium">ตัวเลือกด่วน</ion-label>
+          <div class="flex gap-2 mt-3">
+            <ion-chip [outline]="visitorCount !== 1" [color]="visitorCount === 1 ? 'primary' : 'medium'" (click)="visitorCount = 1">
+              <ion-label>1 คน</ion-label>
+            </ion-chip>
+            <ion-chip [outline]="visitorCount !== 3" [color]="visitorCount === 3 ? 'primary' : 'medium'" (click)="visitorCount = 3">
+              <ion-label>3 คน</ion-label>
+            </ion-chip>
+          </div>
         </div>
       </ion-card-content>
-    </ion-card>
+      </ion-card>
+    </div>
 
-    <ion-card class="ion-no-margin">
-      <ion-card-header>
-        <ion-card-title>ระยะเวลาบัตรผ่าน</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
+    <div>
+      <h3 class="text-lg font-bold mb-3 px-2">ระยะเวลาบัตรผ่าน</h3>
+      <ion-card class="ion-no-margin">
+        <ion-card-content>
         <ion-segment [(ngModel)]="passType" (ionChange)="updateExpiry()" mode="ios">
           <ion-segment-button value="1-time">
             <ion-label>ครั้งเดียว</ion-label>
@@ -81,7 +81,8 @@
           <ion-note slot="end" color="danger">{{ expiryDate | date:'dd/MM/yyyy HH:mm' }}</ion-note>
         </ion-item>
       </ion-card-content>
-    </ion-card>
+      </ion-card>
+    </div>
 
     <ion-button
       expand="block"
@@ -109,20 +110,27 @@
   </ion-modal>
 
   <!-- ผลลัพธ์หลังสร้างสำเร็จ -->
-  <div *ngIf="isSuccess" class="text-center pt-8">
+  <div *ngIf="isSuccess" class="text-center pt-8 pb-8">
 
-    <ion-icon name="checkmark-circle" class="text-6xl text-green-500 mb-4"></ion-icon>
-    <h2 class="text-xl font-bold mb-6">สร้างบัตรผ่านสำเร็จ!</h2>
+    <ion-icon name="checkmark-circle" color="success" style="font-size: 48px; margin-bottom: 20px;"></ion-icon>
+    <h2 class="text-xl font-bold mb-8">สร้างบัตรผ่านสำเร็จ!</h2>
 
-    <div class="p-6 bg-blue-50 rounded-xl border-2 border-dashed border-blue-400">
-      <p class="text-sm text-blue-600 mb-2">ส่งรหัสนี้ให้ผู้มาติดต่อ</p>
-      <h1 class="text-4xl font-black text-[#1a73e8] tracking-[0.2em]">{{ generatedCode }}</h1>
+    <div class="relative">
+      <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200 mb-2" (click)="copyCode()" style="cursor: pointer; transition: all 0.3s ease;">
+        <p class="text-xs text-blue-600 mb-3 font-semibold tracking-wide">รหัสเข้าอาคาร (คลิกเพื่อคัดลอก)</p>
+        <div class="font-mono text-3xl font-bold text-blue-700 letter-spacing-wider">{{ generatedCode }}</div>
+        <p class="text-xs text-blue-500 mt-2">✓ คัดลอกไปยังคลิปบอร์ด</p>
+      </div>
+      <div *ngIf="copySuccess" class="absolute top-0 right-0 bg-green-500 text-white px-3 py-1 rounded text-xs font-semibold">
+        คัดลอกแล้ว!
+      </div>
     </div>
 
-    <div class="mt-6 text-left bg-gray-50 p-4 rounded-lg text-sm text-gray-600 space-y-2">
-      <p>📍 {{ selectedBuildingName }}, ชั้น {{ selectedFloor }}, ห้อง {{ selectedRoom }}</p>
-      <p>👥 ใช้งานได้สูงสุด {{ visitorCount }} คน ({{ passType }})</p>
-      <p>⏳ หมดอายุ {{ expiryDate | date:'dd/MM/yyyy HH:mm' }}</p>
+    <div class="mt-6 text-left bg-gray-50 p-4 rounded-lg text-sm text-gray-600 space-y-2 border-l-4 border-blue-400">
+      <p><span class="font-semibold text-gray-700">📍 ตำแหน่ง:</span> {{ selectedBuildingName }}, ชั้น {{ selectedFloor }}, ห้อง {{ selectedRoom }}</p>
+      <p><span class="font-semibold text-gray-700">👥 ผู้ใช้งาน:</span> ใช้งานได้สูงสุด {{ visitorCount }} คน</p>
+      <p><span class="font-semibold text-gray-700">🎫 ประเภท:</span> {{ passType === '1-time' ? 'ครั้งเดียว' : passType === '1-day' ? '1 วัน' : '2 วัน' }}</p>
+      <p><span class="font-semibold text-gray-700">⏳ หมดอายุ:</span> {{ expiryDate | date:'dd/MM/yyyy HH:mm' }}</p>
     </div>
 
     <ion-button expand="block" class="h-12 mt-8" (click)="dismiss()">

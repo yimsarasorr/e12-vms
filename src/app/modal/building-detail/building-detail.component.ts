@@ -9,6 +9,7 @@ import { ParkingDataService } from '../../services/parking-data.service';
 import { BookmarkService } from '../../services/bookmark.service';
 import { AuthService } from '../../services/auth.service';
 import { SupabaseService } from '../../services/supabase.service';
+import { RegisterCodeModalComponent } from '../register-code/register-code-modal.component';
 import * as QRCode from 'qrcode';
 import { addIcons } from 'ionicons';
 import {
@@ -100,6 +101,15 @@ export class BuildingDetailComponent implements OnInit {
 
     dismiss() {
         this.modalCtrl.dismiss();
+    }
+
+    async openRegisterCodeModal() {
+        const modal = await this.modalCtrl.create({
+            component: RegisterCodeModalComponent,
+            breakpoints: [0, 0.75],
+            initialBreakpoint: 0.75,
+        });
+        await modal.present();
     }
 
     openBuildingAccess() {

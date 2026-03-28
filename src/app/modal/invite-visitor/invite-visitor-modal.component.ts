@@ -34,6 +34,7 @@ export class InviteVisitorModalComponent implements OnInit {
   isSuccess = false;
   generatedCode = '';
   errorMessage = '';
+  copySuccess = false;
 
   constructor(private modalCtrl: ModalController, private supabase: SupabaseService) {}
 
@@ -180,6 +181,18 @@ export class InviteVisitorModalComponent implements OnInit {
 
   getSelectedBuildingName(buildingId: string): string {
     return this.buildings.find((b) => b.id === buildingId)?.name || buildingId;
+  }
+
+  async copyCode() {
+    try {
+      await navigator.clipboard.writeText(this.generatedCode);
+      this.copySuccess = true;
+      setTimeout(() => {
+        this.copySuccess = false;
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   }
 
   dismiss() { this.modalCtrl.dismiss(); }
