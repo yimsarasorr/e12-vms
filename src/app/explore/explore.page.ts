@@ -438,19 +438,16 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     });
     L.Marker.prototype.options.icon = new DefaultIcon();
 
-    // Center map by user location when allowed; otherwise use E12 coordinates from DB.
-    const userPosition = await this.getCurrentPositionWithFallback();
-    const dbFallback = userPosition ? null : await this.getE12CenterFromDatabase();
+    // Render immediately with a safe fallback center; resolve precise center in background.
+    const defaultLat = 13.651;
+    const defaultLng = 100.494;
 
-    const centerLat = userPosition?.lat ?? dbFallback?.lat ?? 0;
-    const centerLng = userPosition?.lng ?? dbFallback?.lng ?? 0;
-
-    this.userLat = centerLat;
-    this.userLon = centerLng;
-    this.mapCenteredByUserLocation = !!userPosition;
+    this.userLat = defaultLat;
+    this.userLon = defaultLng;
+    this.mapCenteredByUserLocation = false;
 
     this.map = L.map('map', {
-      center: [centerLat, centerLng],
+      center: [defaultLat, defaultLng],
       zoom: 16,
       zoomControl: false,
       attributionControl: false,
@@ -465,11 +462,30 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
       keepBuffer: 8
     }).addTo(this.map);
 
+    setTimeout(() => { this.map.invalidateSize(); }, 500);
+
+    // Resolve user/DB center asynchronously so slow geolocation doesn't block map rendering.
+    void this.resolveInitialMapCenter();
+  }
+
+  private async resolveInitialMapCenter() {
+    const userPosition = await this.getCurrentPositionWithFallback();
+    const dbFallback = userPosition ? null : await this.getE12CenterFromDatabase();
+
+    const centerLat = userPosition?.lat ?? dbFallback?.lat ?? this.userLat;
+    const centerLng = userPosition?.lng ?? dbFallback?.lng ?? this.userLon;
+
+    this.userLat = centerLat;
+    this.userLon = centerLng;
+    this.mapCenteredByUserLocation = !!userPosition;
+
+    if (this.map) {
+      this.map.setView([centerLat, centerLng], 16);
+    }
+
     if (userPosition) {
       await this.renderUserLocationOnMap(userPosition.lat, userPosition.lng, false);
     }
-
-    setTimeout(() => { this.map.invalidateSize(); }, 500);
   }
 
   private createPinIcon(L: any, color: string, text: string = '') {
