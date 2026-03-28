@@ -427,7 +427,7 @@ export class ExplorePage implements OnInit, OnDestroy, AfterViewInit {
     const L = await import('leaflet');
 
     // ตั้งค่า Default Icon
-    const iconUrl = 'assets/icon/favicon.png';
+    const iconUrl = '/assets/icon/favicon.png';
     const DefaultIcon = L.Icon.extend({
       options: {
         iconUrl,

@@ -188,7 +188,7 @@ export const TAB1_PARKING_LOTS: ParkingLot[] = [
     priceUnit: 'ต่อชม.',
     supportedTypes: ['normal', 'motorcycle'],
     schedule: [],
-    images: ['assets/images/parking/indoor.png']
+    images: ['/assets/images/parking/indoor.png']
   },
   {
     id: 'visitor_bldg_2',
@@ -211,7 +211,7 @@ export const TAB1_PARKING_LOTS: ParkingLot[] = [
     priceUnit: 'ต่อชม.',
     supportedTypes: ['normal', 'ev', 'motorcycle'],
     schedule: [],
-    images: ['assets/images/parking/exterior.png']
+    images: ['/assets/images/parking/exterior.png']
   },
   {
     id: 'visitor_bldg_complex',
@@ -234,7 +234,7 @@ export const TAB1_PARKING_LOTS: ParkingLot[] = [
     priceUnit: 'ต่อชม.',
     supportedTypes: ['normal', 'ev'],
     schedule: [],
-    images: ['assets/images/parking/exterior.png']
+    images: ['/assets/images/parking/exterior.png']
   },
   {
     id: 'visitor_bldg_library',
@@ -257,7 +257,7 @@ export const TAB1_PARKING_LOTS: ParkingLot[] = [
     priceUnit: 'ต่อชม.',
     supportedTypes: ['normal', 'motorcycle'],
     schedule: [],
-    images: ['assets/images/parking/outdoor.png']
+    images: ['/assets/images/parking/outdoor.png']
   }
 ];
 
@@ -360,8 +360,8 @@ export const PARKING_DETAIL_MOCK_SITES: ParkingLot[] = [
     supportedTypes: ['normal', 'ev', 'motorcycle'],
     schedule: [],
     images: [
-      'assets/images/parking/exterior.png',
-      'assets/images/parking/indoor.png',
+      '/assets/images/parking/exterior.png',
+      '/assets/images/parking/indoor.png',
     ],
   },
   {
@@ -382,6 +382,6 @@ export const PARKING_DETAIL_MOCK_SITES: ParkingLot[] = [
     priceUnit: 'ต่อชม.',
     supportedTypes: ['ev'],
     schedule: [],
-    images: ['assets/images/parking/ev.png'],
+    images: ['/assets/images/parking/ev.png'],
   },
 ];

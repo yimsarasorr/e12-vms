@@ -79,7 +79,7 @@ export class ParkingService {
             priceUnit: item.price_unit || 'บาท/ชม.',
             supportedTypes: item.supported_types || ['normal'],
             schedule: item.schedule || [],
-            images: item.images || ['assets/images/parking/default.png']
+            images: item.images || ['/assets/images/parking/default.png']
           }));
         }
       } catch (edgeError) {

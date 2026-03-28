@@ -116,9 +116,9 @@ export class MapViewComponent implements OnInit, OnDestroy, AfterViewInit {
         this.L = (LeafletModule as any).default || LeafletModule;
         this.ngeohash = await import('ngeohash');
 
-        const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
-        const iconUrl = 'assets/leaflet/marker-icon.png';
-        const shadowUrl = 'assets/leaflet/marker-shadow.png';
+        const iconRetinaUrl = '/assets/leaflet/marker-icon-2x.png';
+        const iconUrl = '/assets/leaflet/marker-icon.png';
+        const shadowUrl = '/assets/leaflet/marker-shadow.png';
         const DefaultIcon = this.L.Icon.extend({
             options: {
                 iconUrl,

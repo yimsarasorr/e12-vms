@@ -183,7 +183,7 @@ export class BuildingViewComponent implements AfterViewInit, OnChanges, OnDestro
     const textureLoader = new THREE.TextureLoader();
     const mainMaterial = new THREE.MeshStandardMaterial({ color: 0xEAE0D5 });
     const accentMaterial = new THREE.MeshStandardMaterial({ color: 0x4B4B4B });
-    const windowTexture = textureLoader.load('assets/window-texture.png');
+    const windowTexture = textureLoader.load('/assets/window-texture.png');
     const windowMaterial = new THREE.MeshBasicMaterial({ map: windowTexture, transparent: true });
 
     const floorHeight = 3.5;
